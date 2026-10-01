@@ -4,7 +4,6 @@ import {
   motion,
   useMotionValue,
   useMotionValueEvent,
-  useReducedMotion,
   useSpring,
   useTransform,
   type MotionValue,
@@ -18,7 +17,7 @@ import {
   type ReactNode,
 } from "react";
 
-import { useMediaQuery } from "@/lib/media-query";
+import { REDUCED_MOTION_QUERY, useMediaQuery } from "@/lib/media-query";
 import { cn } from "@/lib/utils";
 import {
   COMPACT_QUERY,
@@ -75,7 +74,15 @@ function Reveal({
  */
 export function VibeMachine() {
   const scrollProgress = useHeroProgress();
-  const reducedMotion = useReducedMotion();
+  /*
+   * Deliberately `useMediaQuery`, not Motion's `useReducedMotion()`. The stage
+   * below is rendered as TEXT in the status bar, and Motion resolves the
+   * preference at module load — so a reduced-motion client rendered
+   * "05 / 05 · Outcome" on its first pass while the server had rendered
+   * "01 / 05 · Chaos", and hydration failed. `useMediaQuery` reports `false`
+   * during SSR *and* hydration, then re-renders, so both agree.
+   */
+  const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
   const compact = useMediaQuery(COMPACT_QUERY);
 
   const layout = compact ? LAYOUT_COMPACT : LAYOUT_DESKTOP;

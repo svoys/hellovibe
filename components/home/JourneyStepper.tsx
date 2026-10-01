@@ -1,11 +1,11 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 
 import { JourneyVisual } from "@/components/home/JourneyVisual";
 import { journeyStages } from "@/data/product-journey";
-import { useMediaQuery } from "@/lib/media-query";
+import { REDUCED_MOTION_QUERY, useMediaQuery } from "@/lib/media-query";
 import { cn } from "@/lib/utils";
 
 /**
@@ -37,7 +37,14 @@ const LAST = journeyStages.length - 1;
  */
 export function JourneyStepper() {
   const [active, setActive] = useState(0);
-  const reducedMotion = useReducedMotion();
+  /*
+   * `useMediaQuery`, not Motion's `useReducedMotion()` — one rule for the whole
+   * codebase. Motion resolves the preference at module load, so it is already
+   * `true` on the first client render while the server rendered `false`; here it
+   * only feeds a `transition`, but using the same hook everywhere keeps anyone
+   * from copying it into a place where it would break hydration.
+   */
+  const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
   const horizontal = useMediaQuery(RAIL_HORIZONTAL_QUERY);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 

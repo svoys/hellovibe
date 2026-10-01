@@ -2,9 +2,10 @@
 
 import { ChevronRight } from "lucide-react";
 import { Fragment, useRef, type CSSProperties } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
 
 import type { ServiceSurface, ServiceVisualKind } from "@/data/services";
+import { REDUCED_MOTION_QUERY, useMediaQuery } from "@/lib/media-query";
 import { cn } from "@/lib/utils";
 
 type Palette = {
@@ -154,7 +155,13 @@ export function ServiceVisual({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
-  const reducedMotion = useReducedMotion();
+  /*
+   * `data-shown` is real rendered output, so the preference comes from
+   * `useMediaQuery` rather than Motion's `useReducedMotion()` — the latter is
+   * already `true` on the first client render while the server rendered `false`,
+   * which mismatches the attribute during hydration.
+   */
+  const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
 
   const shown = Boolean(reducedMotion) || inView;
   const palette = PALETTE[surface];

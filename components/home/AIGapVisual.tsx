@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef, type CSSProperties } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
+
+import { REDUCED_MOTION_QUERY, useMediaQuery } from "@/lib/media-query";
 
 /**
  * Deterministic dispersion offsets, index-matched to {@link TIER_ONE}.
@@ -63,7 +65,13 @@ const CHIP =
 export function AIGapVisual() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.25 });
-  const reducedMotion = useReducedMotion();
+  /*
+   * `data-shown` below is real rendered output, so the preference has to come
+   * from `useMediaQuery` rather than Motion's `useReducedMotion()` — the latter
+   * already reports `true` on the first client render while the server rendered
+   * `false`, which is a hydration mismatch on the attribute.
+   */
+  const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
 
   const shown = Boolean(reducedMotion) || inView;
 
