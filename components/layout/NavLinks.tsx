@@ -15,6 +15,11 @@ import { cn } from "@/lib/utils";
  *
  * The active state is a hairline underline plus stronger text. No pills, no
  * filled tabs.
+ *
+ * Contrast note — inactive links used `--color-muted` (#8a8882), which measures
+ * 3.2:1 on the warm background and fails WCAG AA for 14px text. `black/60`
+ * measures 5.6:1 and still leaves a visible delta against the `black` hover
+ * state. Same trade the Hero makes; the token itself is untouched.
  */
 export function NavLinks() {
   const pathname = usePathname();
@@ -32,7 +37,7 @@ export function NavLinks() {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "group relative inline-block text-small whitespace-nowrap transition-colors duration-150 hover:text-black",
-                  active ? "text-black" : "text-muted",
+                  active ? "text-black" : "text-black/60",
                 )}
               >
                 {item.label}
