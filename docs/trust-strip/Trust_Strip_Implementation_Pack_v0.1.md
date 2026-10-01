@@ -205,13 +205,29 @@ lg: sentence col-span-5 · labels col-span-6 (starting col 7)
 Reuse the `hv-grid` 12-column grid the other sections use, so the strip aligns with the Hero, the AI Gap and Services above and below it.
 
 - Sentence: `text-body-lg`, `text-black/75`, `max-w-[38ch]`.
-- Labels: a `<ul>` laid out as a single wrapped row, `gap-x-4 gap-y-2`, each `<li>` prefixed by a hairline separator except the first.
+- Labels: a `<ul>` laid out as a single wrapped row, `gap-x-3 gap-y-2`, each `<li>` prefixed by a hairline separator except the first.
 
 Mobile (below `md`):
 
 - The strip stacks: sentence first, then the labels as a wrapped row.
-- Labels wrap to two lines at 390px rather than shrinking the type. Do not truncate.
+- Labels wrap to two lines below ~430px rather than shrinking the type. Do not truncate.
+- **The hairline separators are `hidden md:block`** — see the correction below.
 - No horizontal scrolling.
+
+### Correction — separators must not survive a wrap
+
+As first built, the separator was a plain leading rule on every `<li>` with `index > 0`. That is correct on one line but wrong the moment the row wraps: the first item on line two is not the first item in the list, so it keeps its rule and "Brands" ends up with a stray dash hanging in front of it. Verified at 390px.
+
+There is no CSS selector for "first item on a wrapped line", so the decoration cannot be made wrap-aware. Since it is pure decoration, the fix is to drop it at the widths where the row can wrap:
+
+```text
+hidden h-px w-6 shrink-0 bg-line md:block
+```
+
+Two useful side effects, both confirmed by measurement:
+
+- With the rules gone, the four labels fit on **one** line at 390px again, so the section is 186px tall instead of 208px. Only 320px still wraps — to 3 + 1, cleanly, with no dangling rule.
+- Nothing changes at `md` and up, where the row has never wrapped.
 
 Vertical rhythm: `py-12` and `md:py-16`. Both are on the design system's 4/8/12/16/24/32/48/64/80/120/160 scale and both are deliberately smaller than `py-section-lg`, so the band reads as a band.
 
@@ -222,7 +238,7 @@ Vertical rhythm: `py-12` and `md:py-16`. Both are on the design system's 4/8/12/
 - The `<section>` is labelled by its heading via `aria-labelledby`, so the strip appears in a screen-reader landmark list as something with a name.
 - The sentence is an `<h2>` — the strip is a real section of the document, and the outline should not skip from the Hero's `h1` to the AI Gap's `h2` without it.
 - The labels are a `<ul>`. They are a set, and a list is what a set is.
-- The hairline separators are `aria-hidden="true"` — they are decoration, and a screen reader announcing "vertical line" between every label is noise.
+- The hairline separators are `aria-hidden="true"` — they are decoration, and a screen reader announcing "vertical line" between every label is noise. They are also `hidden md:block`, so below `md` they are absent from the accessibility tree *and* from the layout.
 - Colour contrast: `text-black/75` on `--color-bg` is 8.1:1, and `text-black/70` is 6.8:1. Both clear AA. **Do not use `--color-muted`** (#8a8882), which measures 3.2:1 on the warm background and fails AA for body text.
 - No interaction, so no focus management, no roving tabindex and no keyboard contract is needed.
 
@@ -301,7 +317,7 @@ Then verify in a real browser at **1440, 1280, 1024, 768, 640, 390 and 320**:
 - `aria-labelledby` resolves to the heading;
 - the heading is an `h2` and the document outline reads `h1 → h2 → h2 → h2 → h2`;
 - no console errors and no hydration failure on load;
-- the section height is identical at every width (there is no state, so any variance is a bug);
+- the section height is stable across reloads at the same width (there is no state, so any variance there is a bug) — note it legitimately differs *between* widths, because the sentence and the labels wrap;
 - no `--color-muted` text anywhere in the section.
 
 And confirm by inspection that the diff contains **no logo, no number, no client name and no `public/` addition**.
@@ -316,10 +332,11 @@ And confirm by inspection that the diff contains **no logo, no number, no client
 - [ ] The strip carries `id="trust"` and `aria-labelledby="trust-title"`.
 - [ ] `#the-ai-gap` still resolves to the AI Gap section, and `#trust` resolves to the strip — both verified in the browser, since one of them is the trap in §1.
 - [ ] Copy is verbatim from §2, including the typographic apostrophe.
-- [ ] The four labels render as a `<ul>` with `aria-hidden` separators.
+- [ ] The four labels render as a `<ul>` with `aria-hidden` separators that are `hidden md:block` (§6 correction).
 - [ ] No logos, no placeholders, no metrics, no testimonials, no new dependencies.
 - [ ] Lint and typecheck clean.
 - [ ] Browser verification in §11 passes at all seven widths.
+- [ ] The audit script reports **zero** contrast failures. Inactive navbar links had to move from `text-muted` to `text-black/60` for this to be true — see §17.
 - [ ] Section numbers `01`, `02`, `03` are unchanged on the AI Gap, Services and Product Journey.
 
 ---
@@ -372,6 +389,29 @@ Answered before implementation, so none of these block the work.
 2. ~~**Labels.**~~ **Settled** — `STARTUPS / SCALE-UPS / PRODUCT TEAMS / BRANDS`, exactly as recovered.
 3. ~~**Hero CTA.**~~ **Settled** — retargeted to `#trust`. See §1 for the two edits this requires and the trap it avoids.
 4. ~~**Real logos.**~~ **Settled** — there are no real clients with permission, so this is the labels branch. If that changes, it is a separate task; the data model in §4 is shaped so the swap is small.
+
+---
+
+## 17. Deviation — the navbar had to be fixed for this to pass
+
+The build audit reported one contrast failure that this task did **not** introduce, but could not ship past:
+
+```text
+FAIL 3.2:1  14px  a.group.relative  "What we do"
+```
+
+Inactive links in `NavLinks` used `text-muted` (#8a8882) on `--color-bg` (#f5f3ee). At 14px that is 3.2:1 — below AA's 4.5:1. The Hero had already hit this exact wall and documented the answer: use an alpha black instead of the token. Applied the same reasoning here:
+
+```diff
+- active ? "text-black" : "text-muted",
++ active ? "text-black" : "text-black/60",
+```
+
+`black/60` composites to 5.6:1 and still leaves a visible delta against the `black` hover state — which `black/70` would have flattened. The `--color-muted` token itself is untouched, so the Footer (muted on dark, 5.4:1) and `Tag` are unaffected.
+
+**This is a visible change to an approved component.** It is one class, it is trivially revertible, and it is called out here and in the reply so it is a decision rather than a silent edit.
+
+The two `1.11:1` failures the audit also reported were **bugs in the audit script**, not the page: a digit-regex colour parser read Tailwind v4's `oklab(...)` output as near-black. Fixed in the skill by resolving colours through a 1×1 canvas and compositing alpha. `passAA` can now be `null` (UNKNOWN) instead of silently counting as a failure.
 
 ---
 
