@@ -484,6 +484,63 @@
 }
 
 /* ==========================================================================
+   Method — vertical timeline
+   --------------------------------------------------------------------------
+   Each stage owns its own slice of the rail, so the fill advances stage by
+   stage as the page scrolls, rather than one line being driven by a shared
+   scroll value. Nothing is measured and there is no second source of truth for
+   what is on screen: the ARIA-free `data-shown` attribute is the only state.
+
+   Only `transform`, `opacity` and colours animate. The copy's opacity floor is
+   0.75, not 0, so every stage stays legible if the in-view trigger never fires.
+   ========================================================================== */
+
+.method-rail-fill {
+  transform: scaleY(0);
+  transform-origin: 50% 0%;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+}
+
+.method-stage[data-shown="true"] .method-rail-fill {
+  transform: scaleY(1);
+}
+
+.method-marker {
+  transition:
+    background-color 500ms ease var(--d, 0ms),
+    border-color 500ms ease var(--d, 0ms);
+}
+
+.method-stage[data-shown="true"] .method-marker {
+  border-color: var(--color-black);
+  background-color: var(--color-black);
+}
+
+.method-text {
+  opacity: 0.75;
+  transform: translateY(6px);
+  transition:
+    opacity 500ms ease var(--d, 0ms),
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+}
+
+.method-stage[data-shown="true"] .method-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* The rail stops at the final node instead of dangling past it, and the last
+   row needs no trailing space. */
+.method-stage:last-child .method-rail,
+.method-stage:last-child .method-rail-fill {
+  display: none;
+}
+
+.method-stage:last-child .method-stage-body {
+  padding-bottom: 0;
+}
+
+/* ==========================================================================
    Motion preferences
    ========================================================================== */
 

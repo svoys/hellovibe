@@ -4,11 +4,20 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { journeyCta, journeyHeadline, journeySupporting } from "@/data/product-journey";
 
-/** Anchor for the Product Journey block. */
+/**
+ * Anchor for the Product Journey block.
+ *
+ * The name still says "how-we-work" because the navbar's "How we work" entry
+ * points at it and that href is a settled decision (Product Journey Pack §11).
+ * The section's visible eyebrow is now `One partner. Every stage.`, the source's
+ * own value — so the id and the kicker no longer describe each other. Recorded
+ * as an open question in the Method pack rather than fixed here, because moving
+ * the navbar target is a navigation decision, not a Method one.
+ */
 export const JOURNEY_SECTION_ID = "how-we-work";
 
 /**
- * Section 03 — HOW WE WORK.
+ * Section 03 — ONE PARTNER. EVERY STAGE.
  *
  * Answers the question the AI Gap and Services leave open: you said where AI
  * creates leverage and what you sell, so what actually happens next.
@@ -17,6 +26,12 @@ export const JOURNEY_SECTION_ID = "how-we-work";
  * "Start anywhere" tells a visitor who has no brief yet that they are still in
  * the right place, which is the point the pack §14 makes about the copy having
  * to be legible from the interface itself.
+ *
+ * The eyebrow was `How we work` until the Method block was built. The source
+ * gives that kicker to Method, and gives this section `ONE PARTNER. EVERY
+ * STAGE.` — so two sections can no longer share a label. The eyebrow was
+ * reverted to the source value; the anchor and the navbar target are unchanged.
+ * See `docs/method/Method_Implementation_Pack_v0.1.md` §2.
  *
  * Server Component. The header is split — title left, description right — like
  * Services, so the block does not read as a third Hero. Only the stepper
@@ -34,7 +49,7 @@ export function ProductJourney() {
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <SectionHeader
               number="03"
-              eyebrow="How we work"
+              eyebrow="One partner. Every stage."
               tone="strong"
               titleId="journey-title"
               title={journeyHeadline}
