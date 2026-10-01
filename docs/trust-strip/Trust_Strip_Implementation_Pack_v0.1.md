@@ -27,7 +27,7 @@ The pack does not exist as a document in the source conversation — it was reco
 | 1 | Section number | **None.** Like the Hero, the strip is unnumbered, so AI Gap stays `01`, What We Do `02` and Product Journey `03` | Renumber everything after it — a large, pointless diff |
 | 2 | Anchor | **`id="trust"`**, with no navbar entry | Give it a nav link — the navbar pack does not list one |
 | 3 | Shape | **A thin band**, `py-12` / `md:py-16`, not a full `py-section-lg` block | Full-height section, which would put two big blocks back to back before any content |
-| 4 | Hero CTA target | **Unchanged** — "Explore what we do ↓" still scrolls to `#the-ai-gap` | Retarget it to `#trust`, which would make the CTA land on a band rather than on content |
+| 4 | Hero CTA target | **Retargeted to `#trust`** — "Explore what we do ↓" should land on the next block rather than skip it. Approved explicitly, because it means a one-line change to the frozen `Hero.tsx` | Leave it pointing at `#the-ai-gap` |
 | 5 | Surface | **Warm background**, same as every other light section | A dark band, which would fight the Hero |
 
 The one non-negotiable rule from the source conversation, stated twice and in capitals in the agent prompt:
@@ -66,7 +66,27 @@ id="trust"
 Notes:
 
 - The section heading carries `id="trust-title"` so the section can use `aria-labelledby` without an extra wrapper.
-- The Hero's secondary CTA keeps pointing at `#the-ai-gap`. A strip is not a destination.
+- The Hero's secondary CTA **moves to `#trust`**, so "Explore what we do ↓" lands on the next block instead of skipping past it. Approved explicitly, because it touches a frozen file.
+
+  It needs **two edits that must land together**, and the reason is a latent trap: `NEXT_SECTION_ID` in `components/home/Hero.tsx` currently does double duty — it is *both* the Hero's CTA target *and* the AI Gap's section `id`, because `AIGap.tsx` imports it and spreads it onto its own `<section>`. Changing that constant's value to `"trust"` on its own would silently move the AI Gap's anchor and leave `#the-ai-gap` dead.
+
+  So:
+
+  ```tsx
+  // components/home/Hero.tsx — value changes, name stays accurate
+  /** The section the secondary CTA scrolls to. */
+  export const NEXT_SECTION_ID = "trust";
+  ```
+
+  ```tsx
+  // components/home/AIGap.tsx — stops borrowing, owns its anchor
+  /** Anchor for this section. */
+  export const AI_GAP_SECTION_ID = "the-ai-gap";
+  ```
+
+  and drop the `NEXT_SECTION_ID` import from `AIGap.tsx`.
+
+  This also brings the AI Gap in line with every other section: `Services`, `ProductJourney` and the new `TrustStrip` each own and export their own section id. The AI Gap was the one that borrowed one from a sibling.
 - No navbar or footer change. `data/navigation.ts` is not touched by this task.
 
 ---
@@ -246,9 +266,10 @@ If real client logos and permission arrive later, that is a separate task with a
 
 Do not modify, without an explicit instruction:
 
-- `components/home/Hero.tsx` — including `NEXT_SECTION_ID`, which the AI Gap imports;
+- `components/home/Hero.tsx` — **except** the `NEXT_SECTION_ID` value, which becomes `"trust"` (§1). Nothing else in the file changes;
 - `components/home/VibeMachine.tsx`, `HeroTrack.tsx`, `VibeMachineWord.tsx`;
-- `components/home/AIGap.tsx`, `AIGapVisual.tsx`;
+- `components/home/AIGap.tsx` — **except** swapping the borrowed `NEXT_SECTION_ID` import for its own `AI_GAP_SECTION_ID` (§1). No markup, copy or styling change;
+- `components/home/AIGapVisual.tsx`;
 - `components/home/Services.tsx`, `ServiceVisual.tsx`;
 - `components/home/ProductJourney.tsx`, `JourneyStepper.tsx`, `JourneyVisual.tsx`;
 - `components/layout/*`, `components/ui/*`;
@@ -293,6 +314,7 @@ And confirm by inspection that the diff contains **no logo, no number, no client
 - [ ] `components/home/TrustStrip.tsx` exists, is a Server Component, and contains no `"use client"`.
 - [ ] `app/page.tsx` renders `Hero → TrustStrip → AIGap → Services → ProductJourney`.
 - [ ] The strip carries `id="trust"` and `aria-labelledby="trust-title"`.
+- [ ] `#the-ai-gap` still resolves to the AI Gap section, and `#trust` resolves to the strip — both verified in the browser, since one of them is the trap in §1.
 - [ ] Copy is verbatim from §2, including the typographic apostrophe.
 - [ ] The four labels render as a `<ul>` with `aria-hidden` separators.
 - [ ] No logos, no placeholders, no metrics, no testimonials, no new dependencies.
@@ -342,12 +364,14 @@ Return:
 
 ---
 
-## 16. Open questions
+## 16. Open questions — all settled
 
-1. **Anchor.** `id="trust"` with no nav link. Add a navbar entry, or leave it unlinked?
-2. **Labels.** `STARTUPS / SCALE-UPS / PRODUCT TEAMS / BRANDS` as recovered. Different or additional categories?
-3. **Hero CTA.** Currently still scrolls to `#the-ai-gap`, skipping the strip. Leave it, or retarget to `#trust`?
-4. **Real logos.** If client logos and permission exist, say so and this becomes a different task — the strip is built so that swap is small.
+Answered before implementation, so none of these block the work.
+
+1. ~~**Anchor.**~~ **Settled** — `id="trust"`, no navbar entry. Nothing in the navigation pack lists a Trust link, and adding one would put a nav item on a band.
+2. ~~**Labels.**~~ **Settled** — `STARTUPS / SCALE-UPS / PRODUCT TEAMS / BRANDS`, exactly as recovered.
+3. ~~**Hero CTA.**~~ **Settled** — retargeted to `#trust`. See §1 for the two edits this requires and the trap it avoids.
+4. ~~**Real logos.**~~ **Settled** — there are no real clients with permission, so this is the labels branch. If that changes, it is a separate task; the data model in §4 is shaped so the swap is small.
 
 ---
 
