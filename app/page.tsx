@@ -1,3 +1,4 @@
+import { AIAudit } from "@/components/home/AIAudit";
 import { AIGap } from "@/components/home/AIGap";
 import { Hero } from "@/components/home/Hero";
 import { ProductJourney } from "@/components/home/ProductJourney";
@@ -12,6 +13,7 @@ export default function HomePage() {
       <AIGap />
       <Services />
       <ProductJourney />
+      <AIAudit />
     </>
   );
 }
