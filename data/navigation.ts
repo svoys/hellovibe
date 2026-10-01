@@ -1,3 +1,4 @@
+import { serviceLinks } from "@/data/services";
 import type { NavItem } from "@/types";
 
 /**
@@ -27,15 +28,12 @@ export const primaryCta: NavItem = {
 };
 
 /**
- * Service capabilities listed in the footer. No dedicated sub-routes exist yet,
- * so they point at the approved `/services` route rather than inventing pages.
+ * Service capabilities listed in the footer.
+ *
+ * Derived from `data/services.ts` so the four pillar names are defined exactly
+ * once — the homepage Services section renders the same entries.
  */
-export const footerServices: NavItem[] = [
-  { label: "AI Strategy", href: "/services" },
-  { label: "AI Systems", href: "/services" },
-  { label: "AI Products", href: "/services" },
-  { label: "AI Creative", href: "/services" },
-];
+export const footerServices: NavItem[] = serviceLinks;
 
 /** The only contact channel that actually exists. */
 export const contactEmail = "hello@hellovibe.ru";

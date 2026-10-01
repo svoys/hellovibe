@@ -282,6 +282,85 @@
 }
 
 /* ==========================================================================
+   AI Gap — controlled convergence
+   --------------------------------------------------------------------------
+   The AI Gap dials the Hero's energy down: same editorial language (borders,
+   mono labels, small shapes), but a single convergence instead of a
+   choreography.
+
+   Scattered offsets arrive as custom properties from `AIGapVisual` so they stay
+   deterministic and the server render already matches the client render.
+
+   Only `transform` and `opacity` animate. The opacity floor is 0.8, not 0, so
+   the chips stay legible even if the in-view trigger never fires.
+   ========================================================================== */
+
+.aigap-token {
+  transform: translate3d(var(--dx, 0px), var(--dy, 0px), 0) rotate(var(--dr, 0deg));
+  opacity: 0.8;
+  transition:
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms),
+    opacity 700ms ease var(--d, 0ms);
+}
+
+.aigap-visual[data-shown="true"] .aigap-token {
+  transform: translate3d(0, 0, 0) rotate(0deg);
+  opacity: 1;
+}
+
+.aigap-arrow {
+  opacity: 0;
+  transition: opacity 500ms ease var(--d, 0ms);
+}
+
+.aigap-visual[data-shown="true"] .aigap-arrow {
+  opacity: 1;
+}
+
+.aigap-system {
+  transform: scaleX(0.97);
+  transform-origin: 0% 50%;
+  opacity: 0.8;
+  transition:
+    opacity 600ms ease var(--d, 0ms),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+}
+
+.aigap-visual[data-shown="true"] .aigap-system {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Services — card diagrams
+   --------------------------------------------------------------------------
+   Only the decorative marks animate; the stage captions are static text, so
+   each card still communicates if the trigger never fires.
+   ========================================================================== */
+
+.svc-shape {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 500ms ease var(--d, 0ms),
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+}
+
+.svc-arrow {
+  opacity: 0;
+  transform: translateX(-5px);
+  transition:
+    opacity 500ms ease var(--d, 0ms),
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+}
+
+.svc-visual[data-shown="true"] .svc-shape,
+.svc-visual[data-shown="true"] .svc-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* ==========================================================================
    Motion preferences
    ========================================================================== */
 
