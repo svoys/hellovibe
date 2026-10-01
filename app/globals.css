@@ -185,6 +185,103 @@
 }
 
 /* ==========================================================================
+   Hero — scroll track
+   --------------------------------------------------------------------------
+   On wide, tall viewports the Hero is a tall track with a sticky stage, and
+   scroll position drives the Vibe Machine from chaos to outcome.
+
+   The track height is set explicitly rather than left to `auto`: `useScroll`
+   needs the section to be taller than the viewport, otherwise scrollYProgress
+   can never reach 1 and the machine stalls part-way through the choreography.
+
+   Narrow or short viewports get no track at all — the Hero becomes a normal
+   document block and the machine plays a one-shot intro instead. That also
+   avoids stacking the copy and the machine into a fixed-height box they cannot
+   both fit inside.
+
+   The media query below must stay in sync with TRACK_QUERY in
+   `components/home/HeroTrack.tsx`.
+   ========================================================================== */
+
+.hero-track {
+  position: relative;
+}
+
+.hero-stage {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.hero-machine {
+  height: clamp(18rem, 75vw, 26rem);
+}
+
+@media (min-width: 64rem) and (min-height: 40rem) {
+  .hero-track {
+    height: 200svh;
+  }
+
+  .hero-stage {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 100svh;
+    padding-block: 0;
+  }
+
+  .hero-machine {
+    height: clamp(15rem, calc(100svh - 20rem), 30rem);
+  }
+}
+
+/* Reduced motion: no sticky track, no choreography to scroll through. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-track {
+    height: auto;
+  }
+
+  .hero-stage {
+    position: static;
+    display: block;
+    height: auto;
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .hero-machine {
+    height: clamp(18rem, 75vw, 26rem);
+  }
+}
+
+/* ---------- Vibe Machine ---------- */
+
+@keyframes vm-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+.vm-float {
+  animation: vm-float var(--vm-dur, 5s) ease-in-out var(--vm-delay, 0s) infinite;
+}
+
+/* Once the system has formed there is nothing left to float. */
+[data-calm="true"] .vm-float {
+  animation: none;
+}
+
+/* Phones and reduced motion: ten simultaneously floating words is noise, and
+   the pack asks for a simplified mobile treatment. */
+@media (max-width: 47.99rem), (prefers-reduced-motion: reduce) {
+  .vm-float {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
    Motion preferences
    ========================================================================== */
 
