@@ -171,24 +171,32 @@ export function JourneyStepper() {
               >
                 <div className="col-span-4 md:col-span-8 lg:col-span-6">
                   {/*
-                    The descriptions run to three lines at `lg`. Reserving that
-                    height stops the panel box resizing — and the page jumping —
-                    when the reader moves between stages.
+                    The panel box must not change height when the reader moves
+                    between stages, or everything below it jumps under the
+                    pointer. Two things would otherwise vary it: the
+                    descriptions wrap to a different number of lines at each
+                    width, and DISCOVER lists three items where the other stages
+                    list four. Reserving both heights makes every panel exactly
+                    as tall as the tallest one.
+
+                    The reserved values are measured, not guessed. One line of
+                    `text-body-lg` is `1.45em`, so `5.8em` is four lines, `4.35em`
+                    is three and `2.9em` is two. The longest description needs
+                    four lines on a 320px phone, three up to `md`, and two from
+                    `md` up. `8.25rem` is four items at the widest breakpoint, so
+                    it is a few pixels generous on a phone.
                   */}
-                  <p className="max-w-[46ch] text-body-lg text-pretty text-black/75 lg:min-h-[4.35em]">
+                  <p className="max-w-[52ch] text-body-lg text-pretty text-black/75 min-h-[5.8em] min-[384px]:min-h-[4.35em] md:min-h-[2.9em]">
                     {stage.description}
                   </p>
 
-                  <p className="mt-8 font-mono text-label uppercase text-black/70">Outputs</p>
+                  <p className="mt-8 font-mono text-label uppercase text-black/70">Includes</p>
 
-                  <ul className="mt-4 flex flex-col gap-2.5">
-                    {stage.outputs.map((output) => (
-                      <li
-                        key={output}
-                        className="flex items-center gap-3 text-body text-black/75"
-                      >
+                  <ul className="mt-4 flex min-h-[8.25rem] flex-col gap-2.5">
+                    {stage.items.map((item) => (
+                      <li key={item} className="flex items-center gap-3 text-body text-black/75">
                         <span aria-hidden="true" className="h-px w-4 shrink-0 bg-line" />
-                        {output}
+                        {item}
                       </li>
                     ))}
                   </ul>
@@ -197,7 +205,7 @@ export function JourneyStepper() {
                 <div className="col-span-4 md:col-span-8 lg:col-span-6">
                   <JourneyVisual
                     kind={stage.visual}
-                    phase={stage.phase}
+                    metaphor={stage.metaphor}
                     active={selected}
                     reduced={reduced}
                   />

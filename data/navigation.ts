@@ -4,19 +4,26 @@ import type { NavItem } from "@/types";
 /**
  * Single source of truth for navigation labels and routes.
  *
- * Routes are fixed by the Navigation + Footer Pack v0.1, §1:
+ * Routes are fixed by the Navigation + Footer Pack v0.1, §1, with one later
+ * change: the Product Journey Pack v0.1 §11 requires "How we work" to point at
+ * the homepage section rather than at `/services`, because that section is what
+ * the label now names. §19 lists the same thing as a QA check.
+ *
  *   What we do  → /services
- *   How we work → /services
+ *   How we work → /#how-we-work
  *   Cases       → /work
  *   About       → /about
  *   Start a project → /contact
  *
- * Note: "What we do" and "How we work" intentionally share `/services`, so both
- * will report as the active route on that page. See the task report.
+ * The leading `/` is required: the navbar renders on every route, so a bare
+ * `#how-we-work` would do nothing on `/about`. `NavLinks` compares
+ * `usePathname()` against `href` for its active state, so this entry never
+ * reports as the current page — which is right, because it is an in-page anchor
+ * rather than a route of its own.
  */
 export const mainNavigation: NavItem[] = [
   { label: "What we do", href: "/services" },
-  { label: "How we work", href: "/services" },
+  { label: "How we work", href: "/#how-we-work" },
   { label: "Cases", href: "/work" },
   { label: "About", href: "/about" },
 ];

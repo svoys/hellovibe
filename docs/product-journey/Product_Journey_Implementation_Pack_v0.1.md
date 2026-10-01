@@ -1,5 +1,18 @@
 # HelloVibe — Product Journey Implementation Pack v0.1
 
+> **Copy status — superseded.**
+>
+> The section copy below was originally drafted in this document. It has since
+> been replaced by the copy from the **ChatGPT Product Journey pack**, which is
+> the authoritative source. Where the two disagreed the pack won, and the shipped
+> strings are now verbatim from it: the section H2, the supporting line, all four
+> phase names, every stage title and description, the item lists, the visual
+> metaphors and the closing CTA.
+>
+> §2, §3, §3a, §4 and §5 below have been updated to the shipped copy. Everything
+> else — layout, interaction, accessibility, motion, validation — is unchanged
+> and still accurate.
+
 ## Purpose
 
 Implement the third homepage section: **Section 03 — HOW WE WORK / the Product Journey**.
@@ -23,13 +36,13 @@ Before editing:
 
 ## What I decided — review these first
 
-This pack did not come from ChatGPT; it was drafted from the repo. Five judgement calls were made where the source material was silent. Correct any of them and the copy below changes with it.
+This pack was first drafted from the repo alone. The ChatGPT Product Journey pack was located afterwards and is the authoritative source, so the copy decisions below are now settled by it rather than chosen here.
 
 | # | Decision | Chosen | Alternative |
 |---|---|---|---|
-| 1 | Number of stages | **Four** — mirrors the four service pillars and keeps the rail readable | Three (merge Define into Build) |
+| 1 | Number of stages | **Four** — mirrors the four service pillars and keeps the rail readable | Three (merge Design into Build) |
 | 2 | Section index | **`03`** — continues 01 / 02 | — |
-| 3 | Section H2 | *"How an idea becomes something that works."* | *"From first signal to working product."* / *"Four stages. One working reality."* |
+| 3 | Section H2 | *"Start anywhere. We’ll figure out what’s next."* — **from the pack** | The drafted *"How an idea becomes something that works."*, now discarded |
 | 4 | Surface | **Warm background**, same as AI Gap and Services | Full-bleed near-black, which would make this the page's dark finale before the black footer |
 | 5 | Mobile behaviour | **Same stepper**, stacked vertically, panel below the list | Every stage expanded on mobile with the interaction disabled |
 
@@ -60,21 +73,22 @@ id="how-we-work"
 Notes:
 
 - The anchor matches the navbar's **"How we work"** label.
-- `data/navigation.ts` currently points "How we work" at `/services`, not at this anchor. **Do not change the navbar** — it is frozen. Wiring the nav link to `#how-we-work` is a separate decision and is listed as an open question in §21.
+- `data/navigation.ts` now points "How we work" at `/#how-we-work`, as the pack §11 requires and §19 checks. The leading `/` is required because the navbar renders on every route — a bare `#how-we-work` would do nothing on `/about`. Only the `href` changed; the navbar component itself is untouched.
 - The section heading carries `id="journey-title"` so the section can use `aria-labelledby` without an extra wrapper.
 
 ---
 
 ## 2. Approved copy — section header
 
+Verbatim from the pack §2.
+
 ```text
 03
 HOW WE WORK
 
-How an idea becomes something that works.
+Start anywhere. We’ll figure out what’s next.
 
-No black box. Four stages, each with a clear output — so you always know
-what you’re getting and what happens next.
+You don’t need to know exactly what to build. That’s our job.
 ```
 
 Rendered with the existing `SectionHeader`:
@@ -85,10 +99,12 @@ Rendered with the existing `SectionHeader`:
   eyebrow="How we work"
   tone="strong"
   titleId="journey-title"
-  title="How an idea becomes something that works."
-  description="No black box. Four stages, each with a clear output — so you always know what you’re getting and what happens next."
+  title={journeyHeadline}
 />
 ```
+
+The headline and the supporting line are exported from `data/product-journey.ts`
+as `journeyHeadline` and `journeySupporting`, so neither is written twice.
 
 `tone="strong"` is required. `--color-muted` (#8a8882) measures 3.2:1 on `--color-bg` and fails WCAG AA for body text; `strong` uses the `black/70` and `black/75` alpha variants already used by the Hero and the other two sections.
 
@@ -102,64 +118,86 @@ lg: title col-span-7 · description col-span-5
 
 ## 3. Approved copy — the four stages
 
-Each stage has five fields. The phase label and the stage title are the only text shown in the rail; the description, outputs and diagram live in the panel.
+Each stage has six fields. The phase label and the stage title are the only text shown in the rail; the description, the item list and the diagram live in the panel.
 
-Copy is verbatim — including the typographic apostrophes (`’`, U+2019) and em dashes (`—`). The shipped copy in `AIGap.tsx` and `data/services.ts` already uses these characters; match them so the three sections read as one voice.
+Copy is verbatim from the pack §3 — including the typographic apostrophes (`’`, U+2019). The shipped copy in `AIGap.tsx` and `data/services.ts` already uses these characters; match them so the three sections read as one voice.
 
-### 01 · Diagnose
+### 01 · Discover
 
 ```text
-phase        Diagnose
-title        Find where AI actually pays off.
-description  We map how your business really works, then rank the places AI
-             can move the needle — and the ones that only look good in a demo.
-outputs      Opportunity map
-             Ranked use cases
-             A clear recommendation
+phase        Discover
+title        Find the opportunity.
+description  We start with the problem, the business and the people behind it.
+items        AI Audit
+             Product Discovery
+             Creative Audit
+metaphor     Question → Signals → Opportunity
 ```
 
-### 02 · Define
+### 02 · Design
 
 ```text
-phase        Define
-title        Turn the opportunity into a plan.
-description  We shape the strongest bet into a scoped product or system —
-             what we build, what we don’t, and how we’ll know it worked.
-outputs      Scope and success criteria
-             Prototype direction
-             Effort and timeline
+phase        Design
+title        Shape what could work.
+description  We turn the opportunity into a clear product, system or creative direction.
+items        Strategy
+             UX / UI
+             Architecture
+             Prototype
+metaphor     Idea → Flow → Prototype
 ```
 
 ### 03 · Build
 
 ```text
 phase        Build
-title        Build the working version.
-description  We design and build the real thing in short cycles, so you review
-             working software instead of another slide deck.
-outputs      Working software
-             Visible progress
-             Decisions documented
+title        Make it real.
+description  We combine product, design, engineering and AI to build something
+             people can actually use.
+items        AI Systems
+             MWP
+             MVP
+             Creative Engine
+metaphor     Prototype → System → Product
 ```
 
 ### 04 · Scale
 
 ```text
 phase        Scale
-title        Make it real — and keep it real.
-description  We launch, measure and improve against real usage, then hand your
-             team something they can run without us.
-outputs      Launch and measurement
-             Iteration on real usage
-             Handover your team can run
+title        Make it better. Then make it bigger.
+description  We optimize what works, automate what doesn’t and keep building
+             from there.
+items        Optimization
+             Product Team
+             Automation
+             Growth
+metaphor     Learn → Optimize → Scale
 ```
 
 ### Why this arc
 
-- The four verbs — **Find · Turn · Build · Make** — are deliberate imperatives, matching the Services pattern (`Find · Automate · Build · Amplify`).
-- Stage 04 lands on the brand promise: *"AI, but make it real."* The journey ends on the line the Hero opened with.
-- Stage 01 closes the loop with the AI Gap, which already says the hard part is *"knowing where AI actually creates leverage"*. Diagnose is that sentence turned into a service.
-- The outputs are process artefacts, not claims about results. Nothing here asserts a client, a metric or an outcome.
+- The four verbs — **Find · Shape · Make · Make it better** — are imperatives, and they escalate rather than repeat.
+- Stage 04 lands on the brand promise: *"AI, but make it real."* "Make it better. Then make it bigger." is that line continued.
+- Stage 01 closes the loop with the AI Gap, which already says the hard part is *"knowing where AI actually creates leverage"*. Discover is that sentence turned into a service.
+- The items name capabilities, not deliverables or results. Nothing here asserts a client, a metric or an outcome.
+- Stage 01 lists three items where the others list four. The panel reserves the height of four on `lg` so the box does not resize between stages.
+
+### 3a. Approved copy — closing CTA
+
+Verbatim from the pack §4. It sits at the foot of the block, below the stepper.
+
+```text
+Not sure where to start?
+Start a project →
+```
+
+The link goes to `/contact`. The pack is explicit that there must be exactly one
+closing line and one link — no second, more elaborate CTA. It is rendered with
+the existing `ArrowLink`, the same control the Hero and Services use, so it needs
+no new styling.
+
+All three strings are exported from `data/product-journey.ts` as `journeyCta`.
 
 ---
 
@@ -185,8 +223,8 @@ Each stage gets one abstract mark, built from CSS borders and small shapes — t
 
 | Stage | Mark | Reads as |
 |---|---|---|
-| Diagnose | Six 10×10 squares in a row — five hairline-bordered, the third solid `--color-vibe` with a black border — under a full-width hairline | Scan a field, spot the one that matters |
-| Define | A dashed rectangle with a solid smaller rectangle nested inside it, plus two hairline ticks on the left edge | A bet scoped inside a boundary |
+| Discover | Six 10×10 squares in a row — five hairline-bordered, the third solid `--color-vibe` with a black border — under a full-width hairline | Scan a field, spot the one that matters |
+| Design | A dashed rectangle with a solid smaller rectangle nested inside it, plus two hairline ticks on the left edge | A bet scoped inside a boundary |
 | Build | Two solid black blocks stacked, widest at the bottom, with a third dashed block on top | Built up, with the next piece in progress |
 | Scale | Three ascending solid blocks on a hairline baseline; the tallest carries a `--color-vibe` cap | Direction of travel, unlabelled |
 
@@ -194,7 +232,8 @@ Rules:
 
 - Marks are `aria-hidden="true"` — they are decoration, and the panel text already carries the meaning.
 - No raster imagery, no fake screenshots, no fake analytics, no fake logos, no neural-network clichés, no glowing orbs.
-- Diagram sits in a bordered box (`border-line`, white background) with the phase label in mono uppercase at the foot — the same treatment `ServiceVisual` uses for its stage captions, so the two sections read as one system.
+- Diagram sits in a bordered box (`border-line`, white background) with the stage's visual metaphor in mono uppercase at the foot — the same treatment `ServiceVisual` uses for its stage captions, so the two sections read as one system.
+- The metaphor is the box's only text and it carries meaning, so it is rendered as its three words with the arrows marked `aria-hidden` — otherwise a screen reader announces "right arrow" twice for nothing.
 
 ---
 
@@ -204,7 +243,7 @@ Create `data/product-journey.ts` — the single source of truth, so no stage is 
 
 ```ts
 /** Which abstract mark a stage draws. See `components/home/JourneyVisual.tsx`. */
-export type JourneyVisualKind = "diagnose" | "define" | "build" | "scale";
+export type JourneyVisualKind = "discover" | "design" | "build" | "scale";
 
 /** One stage of the HelloVibe product journey. */
 export type JourneyStage = {
@@ -218,8 +257,10 @@ export type JourneyStage = {
   title: string;
   /** One or two sentences of detail. */
   description: string;
-  /** What the client actually receives at the end of this stage. */
-  outputs: readonly string[];
+  /** What HelloVibe can pick up at this stage. */
+  items: readonly string[];
+  /** The visual metaphor, rendered as the caption under the mark. */
+  metaphor: string;
   /** Abstract mark for this stage. */
   visual: JourneyVisualKind;
 };
@@ -230,11 +271,22 @@ export type JourneyStage = {
  * The copy is fixed — do not reword, reorder or extend this list.
  */
 export const journeyStages: readonly JourneyStage[] = [
-  { id: "diagnose", number: "01", phase: "Diagnose", title: "Find where AI actually pays off.", … },
-  { id: "define",   number: "02", phase: "Define",   title: "Turn the opportunity into a plan.", … },
-  { id: "build",    number: "03", phase: "Build",    title: "Build the working version.", … },
-  { id: "scale",    number: "04", phase: "Scale",    title: "Make it real — and keep it real.", … },
+  { id: "discover", number: "01", phase: "Discover", title: "Find the opportunity.", … },
+  { id: "design",   number: "02", phase: "Design",   title: "Shape what could work.", … },
+  { id: "build",    number: "03", phase: "Build",    title: "Make it real.", … },
+  { id: "scale",    number: "04", phase: "Scale",    title: "Make it better. Then make it bigger.", … },
 ];
+
+/** Headline and supporting line, verbatim from the pack §2. */
+export const journeyHeadline = "Start anywhere. We’ll figure out what’s next.";
+export const journeySupporting = "You don’t need to know exactly what to build. That’s our job.";
+
+/** Closing call to action, verbatim from the pack §4. */
+export const journeyCta = {
+  prompt: "Not sure where to start?",
+  label: "Start a project",
+  href: "/contact",
+} as const;
 ```
 
 `readonly` throughout. The array is consumed by exactly one component and must not be duplicated in JSX.
@@ -310,7 +362,7 @@ Below `lg`:
 - The rail becomes **vertical**: four full-width rows stacked, each row showing `number · phase · title`, with the node marker on the left and the connecting hairline running down the left edge.
 - The panel sits directly beneath the list, inside the same bordered container, with a top hairline and no large gap.
 - Rows are at least **56px** tall so they clear the 44×44px touch-target minimum.
-- The panel stacks: description, then diagram, then outputs.
+- The panel stacks: description, then the item list, then the diagram.
 - No horizontal scrolling. No truncated labels — rows wrap to two lines rather than clipping.
 
 At `md` (768px) the header splits into two columns; below that it stacks.
@@ -575,14 +627,30 @@ Only unresolved issues or open questions.
 Answer any of these and the pack changes before a line of code is written.
 
 1. **Mobile behaviour.** Default is the same stepper, stacked, with the panel below the list. The alternative is every stage expanded on mobile with no interaction — more to scroll, but nothing hidden.
-2. **Section H2.** Default is *"How an idea becomes something that works."* Alternatives: *"From first signal to working product."* / *"Four stages. One working reality."*
+2. ~~**Section H2.**~~ **Settled** — *"Start anywhere. We’ll figure out what’s next."*, from the ChatGPT pack §2. The drafted H2 was discarded.
 3. **Surface.** Default is the warm background. A full-bleed near-black version would make this the page's dark finale immediately before the black footer — striking, but two dark blocks in a row.
 4. **Stage durations.** Currently omitted on purpose. If you want them, give me the wording (e.g. "1–2 weeks") and I will add a `when` field.
-5. **Navbar wiring.** `#how-we-work` exists after this task but the navbar still points "How we work" at `/services`. Change the nav, or leave it?
+5. ~~**Navbar wiring.**~~ **Settled** — "How we work" now points at `/#how-we-work`, as the pack §11 requires.
 6. **`AGENTS.md`.** It does not exist in the repository. Create it, or keep the "read if present" phrasing?
 
 ---
 
 Next task after this:
 
-`Implement HelloVibe Cases / Work section.`
+**AI Audit** — section 06 in the homepage order recovered from the ChatGPT
+conversation:
+
+```text
+1 Hero ✅            6 AI Audit          11 Why HelloVibe
+2 Trust / Social Proof ✗   7 Cases       12 Engagement Models
+3 AI Gap ✅          8 Method            13 FAQ
+4 What We Do ✅      9 AI Product Studio 14 Final CTA
+5 Product Journey ✅ 10 AI Creative Engine 15 Footer ✅
+```
+
+The order is described there as intentional and not to be reordered casually.
+Note that **Trust / Social Proof (02) was never built** — it was skipped during
+development, so the page currently runs 01 → 03 → 04 → 05.
+
+No implementation pack exists for AI Audit; it has to be written from the
+conversation.

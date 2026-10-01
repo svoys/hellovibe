@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 import type { JourneyVisualKind } from "@/data/product-journey";
 import { cn } from "@/lib/utils";
@@ -66,7 +66,7 @@ function Marks({
   kind: JourneyVisualKind;
   mark: ReturnType<typeof createMark>;
 }) {
-  if (kind === "diagnose") {
+  if (kind === "discover") {
     // Scan a field, spot the one that matters.
     return (
       <div className="flex w-fit flex-col gap-2">
@@ -88,7 +88,7 @@ function Marks({
     );
   }
 
-  if (kind === "define") {
+  if (kind === "design") {
     // A bet scoped inside a boundary.
     return (
       <div className="flex items-center gap-2">
@@ -137,34 +137,63 @@ function Marks({
 
 /**
  * Abstract diagram for one journey stage: a bordered stage box holding the
- * mark, with the phase name in mono at the foot — the same treatment
- * `ServiceVisual` gives its stage captions, so the two sections read as one
- * system.
+ * mark, with the pack's visual metaphor in mono at the foot — the same
+ * treatment `ServiceVisual` gives its stage captions, so the two sections read
+ * as one system.
+ *
+ * The metaphor is the only text in the box and it carries meaning, so it is
+ * rendered as its three words with the arrows hidden from assistive tech —
+ * otherwise a screen reader announces "right arrow" twice for no reason. The
+ * mark above stays decorative.
  *
  * No hooks and no `"use client"`: it is pulled into the client bundle by
  * `JourneyStepper`, which owns the state that drives it.
  */
 export function JourneyVisual({
   kind,
-  phase,
+  metaphor,
   active,
   reduced,
 }: {
   kind: JourneyVisualKind;
-  phase: string;
+  metaphor: string;
   active: boolean;
   reduced: boolean;
 }) {
   const mark = createMark(active, reduced);
+  const words = metaphor.split("→").map((word) => word.trim());
 
   return (
     <div className="flex h-full flex-col border border-line">
-      <div className="flex flex-1 items-center justify-center px-6 py-10">
+      {/*
+        The four marks are different heights — 19px for DISCOVER, 44px for the
+        dashed DESIGN box, 38px for BUILD and SCALE. Reserving the tallest plus
+        the `py-10` keeps every stage's box the same height, which matters
+        wherever the columns are stacked: below `lg` this box sits under the
+        copy, so a 25px difference moves everything below it.
+      */}
+      <div className="flex min-h-[7.75rem] flex-1 items-center justify-center px-6 py-10">
         <Marks kind={kind} mark={mark} />
       </div>
 
+      {/*
+        `block` matters. As an inline span the line boxes would take the parent's
+        line-height (~24px) rather than the label's own 1.2, so a wrapped
+        caption would add ~24px instead of ~13px. Block gives the span its own
+        line boxes, and `min-h-[2.4em]` then reserves exactly two lines — which
+        is what the longest metaphor needs once the box is full-width and narrow
+        (below ~430px). At `lg` the box stretches to the grid row anyway, so the
+        reservation costs nothing there.
+      */}
       <div className="border-t border-line px-6 py-4">
-        <span className="font-mono text-label uppercase text-black/70">{phase}</span>
+        <span className="block min-h-[2.4em] font-mono text-label uppercase text-black/70">
+          {words.map((word, index) => (
+            <Fragment key={word}>
+              {index > 0 ? <span aria-hidden="true">{" → "}</span> : null}
+              <span>{word}</span>
+            </Fragment>
+          ))}
+        </span>
       </div>
     </div>
   );

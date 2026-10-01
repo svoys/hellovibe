@@ -4,7 +4,7 @@
  * Every mark is built from CSS — borders, small shapes and type — never raster
  * imagery. See `components/home/JourneyVisual.tsx`.
  */
-export type JourneyVisualKind = "diagnose" | "define" | "build" | "scale";
+export type JourneyVisualKind = "discover" | "design" | "build" | "scale";
 
 /** One stage of the HelloVibe product journey. */
 export type JourneyStage = {
@@ -18,8 +18,10 @@ export type JourneyStage = {
   title: string;
   /** One or two sentences of detail. */
   description: string;
-  /** What the client actually receives at the end of this stage. */
-  outputs: readonly string[];
+  /** What HelloVibe can pick up at this stage. */
+  items: readonly string[];
+  /** The visual metaphor, rendered as the caption under the mark. */
+  metaphor: string;
   /** Abstract mark for this stage. */
   visual: JourneyVisualKind;
 };
@@ -27,50 +29,66 @@ export type JourneyStage = {
 /**
  * The four stages, exactly as approved in the Product Journey Pack v0.1 §3.
  *
- * The copy is fixed — do not reword, reorder or extend this list.
+ * The copy is fixed — do not reword, reorder or extend this list. The phase
+ * names, titles, descriptions, items and metaphors are all verbatim from the
+ * pack; the strings are not to be "improved" in passing.
  *
  * Deliberately absent: durations and numbers-as-proof. Both are commitments,
  * and the pack does not invent commitments.
  */
 export const journeyStages: readonly JourneyStage[] = [
   {
-    id: "diagnose",
+    id: "discover",
     number: "01",
-    phase: "Diagnose",
-    title: "Find where AI actually pays off.",
-    description:
-      "We map how your business really works, then rank the places AI can move the needle — and the ones that only look good in a demo.",
-    outputs: ["Opportunity map", "Ranked use cases", "A clear recommendation"],
-    visual: "diagnose",
+    phase: "Discover",
+    title: "Find the opportunity.",
+    description: "We start with the problem, the business and the people behind it.",
+    items: ["AI Audit", "Product Discovery", "Creative Audit"],
+    metaphor: "Question → Signals → Opportunity",
+    visual: "discover",
   },
   {
-    id: "define",
+    id: "design",
     number: "02",
-    phase: "Define",
-    title: "Turn the opportunity into a plan.",
-    description:
-      "We shape the strongest bet into a scoped product or system — what we build, what we don’t, and how we’ll know it worked.",
-    outputs: ["Scope and success criteria", "Prototype direction", "Effort and timeline"],
-    visual: "define",
+    phase: "Design",
+    title: "Shape what could work.",
+    description: "We turn the opportunity into a clear product, system or creative direction.",
+    items: ["Strategy", "UX / UI", "Architecture", "Prototype"],
+    metaphor: "Idea → Flow → Prototype",
+    visual: "design",
   },
   {
     id: "build",
     number: "03",
     phase: "Build",
-    title: "Build the working version.",
+    title: "Make it real.",
     description:
-      "We design and build the real thing in short cycles, so you review working software instead of another slide deck.",
-    outputs: ["Working software", "Visible progress", "Decisions documented"],
+      "We combine product, design, engineering and AI to build something people can actually use.",
+    items: ["AI Systems", "MWP", "MVP", "Creative Engine"],
+    metaphor: "Prototype → System → Product",
     visual: "build",
   },
   {
     id: "scale",
     number: "04",
     phase: "Scale",
-    title: "Make it real — and keep it real.",
-    description:
-      "We launch, measure and improve against real usage, then hand your team something they can run without us.",
-    outputs: ["Launch and measurement", "Iteration on real usage", "Handover your team can run"],
+    title: "Make it better. Then make it bigger.",
+    description: "We optimize what works, automate what doesn’t and keep building from there.",
+    items: ["Optimization", "Product Team", "Automation", "Growth"],
+    metaphor: "Learn → Optimize → Scale",
     visual: "scale",
   },
 ];
+
+/** The block's headline copy, verbatim from the pack §2. */
+export const journeyHeadline = "Start anywhere. We’ll figure out what’s next.";
+
+/** Supporting line under the headline, verbatim from the pack §2. */
+export const journeySupporting = "You don’t need to know exactly what to build. That’s our job.";
+
+/** Closing call to action, verbatim from the pack §4. */
+export const journeyCta = {
+  prompt: "Not sure where to start?",
+  label: "Start a project",
+  href: "/contact",
+} as const;
