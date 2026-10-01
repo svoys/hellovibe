@@ -5,8 +5,17 @@ import { VibeMachine } from "@/components/home/VibeMachine";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
-/** The section the secondary CTA scrolls to. Owned by `app/page.tsx`. */
-export const NEXT_SECTION_ID = "the-ai-gap";
+/**
+ * The section the secondary CTA scrolls to — the block immediately after the
+ * Hero, so "Explore what we do ↓" lands on the next thing rather than skipping
+ * past it.
+ *
+ * This used to read `"the-ai-gap"` and did double duty: `AIGap` imported it and
+ * spread it onto its own `<section>`, so the Hero's link target and the AI Gap's
+ * anchor were the same constant. That is why `AIGap` now owns `AI_GAP_SECTION_ID`
+ * instead — changing this value alone used to move the AI Gap's anchor too.
+ */
+export const NEXT_SECTION_ID = "trust";
 
 /**
  * HelloVibe homepage Hero.
