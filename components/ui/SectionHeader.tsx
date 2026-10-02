@@ -13,13 +13,22 @@ import { cn } from "@/lib/utils";
  * `inverse` is the same idea for the dark sections: white at 70% and 75% over
  * `--color-black` measure 9.6:1 and 11:1. Neither `default` nor `strong` is
  * legible there, and a dark section should not have to fork its own header.
+ *
+ * `vibe` is the same idea for the accent sections: `strong`'s two alphas over
+ * `--color-vibe` measure 6.6:1 and 7.8:1, and the field is light, so the text
+ * colours do not have to change — only the number/eyebrow divider, which is
+ * `--color-line` by default and would be invisible on an accent field.
  */
-type SectionHeaderTone = "default" | "strong" | "inverse";
+type SectionHeaderTone = "default" | "strong" | "inverse" | "vibe";
 
-const TONES: Record<SectionHeaderTone, { meta: string; description: string }> = {
-  default: { meta: "text-muted", description: "text-muted" },
-  strong: { meta: "text-black/70", description: "text-black/75" },
-  inverse: { meta: "text-white/70", description: "text-white/75" },
+const TONES: Record<
+  SectionHeaderTone,
+  { meta: string; description: string; divider: string }
+> = {
+  default: { meta: "text-muted", description: "text-muted", divider: "bg-line" },
+  strong: { meta: "text-black/70", description: "text-black/75", divider: "bg-line" },
+  inverse: { meta: "text-white/70", description: "text-white/75", divider: "bg-line" },
+  vibe: { meta: "text-black/70", description: "text-black/75", divider: "bg-black/40" },
 };
 
 type SectionHeaderProps = {
@@ -68,7 +77,9 @@ export function SectionHeader({
       {hasMeta ? (
         <p className={cn("flex flex-wrap items-center gap-3 text-label uppercase", styles.meta)}>
           {number ? <span>{number}</span> : null}
-          {number && eyebrow ? <span aria-hidden="true" className="h-px w-6 bg-line" /> : null}
+          {number && eyebrow ? (
+            <span aria-hidden="true" className={cn("h-px w-6", styles.divider)} />
+          ) : null}
           {eyebrow ? <span>{eyebrow}</span> : null}
         </p>
       ) : null}

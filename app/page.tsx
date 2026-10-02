@@ -1,6 +1,7 @@
 import { AIAudit } from "@/components/home/AIAudit";
 import { AIGap } from "@/components/home/AIGap";
 import { Cases } from "@/components/home/Cases";
+import { CreativeEngine } from "@/components/home/CreativeEngine";
 import { Hero } from "@/components/home/Hero";
 import { Method } from "@/components/home/Method";
 import { ProductJourney } from "@/components/home/ProductJourney";
@@ -20,6 +21,7 @@ export default function HomePage() {
       <Cases />
       <Method />
       <ProductStudio />
+      <CreativeEngine />
     </>
   );
 }

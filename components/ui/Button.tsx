@@ -21,6 +21,12 @@ const VARIANTS: Record<ButtonVariant, string> = {
    * is why the dark sections need this rather than a border override.
    */
   inverse: "bg-white text-black hover:bg-vibe hover:text-black",
+  /*
+   * For accent surfaces. Identical to `primary` at rest — the point is the
+   * hover: `primary` fills with `--color-vibe`, which is invisible on a
+   * `--color-vibe` section, so this one inverts to white instead.
+   */
+  accent: "bg-black text-white hover:bg-white hover:text-black",
 };
 
 type SharedProps = {

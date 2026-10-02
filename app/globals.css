@@ -606,6 +606,88 @@
 }
 
 /* ==========================================================================
+   Creative Engine — the accent surface, and the fan that draws itself
+   --------------------------------------------------------------------------
+   `data-surface="vibe"` needs no focus-ring override: the global ring is
+   `--color-black`, which measures 16:1 against `--color-vibe`. What it does
+   need is the selection colour — the global rule paints selections in
+   `--color-vibe`, so on a `--color-vibe` field the highlight would be the same
+   colour as the field and selecting text would look like nothing happened.
+
+   The animation is the source's own motion concept for this block, "One →
+   Many", read literally: the seed grows out of the corner the trunk attaches
+   to, each row's trunk segment scales down the list, each stub extends, and
+   only then does its chip slide in. Nothing fades in from nowhere, and the
+   delays are derived from the row index in the component rather than being
+   hand-tuned here, so the drawing and the list cannot drift apart.
+
+   Only `opacity` and `transform` animate. The connectors are decorative and
+   rest at scale 0; the six format labels are content and keep a resting opacity
+   floor, so the diagram degrades to a legible list if the trigger never fires —
+   the same floor `studio-stage` and `method-text` use, for the same reason.
+   ========================================================================== */
+
+[data-surface="vibe"] ::selection {
+  background-color: var(--color-black);
+  color: var(--color-vibe);
+}
+
+.ce-seed {
+  opacity: 0.5;
+  transform: scale(0.96);
+  transform-origin: bottom left;
+  transition:
+    opacity 380ms ease,
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ce-visual[data-shown="true"] .ce-seed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Each row owns its own slice of the trunk, so the segments abut into one
+   continuous line. The last row stops at its own stub instead of running past
+   the final chip. */
+.ce-trunk {
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+}
+
+.ce-visual[data-shown="true"] .ce-trunk {
+  transform: scaleY(1);
+}
+
+.ce-row:last-child .ce-trunk {
+  height: 50%;
+}
+
+.ce-stub {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d, 0ms) + 110ms);
+}
+
+.ce-visual[data-shown="true"] .ce-stub {
+  transform: scaleX(1);
+}
+
+.ce-chip {
+  opacity: 0.45;
+  transform: translateX(-6px);
+  transition:
+    opacity 380ms ease calc(var(--d, 0ms) + 190ms),
+    transform 480ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d, 0ms) + 190ms);
+}
+
+.ce-visual[data-shown="true"] .ce-chip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ==========================================================================
    Motion preferences
    ========================================================================== */
 
