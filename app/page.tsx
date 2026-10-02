@@ -8,6 +8,7 @@ import { ProductJourney } from "@/components/home/ProductJourney";
 import { ProductStudio } from "@/components/home/ProductStudio";
 import { Services } from "@/components/home/Services";
 import { TrustStrip } from "@/components/home/TrustStrip";
+import { WhyHelloVibe } from "@/components/home/WhyHelloVibe";
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
       <Method />
       <ProductStudio />
       <CreativeEngine />
+      <WhyHelloVibe />
     </>
   );
 }
