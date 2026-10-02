@@ -4,6 +4,7 @@ import { Cases } from "@/components/home/Cases";
 import { CreativeEngine } from "@/components/home/CreativeEngine";
 import { EngagementModels } from "@/components/home/EngagementModels";
 import { FAQ } from "@/components/home/FAQ";
+import { FinalCta } from "@/components/home/FinalCta";
 import { Hero } from "@/components/home/Hero";
 import { Method } from "@/components/home/Method";
 import { ProductJourney } from "@/components/home/ProductJourney";
@@ -28,6 +29,7 @@ export default function HomePage() {
       <WhyHelloVibe />
       <EngagementModels />
       <FAQ />
+      <FinalCta />
     </>
   );
 }

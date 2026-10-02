@@ -10,11 +10,23 @@ import { contactEmail, footerServices, mainNavigation, primaryCta } from "@/data
  * Contains only what actually exists. No address, phone, social accounts,
  * clients, awards, certifications or registration details.
  *
+ * `border-t border-white/15` marks the top edge. Every block on the page
+ * announces itself with a hairline along its top edge; dark sections get away
+ * with no rule because the colour change *is* the separator (see the Product
+ * Studio and Final CTA notes). That reasoning does not hold here: the Final CTA
+ * is `bg-black` too, so on the homepage this footer is the one DARK → DARK
+ * adjacency on the page and the two merge into a single black run with nothing
+ * to read the boundary from. The value is the same `border-white/15` the
+ * copyright rule below already uses, so the footer is not inventing a second
+ * hairline weight. On the interior pages the rule sits at a light → dark
+ * boundary and is barely visible, which is fine — the colour change separates
+ * those.
+ *
  * TODO (later phase): legal links (privacy / terms) once the documents exist.
  */
 export function Footer() {
   return (
-    <footer className="bg-black text-white">
+    <footer className="border-t border-white/15 bg-black text-white">
       <Container className="py-section">
         <div className="hv-grid gap-y-12">
           <div className="col-span-4 md:col-span-8 lg:col-span-4">

@@ -772,6 +772,27 @@
 }
 
 /* ==========================================================================
+   Final CTA — the assembled machine
+   --------------------------------------------------------------------------
+   The Hero's machine box, sized for a block that is not a full-viewport stage.
+   Deliberately NOT `.hero-machine`: that class carries the Hero's
+   viewport-height maths (`calc(100svh - 20rem)`), which belongs to the sticky
+   track — reusing it here would make the closing panel resize with the window
+   for no reason and couple two unrelated blocks.
+
+   The panel itself is styled inline in `FinalCtaVisual.tsx`, because every one
+   of its colours is a per-word value from `lib/vibe-machine.ts`. Only the box
+   height lives here.
+
+   No reduced-motion branch: the machine is static, so there is nothing to
+   suppress.
+   ========================================================================== */
+
+.cta-machine {
+  height: clamp(20rem, 30vw, 23rem);
+}
+
+/* ==========================================================================
    Motion preferences
    ========================================================================== */
 
