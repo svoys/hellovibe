@@ -15,6 +15,12 @@ const BASE =
 const VARIANTS: Record<ButtonVariant, string> = {
   primary: "bg-black text-white hover:bg-vibe hover:text-black",
   secondary: "border border-line text-black hover:border-black",
+  /*
+   * For near-black surfaces: white fill, black label, and the same vibe-green
+   * hover. `secondary`'s `border-line` would be near-invisible on black, which
+   * is why the dark sections need this rather than a border override.
+   */
+  inverse: "bg-white text-black hover:bg-vibe hover:text-black",
 };
 
 type SharedProps = {

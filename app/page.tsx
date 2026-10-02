@@ -4,6 +4,7 @@ import { Cases } from "@/components/home/Cases";
 import { Hero } from "@/components/home/Hero";
 import { Method } from "@/components/home/Method";
 import { ProductJourney } from "@/components/home/ProductJourney";
+import { ProductStudio } from "@/components/home/ProductStudio";
 import { Services } from "@/components/home/Services";
 import { TrustStrip } from "@/components/home/TrustStrip";
 
@@ -18,6 +19,7 @@ export default function HomePage() {
       <AIAudit />
       <Cases />
       <Method />
+      <ProductStudio />
     </>
   );
 }

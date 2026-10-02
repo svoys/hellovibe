@@ -14,8 +14,14 @@ export type NavItem = {
 /** An entry in the service list (footer, and later the services section). */
 export type ServiceItem = NavItem;
 
-/** Visual treatments available on {@link import("@/components/ui/Button").Button}. */
-export type ButtonVariant = "primary" | "secondary";
+/**
+ * Visual treatments available on {@link import("@/components/ui/Button").Button}.
+ *
+ * `inverse` exists for the dark sections (Product Studio and the blocks after
+ * it). It is not a new look — it is the same button read against near-black, so
+ * the dark sections do not have to fork their own button.
+ */
+export type ButtonVariant = "primary" | "secondary" | "inverse";
 
 /** Visual treatments available on {@link import("@/components/ui/Tag").Tag}. */
 export type TagVariant = "default" | "vibe" | "orange";

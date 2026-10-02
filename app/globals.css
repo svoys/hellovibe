@@ -541,6 +541,71 @@
 }
 
 /* ==========================================================================
+   Product Studio — the first dark surface, and the frame that assembles
+   --------------------------------------------------------------------------
+   The focus ring is declared globally as `--color-black`, which is invisible on
+   `--color-black`, so a dark surface has to flip it. `data-surface="dark"` is
+   the hook; it is on the section, not the tokens, so no brand colour changes.
+
+   The frame's six layers are keyed to the six journey stages — the delay comes
+   from the stage index in the component rather than being hand-tuned here, so
+   the frame and the stage list cannot drift apart. Only `opacity`, `transform`
+   and colours animate.
+   ========================================================================== */
+
+[data-surface="dark"] a,
+[data-surface="dark"] button,
+[data-surface="dark"] input,
+[data-surface="dark"] select,
+[data-surface="dark"] textarea,
+[data-surface="dark"] summary,
+[data-surface="dark"] [role="button"] {
+  outline-color: var(--color-white);
+}
+
+[data-surface="dark"] :focus-visible {
+  outline-color: var(--color-white);
+}
+
+/*
+ * The resting state is a faint ghost rather than nothing. It reads as the
+ * wireframe the frame starts from, and it keeps the diagram legible if the
+ * in-view trigger never fires — the same floor `audit-row` and `method-text`
+ * use, for the same reason.
+ */
+.studio-layer {
+  opacity: 0.28;
+  transform: translateY(8px);
+  transition:
+    opacity 420ms ease var(--d, 0ms),
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
+}
+
+.studio-visual[data-shown="true"] .studio-layer {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.studio-stage {
+  opacity: 0.55;
+  transition: opacity 420ms ease var(--d, 0ms);
+}
+
+.studio-visual[data-shown="true"] .studio-stage {
+  opacity: 1;
+}
+
+/* `vibe` means system / progress / structure, so it is the honest colour for a
+   stage marker — and it is what makes the six light up in sequence. */
+.studio-node {
+  transition: background-color 420ms ease var(--d, 0ms);
+}
+
+.studio-visual[data-shown="true"] .studio-node {
+  background-color: var(--color-vibe);
+}
+
+/* ==========================================================================
    Motion preferences
    ========================================================================== */
 

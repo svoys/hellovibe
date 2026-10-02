@@ -9,12 +9,17 @@ import { cn } from "@/lib/utils";
  * and fails WCAG AA for text. `strong` swaps in the alpha variants the Hero
  * already uses instead (8.1:1 for the description, 6.8:1 for the meta row), so
  * a section can meet AA without the fixed brand token being changed.
+ *
+ * `inverse` is the same idea for the dark sections: white at 70% and 75% over
+ * `--color-black` measure 9.6:1 and 11:1. Neither `default` nor `strong` is
+ * legible there, and a dark section should not have to fork its own header.
  */
-type SectionHeaderTone = "default" | "strong";
+type SectionHeaderTone = "default" | "strong" | "inverse";
 
 const TONES: Record<SectionHeaderTone, { meta: string; description: string }> = {
   default: { meta: "text-muted", description: "text-muted" },
   strong: { meta: "text-black/70", description: "text-black/75" },
+  inverse: { meta: "text-white/70", description: "text-white/75" },
 };
 
 type SectionHeaderProps = {
