@@ -1,7 +1,7 @@
 import { ServiceCard } from "@/components/home/ServiceCard";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { services } from "@/data/services";
+import { servicePillars } from "@/data/service-pillars";
 
 /** Anchor for the Services block. */
 export const SERVICES_SECTION_ID = "what-we-do";
@@ -44,9 +44,9 @@ export function Services() {
 
         {/* `hv-grid` already supplies the row gap, so no gap utility is needed. */}
         <div className="hv-grid mt-16">
-          {services.map((service) => (
-            <div key={service.id} className="col-span-4 md:col-span-4 lg:col-span-6">
-              <ServiceCard service={service} />
+          {servicePillars.map((pillar) => (
+            <div key={pillar.service.id} className="col-span-4 md:col-span-4 lg:col-span-6">
+              <ServiceCard service={pillar.service} href={pillar.href} />
             </div>
           ))}
         </div>

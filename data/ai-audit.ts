@@ -78,9 +78,8 @@ export const auditMicrocopy = "Typically 1–2 weeks";
 export const auditCaption = "Illustrative interface — conceptual, not a live analysis.";
 
 /**
- * `/services` is the approved route where the AI Strategy pillar lives, and it
- * is where `serviceLinks` already points all four pillars. A dedicated
- * `/ai-audit` route does not exist and this task must not invent one.
+ * `/services` is the approved route where the AI Strategy pillar lives. A
+ * dedicated `/ai-audit` route does not exist and this task must not invent one.
  */
 export const auditCta = {
   label: "Explore AI Audit",

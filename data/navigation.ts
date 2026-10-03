@@ -1,4 +1,4 @@
-import { serviceLinks } from "@/data/services";
+import { servicePillarLinks } from "@/data/service-pillars";
 import type { NavItem } from "@/types";
 
 /**
@@ -37,10 +37,11 @@ export const primaryCta: NavItem = {
 /**
  * Service capabilities listed in the footer.
  *
- * Derived from `data/services.ts` so the four pillar names are defined exactly
- * once — the homepage Services section renders the same entries.
+ * Derived from `data/service-pillars.ts` so the four pillar names are defined
+ * exactly once — the homepage Services section renders the same entries — and
+ * each one points at its own pillar page rather than all four at `/services`.
  */
-export const footerServices: NavItem[] = serviceLinks;
+export const footerServices: NavItem[] = servicePillarLinks;
 
 /** The only contact channel that actually exists. */
 export const contactEmail = "hello@hellovibe.ru";

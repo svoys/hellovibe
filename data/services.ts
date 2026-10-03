@@ -1,5 +1,3 @@
-import type { ServiceItem } from "@/types";
-
 /**
  * Which abstract diagram a service card draws.
  *
@@ -72,14 +70,3 @@ export const services: Service[] = [
     surface: "light",
   },
 ];
-
-/**
- * Footer list, derived so the pillar names live in exactly one place.
- *
- * No dedicated sub-routes exist yet, so these point at the approved `/services`
- * route rather than inventing pages.
- */
-export const serviceLinks: ServiceItem[] = services.map((service) => ({
-  label: service.title,
-  href: "/services",
-}));

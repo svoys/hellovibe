@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 
 import { ServiceVisual } from "@/components/home/ServiceVisual";
 import { PageIntro } from "@/components/layout/PageIntro";
+import { ArrowLink } from "@/components/ui/ArrowLink";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { capabilitiesById } from "@/data/service-capabilities";
-import { services } from "@/data/services";
+import { servicePillars } from "@/data/service-pillars";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -25,10 +25,10 @@ export const metadata: Metadata = {
  * homepage follows the same rule — `Hero` has no top border, and only the
  * sections *between* blocks carry one.
  *
- * Deliberately no links to `/services/strategy`, `/services/systems`,
- * `/services/products` or `/services/creative`. Those routes are in the source's
- * route map but do not exist, and linking them would replace three 404s with
- * four new ones.
+ * Each pillar now carries the source's own CTA — "Explore AI Strategy →" — into
+ * its dedicated page. Those four routes were previously left unlinked on
+ * purpose, because they did not exist and linking them would have replaced
+ * three 404s with four new ones. They exist now, so this page is the way in.
  */
 export default function ServicesPage() {
   return (
@@ -47,9 +47,9 @@ export default function ServicesPage() {
         />
 
         <div className="mt-20 flex flex-col">
-          {services.map((service) => {
+          {servicePillars.map((pillar) => {
+            const { service, includes, href } = pillar;
             const dark = service.surface === "dark";
-            const capabilities = capabilitiesById.get(service.id) ?? [];
 
             return (
               <article
@@ -70,10 +70,14 @@ export default function ServicesPage() {
                   </p>
 
                   <ul className="mt-7 flex flex-col gap-2 border-l border-line pl-5 text-body text-black/75">
-                    {capabilities.map((capability) => (
-                      <li key={capability}>{capability}</li>
+                    {includes.map((item) => (
+                      <li key={item}>{item}</li>
                     ))}
                   </ul>
+
+                  <div className="mt-7">
+                    <ArrowLink href={href}>Explore {service.title}</ArrowLink>
+                  </div>
                 </div>
 
                 {/* The one dark pillar keeps its dark surface here too, so the
