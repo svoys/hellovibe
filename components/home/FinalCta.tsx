@@ -1,13 +1,9 @@
+import { getTranslations } from "next-intl/server";
+
 import { FinalCtaVisual } from "@/components/home/FinalCtaVisual";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import {
-  finalCtaBody,
-  finalCtaEyebrow,
-  finalCtaHeadline,
-  finalCtaMicro,
-} from "@/data/final-cta";
 import { contactEmail, primaryCta } from "@/data/navigation";
 
 /** Anchor for the closing block. Nothing links to it; it exists for parity. */
@@ -43,7 +39,10 @@ export const FINAL_CTA_SECTION_ID = "final-cta";
  * Server Component. The block ships no client JavaScript — no animation, no
  * in-view trigger, nothing to hydrate.
  */
-export function FinalCta() {
+export async function FinalCta() {
+  const t = await getTranslations("FinalCta");
+  const nav = await getTranslations("Nav");
+
   return (
     <section
       id={FINAL_CTA_SECTION_ID}
@@ -56,16 +55,16 @@ export function FinalCta() {
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <SectionHeader
               number="14"
-              eyebrow={finalCtaEyebrow}
+              eyebrow={t("eyebrow")}
               tone="inverse"
               titleId="final-cta-title"
-              title={finalCtaHeadline}
-              description={finalCtaBody}
+              title={t("headline")}
+              description={t("body")}
             />
 
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
               <ButtonLink href={primaryCta.href} variant="inverse" arrow>
-                {primaryCta.label}
+                {nav("startProject")}
               </ButtonLink>
 
               {/*
@@ -82,7 +81,7 @@ export function FinalCta() {
               </a>
             </div>
 
-            <p className="mt-8 text-small text-white/70">{finalCtaMicro}</p>
+            <p className="mt-8 text-small text-white/70">{t("micro")}</p>
           </div>
 
           <div className="col-span-4 md:col-span-8 lg:col-span-5">

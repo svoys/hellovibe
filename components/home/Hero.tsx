@@ -1,4 +1,5 @@
 import { ArrowDown } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 import { HeroTrack } from "@/components/home/HeroTrack";
 import { VibeMachine } from "@/components/home/VibeMachine";
@@ -28,7 +29,9 @@ export const NEXT_SECTION_ID = "trust";
  * warm background, which fails WCAG AA for body text; the alpha variants
  * measure 8.1:1 and 6.8:1. The token itself is untouched.
  */
-export function Hero() {
+export async function Hero() {
+  const t = await getTranslations("Hero");
+
   return (
     <HeroTrack>
       <div className="hero-stage w-full">
@@ -37,28 +40,35 @@ export function Hero() {
             <div className="col-span-4 md:col-span-8 lg:col-span-7">
               <p className="flex items-center gap-3 text-label uppercase text-black/70">
                 <span aria-hidden="true" className="inline-block size-2 bg-orange" />
-                AI Product &amp; Transformation Studio
+                {t("eyebrow")}
               </p>
 
+              {/*
+                The green underline under "real." is part of the headline's
+                markup, not of its text, so the translation carries a tag rather
+                than a split string. Translators keep the emphasis on whichever
+                word carries it in their language — a Russian headline may put it
+                somewhere else entirely — and no locale has to know the CSS.
+              */}
               <h1 id="hero-title" className="mt-6 text-h1">
-                AI, but make it{" "}
-                <span className="relative inline-block">
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-x-[-0.04em] bottom-[0.06em] -z-10 h-[0.3em] bg-vibe"
-                  />
-                  real.
-                </span>
+                {t.rich("title", {
+                  accent: (chunks) => (
+                    <span className="relative inline-block">
+                      <span
+                        aria-hidden="true"
+                        className="absolute inset-x-[-0.04em] bottom-[0.06em] -z-10 h-[0.3em] bg-vibe"
+                      />
+                      {chunks}
+                    </span>
+                  ),
+                })}
               </h1>
 
-              <p className="mt-7 max-w-[34ch] text-body-lg text-black/75">
-                We turn AI opportunities into working products, business systems and creative
-                engines.
-              </p>
+              <p className="mt-7 max-w-[34ch] text-body-lg text-black/75">{t("lead")}</p>
 
               <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-5">
                 <ButtonLink href="/contact" arrow>
-                  Start a project
+                  {t("primaryCta")}
                 </ButtonLink>
 
                 {/*
@@ -71,7 +81,7 @@ export function Hero() {
                   href={`#${NEXT_SECTION_ID}`}
                   className="group inline-flex items-center gap-1.5 border-b border-line pb-0.5 font-medium text-black transition-colors duration-150 hover:border-black"
                 >
-                  Explore what we do
+                  {t("secondaryCta")}
                   <ArrowDown
                     aria-hidden="true"
                     className="size-[1em] shrink-0 transition-transform duration-150 group-hover:translate-y-1"
@@ -79,9 +89,7 @@ export function Hero() {
                 </a>
               </div>
 
-              <p className="mt-10 text-label uppercase text-black/70">
-                Strategy · Product · AI · Creative
-              </p>
+              <p className="mt-10 text-label uppercase text-black/70">{t("micro")}</p>
             </div>
 
             <div className="col-span-4 md:col-span-8 lg:col-span-5">

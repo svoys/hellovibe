@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Fragment, useRef, type CSSProperties } from "react";
 import { useInView } from "motion/react";
 
@@ -42,13 +43,13 @@ const PALETTE: Record<ServiceSurface, Palette> = {
   },
 };
 
-/** The three (or two) beats each diagram spells out. */
-const STAGE_LABELS: Record<ServiceVisualKind, readonly string[]> = {
-  strategy: ["Signals", "Opportunities", "Priority"],
-  systems: ["Manual", "Automation", "Flow"],
-  products: ["Idea", "Prototype", "Product"],
-  creative: ["One idea", "Many outputs"],
-};
+/**
+ * The three (or two) beats each diagram spells out.
+ *
+ * Localised, so they live in `messages/<locale>.json` under
+ * `Services.visuals.<kind>` — one array per diagram, matched by the same
+ * {@link ServiceVisualKind} key the diagram itself is chosen by.
+ */
 
 /** Bar heights, in px, for the two bar-chart stages of the strategy diagram. */
 const STRATEGY_BARS: readonly (readonly number[])[] = [
@@ -162,10 +163,11 @@ export function ServiceVisual({
    * which mismatches the attribute during hydration.
    */
   const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
+  const t = useTranslations("Services");
 
   const shown = Boolean(reducedMotion) || inView;
   const palette = PALETTE[surface];
-  const labels = STAGE_LABELS[kind];
+  const labels = t.raw(`visuals.${kind}`) as readonly string[];
 
   return (
     <div ref={ref} data-shown={shown} className="svc-visual flex items-center gap-2 px-6 py-6">

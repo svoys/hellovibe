@@ -14,6 +14,23 @@
  *
  * Positions are percentages of the machine box, anchored at the word's LEFT
  * edge and vertical CENTRE (matching `transformOrigin: "0% 50%"`).
+ *
+ * ## Why the vocabulary below is not localised
+ *
+ * `MACHINE_WORDS`, `STAGES` and `SYSTEM_COLUMNS` are the one part of the site
+ * that stays English in both locales, by decision — the same call the section
+ * numbers (`01`–`12`) get. This diagram is a *system artefact*, not prose: ten
+ * technical nouns in a monospace grid, plus the five beats they pass through.
+ * Translating them would lengthen the chips enough to break the measured
+ * geometry in `LAYOUT_*` (the slot positions are tuned to these exact string
+ * widths), and the words are the same words an engineer would use in Russian
+ * anyway. What *is* localised is everything around them: the accessible name of
+ * the machine, its title, and the copy of the blocks that contain it — see
+ * `Hero.machineLabel`, `Hero.machineTitle`, `Hero.machineStagesLabel` and
+ * `Hero.machineSettledLabel` in `messages/<locale>.json`.
+ *
+ * If this is ever revisited, the strings to move are `label` on every entry of
+ * `MACHINE_WORDS`, `label` on every entry of `STAGES`, and `SYSTEM_COLUMNS`.
  */
 
 export type Frame = {

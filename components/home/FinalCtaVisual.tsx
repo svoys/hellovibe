@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import {
   LAYOUT_COMPACT,
   LAYOUT_DESKTOP,
@@ -51,14 +53,20 @@ const DARK_TONE: Record<Tone, { bg: string; fg: string }> = {
   ink: { bg: "transparent", fg: "var(--color-white)" },
 };
 
-/** The panel is one image: ten scattered words resolved into a system. */
-const SETTLED_LABEL =
-  "The Vibe Machine, assembled: its ten words have settled into inputs, system and output, and the product has resolved into a green outcome.";
+/**
+ * The panel is one image: ten scattered words resolved into a system.
+ *
+ * `role="img"` means a screen reader gets this string and nothing else from the
+ * panel, so it has to carry the content as well as the name. Localised, so it
+ * lives at `Hero.machineSettledLabel` — under `Hero` rather than `FinalCta`
+ * because it is the *same* machine, and the two blocks have to describe it with
+ * the same words.
+ */
 
 /** Hairline colour for the editorial grid, the inverse of `--color-line` on white. */
 const GRID_LINE = "rgba(255, 255, 255, 0.12)";
 
-function SettledMachine({ layout }: { layout: MachineLayout }) {
+function SettledMachine({ layout, title }: { layout: MachineLayout; title: string }) {
   return (
     <div className="cta-machine relative select-none overflow-hidden border border-white bg-black">
       {/* Editorial grid */}
@@ -93,7 +101,7 @@ function SettledMachine({ layout }: { layout: MachineLayout }) {
         bookend. Real text, not decoration.
       */}
       <div className="absolute inset-x-0 top-0 z-10 flex h-9 items-center justify-between border-b border-white/25 px-3 font-mono text-label uppercase text-white/70">
-        <span>The Vibe Machine</span>
+        <span>{title}</span>
         <span className="flex items-center gap-2">
           <span aria-hidden="true" className="inline-block size-2 bg-orange" />
           <span>05 / 05 · Outcome</span>
@@ -156,14 +164,15 @@ function SettledMachine({ layout }: { layout: MachineLayout }) {
   );
 }
 
-export function FinalCtaVisual() {
+export async function FinalCtaVisual() {
+  const t = await getTranslations("Hero");
   return (
-    <div role="img" aria-label={SETTLED_LABEL}>
+    <div role="img" aria-label={t("machineSettledLabel")}>
       <div className="md:hidden">
-        <SettledMachine layout={LAYOUT_COMPACT} />
+        <SettledMachine layout={LAYOUT_COMPACT} title={t("machineTitle")} />
       </div>
       <div className="hidden md:block">
-        <SettledMachine layout={LAYOUT_DESKTOP} />
+        <SettledMachine layout={LAYOUT_DESKTOP} title={t("machineTitle")} />
       </div>
     </div>
   );

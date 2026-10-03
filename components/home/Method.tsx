@@ -1,7 +1,8 @@
+import { getTranslations } from "next-intl/server";
+
 import { MethodTimeline } from "@/components/home/MethodTimeline";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { methodClosing, methodHeadline } from "@/data/method";
 
 /** Anchor for the Method block. */
 export const METHOD_SECTION_ID = "method";
@@ -28,7 +29,9 @@ export const METHOD_SECTION_ID = "method";
  *
  * Server Component. Only the timeline crosses into the client bundle.
  */
-export function Method() {
+export async function Method() {
+  const t = await getTranslations("Method");
+
   return (
     <section
       id={METHOD_SECTION_ID}
@@ -40,10 +43,10 @@ export function Method() {
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <SectionHeader
               number="06"
-              eyebrow="How we work"
+              eyebrow={t("eyebrow")}
               tone="strong"
               titleId="method-title"
-              title={methodHeadline}
+              title={t("headline")}
             />
           </div>
         </div>
@@ -58,7 +61,7 @@ export function Method() {
           make a screen-reader heading list read it as a section title.
         */}
         <div className="mt-16 border-t border-line pt-10">
-          <p className="max-w-[44ch] text-balance text-h3">{methodClosing}</p>
+          <p className="max-w-[44ch] text-balance text-h3">{t("closing")}</p>
         </div>
       </Container>
     </section>

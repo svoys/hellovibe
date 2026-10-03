@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useRef, type CSSProperties } from "react";
 import { useInView } from "motion/react";
 
@@ -26,6 +27,7 @@ function MethodStageRow({ stage, index }: { stage: MethodStage; index: number })
    * which mismatches the attribute during hydration.
    */
   const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
+  const t = useTranslations("Method.stages");
 
   const shown = Boolean(reducedMotion) || inView;
 
@@ -58,11 +60,11 @@ function MethodStageRow({ stage, index }: { stage: MethodStage; index: number })
         <p className="method-text flex items-center gap-3 font-mono text-label uppercase text-black/70">
           <span>{stage.number}</span>
           <span aria-hidden="true" className="h-px w-6 bg-line" />
-          <span>{stage.title}</span>
+          <span>{t(`${stage.id}.title`)}</span>
         </p>
 
         <p className="method-text mt-4 max-w-[52ch] text-body-lg text-pretty text-black/75">
-          {stage.description}
+          {t(`${stage.id}.description`)}
         </p>
       </div>
     </li>

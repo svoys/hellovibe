@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import type { ButtonVariant } from "@/types";
 

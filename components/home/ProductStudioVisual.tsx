@@ -1,9 +1,10 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useRef, type CSSProperties } from "react";
 import { useInView } from "motion/react";
 
-import { studioCaption, studioStages } from "@/data/product-studio";
+import { studioStages } from "@/data/product-studio";
 import { REDUCED_MOTION_QUERY, useMediaQuery } from "@/lib/media-query";
 
 /** Delay between two consecutive beats of the build, in ms. */
@@ -20,9 +21,10 @@ const beat = (n: number) => ({ "--d": `${n * STEP}ms` }) as CSSProperties;
  * must not be possible to mistake the frame for a real product through it.
  * The two acronyms are expanded here as well — on the page they are expanded in
  * visible text, and a screen reader should not have to hear `MWP` bare.
+ *
+ * Localised, so it lives at `Studio.visual.label` and is read through
+ * `useTranslations` in the component below.
  */
-const LABEL =
-  "Diagram of the six-stage product journey — idea, discovery, prototype, MWP, minimum working product, MVP, minimum viable product, and scale — beneath an abstract interface frame that firms up from wireframe to working interface. Illustrative diagram, not a screenshot of a real product.";
 
 /**
  * Section 09 — the product-studio diagram.
@@ -45,6 +47,7 @@ const LABEL =
  * of being hand-tuned.
  */
 export function ProductStudioVisual() {
+  const t = useTranslations("Studio");
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.25 });
   /*
@@ -62,7 +65,7 @@ export function ProductStudioVisual() {
       <div
         ref={ref}
         role="img"
-        aria-label={LABEL}
+        aria-label={t("visual.label")}
         data-shown={shown}
         className="studio-visual border border-white/15 bg-white/[0.03] p-4 sm:p-6"
       >
@@ -142,11 +145,11 @@ export function ProductStudioVisual() {
               />
               <span className="min-w-0">
                 <span className="block font-mono text-label uppercase text-white/70">
-                  {stage.label}
+                  {t(`stages.${stage.id}`)}
                 </span>
                 {stage.gloss ? (
                   <span className="mt-1 block text-small text-pretty text-white/50">
-                    {stage.gloss}
+                    {t(`glosses.${stage.gloss}`)}
                   </span>
                 ) : null}
               </span>
@@ -160,7 +163,7 @@ export function ProductStudioVisual() {
         diagram uses. The diagram is an artefact; this sentence is the studio
         speaking, and it is what stops the frame being read as a screenshot.
       */}
-      <figcaption className="text-small text-white/70">{studioCaption}</figcaption>
+      <figcaption className="text-small text-white/70">{t("caption")}</figcaption>
     </figure>
   );
 }

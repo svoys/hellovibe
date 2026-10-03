@@ -1,13 +1,14 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { mainNavigation, primaryCta } from "@/data/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 const PANEL_ID = "mobile-navigation";
@@ -26,6 +27,9 @@ const FOCUSABLE = "a[href], button:not([disabled])";
  * respects `prefers-reduced-motion`. No dependency is used for any of it.
  */
 export function MobileMenu() {
+  const t = useTranslations("Nav");
+  const common = useTranslations("Common");
+
   // The panel is open only while the route it was opened on is still the current
   // one. Any navigation therefore closes it without needing an effect, and the
   // "close after choosing a link" requirement falls out of the same rule.
@@ -97,14 +101,14 @@ export function MobileMenu() {
       <button
         ref={triggerRef}
         type="button"
-        aria-label="Open menu"
+        aria-label={t("openMenu")}
         aria-expanded={open}
         aria-controls={PANEL_ID}
         onClick={() => setOpenedAt(pathname)}
         className={CONTROL}
       >
         <Menu aria-hidden="true" className="size-4" />
-        menu
+        {t("menuWord")}
       </button>
 
       <div
@@ -116,27 +120,35 @@ export function MobileMenu() {
           open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0",
         )}
       >
-        <Container className="flex h-20 shrink-0 items-center justify-between border-b border-line">
+        <Container className="flex h-20 shrink-0 items-center justify-between gap-4 border-b border-line">
           <Link href="/" className="text-[1.0625rem] font-semibold tracking-[-0.03em]">
-            hellovibe
+            {common("brand")}
           </Link>
-          <button type="button" aria-label="Close menu" onClick={close} className={CONTROL}>
-            close
+
+          {/*
+            The panel covers the whole viewport, navbar included, so the
+            switcher has to be repeated here — otherwise it would be unreachable
+            for exactly as long as the menu is open.
+          */}
+          <LocaleSwitcher className="ml-auto" />
+
+          <button type="button" aria-label={t("closeMenu")} onClick={close} className={CONTROL}>
+            {t("closeWord")}
             <X aria-hidden="true" className="ml-2 size-4" />
           </button>
         </Container>
 
-        <nav aria-label="Mobile" className="flex-1 overflow-y-auto">
+        <nav aria-label={t("mobileLabel")} className="flex-1 overflow-y-auto">
           <Container className="flex flex-col py-12">
             <ul className="flex flex-col gap-5">
               {mainNavigation.map((item) => (
-                <li key={item.label}>
+                <li key={item.key}>
                   <Link
                     href={item.href}
                     aria-current={pathname === item.href ? "page" : undefined}
                     className="text-h3 inline-block transition-colors duration-150 hover:text-muted"
                   >
-                    {item.label}
+                    {t(`items.${item.key}`)}
                   </Link>
                 </li>
               ))}
@@ -144,7 +156,7 @@ export function MobileMenu() {
 
             <div className="mt-12">
               <ButtonLink href={primaryCta.href} arrow>
-                {primaryCta.label}
+                {t("startProject")}
               </ButtonLink>
             </div>
           </Container>

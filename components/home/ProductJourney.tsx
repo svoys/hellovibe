@@ -1,8 +1,10 @@
+import { getTranslations } from "next-intl/server";
+
 import { JourneyStepper } from "@/components/home/JourneyStepper";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { journeyCta, journeyHeadline, journeySupporting } from "@/data/product-journey";
+import { journeyCta } from "@/data/product-journey";
 
 /**
  * Anchor for the Product Journey block.
@@ -37,7 +39,9 @@ export const JOURNEY_SECTION_ID = "how-we-work";
  * Services, so the block does not read as a third Hero. Only the stepper
  * crosses into the client bundle.
  */
-export function ProductJourney() {
+export async function ProductJourney() {
+  const t = await getTranslations("Journey");
+
   return (
     <section
       id={JOURNEY_SECTION_ID}
@@ -49,17 +53,15 @@ export function ProductJourney() {
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <SectionHeader
               number="03"
-              eyebrow="One partner. Every stage."
+              eyebrow={t("eyebrow")}
               tone="strong"
               titleId="journey-title"
-              title={journeyHeadline}
+              title={t("headline")}
             />
           </div>
 
           <div className="col-span-4 md:col-span-8 lg:col-span-5">
-            <p className="max-w-[44ch] text-body-lg text-pretty text-black/75">
-              {journeySupporting}
-            </p>
+            <p className="max-w-[44ch] text-body-lg text-pretty text-black/75">{t("supporting")}</p>
           </div>
         </div>
 
@@ -73,10 +75,10 @@ export function ProductJourney() {
           so it needs no new styling.
         */}
         <div className="mt-12 flex flex-col gap-5 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-body-lg text-black/75">{journeyCta.prompt}</p>
+          <p className="text-body-lg text-black/75">{t("ctaPrompt")}</p>
 
           <ArrowLink href={journeyCta.href} className="text-body-lg">
-            {journeyCta.label}
+            {t("ctaLabel")}
           </ArrowLink>
         </div>
       </Container>

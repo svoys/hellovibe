@@ -1,6 +1,8 @@
+import { getTranslations } from "next-intl/server";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { faqEyebrow, faqHeadline, faqItems } from "@/data/faq";
+import { faqItems } from "@/data/faq";
 import { cn } from "@/lib/utils";
 
 /** Anchor for the FAQ block. */
@@ -50,7 +52,9 @@ export const FAQ_SECTION_ID = "faq";
  * screen-reader user can jump between them. `text-h4` matches the size the Why
  * HelloVibe labels use, so the two lists read as the same weight of thing.
  */
-export function FAQ() {
+export async function FAQ() {
+  const t = await getTranslations("Faq");
+
   return (
     <section
       id={FAQ_SECTION_ID}
@@ -66,10 +70,10 @@ export function FAQ() {
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <SectionHeader
               number="11"
-              eyebrow={faqEyebrow}
+              eyebrow={t("eyebrow")}
               tone="strong"
               titleId="faq-title"
-              title={faqHeadline}
+              title={t("headline")}
             />
           </div>
         </div>
@@ -93,11 +97,11 @@ export function FAQ() {
         <div className="hv-grid mt-16">
           <ul className="col-span-4 border-b border-line md:col-span-8 lg:col-span-12">
             {faqItems.map((item) => (
-              <li key={item.id} className="border-t border-line">
+              <li key={item} className="border-t border-line">
                 <details className="faq-item">
                   <summary className="flex cursor-pointer items-center justify-between gap-6 py-6">
                     <h3 className="faq-question text-h4 text-black/75">
-                      {item.question}
+                      {t(`items.${item}.question`)}
                     </h3>
 
                     {/*
@@ -109,17 +113,25 @@ export function FAQ() {
                   </summary>
 
                   <div className="faq-answer pb-8">
-                    {item.answer.map((paragraph, index) => (
-                      <p
-                        key={paragraph}
-                        className={cn(
-                          "max-w-[62ch] text-body text-pretty text-black/75",
-                          index > 0 && "mt-3",
-                        )}
-                      >
-                        {paragraph}
-                      </p>
-                    ))}
+                    {/*
+                      The answer is stored as an array of paragraphs, because the
+                      source's breaks are deliberate: four of the six answers lead
+                      with a one-word verdict and then explain. Flattening them
+                      would lose the direct answer that makes an FAQ worth reading.
+                    */}
+                    {(t.raw(`items.${item}.answer`) as readonly string[]).map(
+                      (paragraph, index) => (
+                        <p
+                          key={paragraph}
+                          className={cn(
+                            "max-w-[62ch] text-body text-pretty text-black/75",
+                            index > 0 && "mt-3",
+                          )}
+                        >
+                          {paragraph}
+                        </p>
+                      ),
+                    )}
                   </div>
                 </details>
               </li>

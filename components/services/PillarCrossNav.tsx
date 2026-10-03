@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { servicePillars } from "@/data/service-pillars";
 import { cn } from "@/lib/utils";
@@ -11,11 +13,14 @@ import { cn } from "@/lib/utils";
  * as text with `aria-current="page"` rather than as a link to itself, which is
  * also why the list keeps its own `nav` landmark and label.
  *
- * Server Component — `ArrowLink` renders a `next/link` and nothing here needs
- * state. The global focus ring already covers the links, and the light surface
- * needs no `data-surface` hook.
+ * Async Server Component: the pillar names and action words are per locale, so
+ * they are read from `Services.pillars` rather than from `data/services.ts` —
+ * which is why this became `async` when the site went bilingual. `ArrowLink`
+ * still supplies the locale-aware `Link`, so nothing here has to know the
+ * routing rules. The global focus ring already covers the links, and the light
+ * surface needs no `data-surface` hook.
  */
-export function PillarCrossNav({
+export async function PillarCrossNav({
   currentSlug,
   className,
 }: {
@@ -23,11 +28,16 @@ export function PillarCrossNav({
   currentSlug: string;
   className?: string;
 }) {
+  const t = await getTranslations("Pages.Pillar");
+  const pillars = await getTranslations("Services.pillars");
+
   return (
-    <nav aria-label="Service pillars" className={className}>
+    <nav aria-label={t("crossNavLabel")} className={className}>
       <ul className="flex flex-col border-t border-line">
         {servicePillars.map((pillar) => {
           const isCurrent = pillar.slug === currentSlug;
+          const title = pillars(`${pillar.service.id}.title`);
+          const action = pillars(`${pillar.service.id}.action`);
 
           return (
             <li
@@ -43,14 +53,11 @@ export function PillarCrossNav({
                   /* Not a link: the reader is already here. `aria-current`
                      carries the state, so the styling is not the only cue. */
                   <span aria-current="page" className="text-h4">
-                    {pillar.service.title}
+                    {title}
                   </span>
                 ) : (
-                  <ArrowLink
-                    href={pillar.href}
-                    className="text-h4 text-black/75 hover:text-black"
-                  >
-                    {pillar.service.title}
+                  <ArrowLink href={pillar.href} className="text-h4 text-black/75 hover:text-black">
+                    {title}
                   </ArrowLink>
                 )}
               </span>
@@ -61,7 +68,7 @@ export function PillarCrossNav({
                   isCurrent ? "text-black" : "text-black/70",
                 )}
               >
-                {pillar.service.action}
+                {action}
               </span>
             </li>
           );

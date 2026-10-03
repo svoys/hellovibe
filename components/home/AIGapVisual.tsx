@@ -1,16 +1,20 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useRef, type CSSProperties } from "react";
 import { useInView } from "motion/react";
 
 import { REDUCED_MOTION_QUERY, useMediaQuery } from "@/lib/media-query";
 
 /**
- * Deterministic dispersion offsets, index-matched to {@link TIER_ONE}.
+ * Deterministic dispersion offsets, index-matched to the first token row.
  *
  * Fixed values rather than `Math.random()` so the server render, the client
  * render and every replay are identical — the same rule the Vibe Machine
- * follows.
+ * follows. The tokens themselves now come from `AIGap.visual.tierOne` in the
+ * message catalogues, so this table is matched to that list by position; the
+ * `% DISPERSION.length` in {@link scatter} is what keeps a longer translation
+ * from reading past the end.
  */
 const DISPERSION: readonly [number, number, number][] = [
   [-16, 12, 5],
@@ -23,23 +27,6 @@ const DISPERSION: readonly [number, number, number][] = [
   [14, -8, 6],
   [-6, 15, -5],
 ];
-
-const TIER_ONE = [
-  "AI",
-  "Chat",
-  "Tools",
-  "Models",
-  "Prompts",
-  "Automation",
-  "Data",
-  "Content",
-  "Agents",
-] as const;
-
-const TIER_TWO = ["People", "Process", "System", "Product", "Outcome"] as const;
-
-const LABEL =
-  "Diagram: nine disconnected AI possibilities — AI, chat, tools, models, prompts, automation, data, content and agents — settle into five elements of business reality — people, process, system, product and outcome — and resolve into one working system.";
 
 /** Builds the CSS custom properties that place a token in its scattered state. */
 function scatter(index: number, scale: number, delay: number): CSSProperties {
@@ -72,22 +59,33 @@ export function AIGapVisual() {
    * `false`, which is a hydration mismatch on the attribute.
    */
   const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
+  const t = useTranslations("AIGap.visual");
 
   const shown = Boolean(reducedMotion) || inView;
+
+  /*
+   * The two token rows are read as arrays rather than as numbered keys: they are
+   * lists whose length is the diagram's content (nine scattered possibilities,
+   * five elements of business reality), and `t.raw` keeps that shape. Their
+   * labels stay short and uppercase in every locale — they are chips inside a
+   * figure, not prose.
+   */
+  const tierOne = t.raw("tierOne") as readonly string[];
+  const tierTwo = t.raw("tierTwo") as readonly string[];
 
   return (
     <div
       ref={ref}
       role="img"
-      aria-label={LABEL}
+      aria-label={t("label")}
       data-shown={shown}
       className="aigap-visual border border-black bg-white"
     >
       {/* 01 — AI everywhere */}
       <div className="px-5 py-5">
-        <p className="text-label uppercase text-black/70">AI everywhere</p>
+        <p className="text-label uppercase text-black/70">{t("from")}</p>
         <ul className="mt-4 flex flex-wrap gap-1.5">
-          {TIER_ONE.map((token, index) => (
+          {tierOne.map((token, index) => (
             <li key={token} className={CHIP} style={scatter(index, 1, index * 40)}>
               {token}
             </li>
@@ -104,9 +102,9 @@ export function AIGapVisual() {
           ↓
         </span>
         <div className="min-w-0 flex-1">
-          <p className="text-label uppercase text-black/70">Business reality</p>
+          <p className="text-label uppercase text-black/70">{t("to")}</p>
           <ul className="mt-4 flex flex-wrap gap-1.5">
-            {TIER_TWO.map((token, index) => (
+            {tierTwo.map((token, index) => (
               <li key={token} className={CHIP} style={scatter(index, 0.5, 420 + index * 40)}>
                 {token}
               </li>
@@ -128,7 +126,7 @@ export function AIGapVisual() {
           style={{ "--d": "720ms" } as CSSProperties}
         >
           <span aria-hidden="true" className="inline-block size-2 shrink-0 bg-black" />
-          <span className="font-mono text-label uppercase text-black">One working system</span>
+          <span className="font-mono text-label uppercase text-black">{t("result")}</span>
         </div>
       </div>
     </div>

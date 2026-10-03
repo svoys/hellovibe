@@ -1,30 +1,20 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { useActionState, useEffect, useId, useRef } from "react";
 
-import { submitContact } from "@/app/contact/actions";
+import { submitContact } from "@/app/[locale]/contact/actions";
 import { Button } from "@/components/ui/Button";
 import {
-  contactBudgetOptions,
-  contactBudgetQuestion,
-  contactGoalPlaceholder,
-  contactGoalQuestion,
-  contactIntentOptions,
-  contactIntentQuestion,
-  contactMicrocopy,
-  contactStageOptions,
-  contactStageQuestion,
-  contactSubmitLabel,
-  contactSuccessBody,
-  contactSuccessHeading,
-  contactTimingOptions,
-  contactTimingQuestion,
-  contactUndeliveredBody,
-  contactUndeliveredHeading,
+  CONTACT_BUDGET_IDS,
+  CONTACT_INTENT_IDS,
+  CONTACT_STAGE_IDS,
+  CONTACT_TIMING_IDS,
 } from "@/data/contact";
 import { contactEmail } from "@/data/navigation";
 import {
   CONTACT_FIELDS,
+  CONTACT_LOCALE_FIELD,
   EMPTY_CONTACT_VALUES,
   HONEYPOT_FIELD,
   type ContactErrors,
@@ -41,15 +31,20 @@ const CONTROL =
 
 const LEGEND = "text-body-lg font-medium text-black";
 
-/** Shown against the two optional groups and the optional text field. */
-const OPTIONAL_TAG = <span className="ml-3 text-small font-normal text-black/70">Optional</span>;
+/** One radio option: the identifier that is submitted, and the label that is shown. */
+type RadioOption = {
+  /** Machine-readable value — see the header of `data/contact.ts`. */
+  id: string;
+  /** Localised text beside the control. */
+  label: string;
+};
 
 type RadioGroupProps = {
   /** Id for the group's first control, so a failed submit can focus it. */
   id: string;
   name: string;
   question: string;
-  options: readonly string[];
+  options: readonly RadioOption[];
   value: string;
   error?: string;
   optional?: boolean;
@@ -60,6 +55,11 @@ type RadioGroupProps = {
  * A `fieldset` + `legend` rather than a list of labelled inputs: the question is
  * the group's accessible name, so a screen reader announces it once for the
  * group instead of once per option.
+ *
+ * The `value` of every radio is the option's `id` and the visible text is its
+ * `label`. That split is the point of the whole form: what leaves the browser is
+ * `use_ai_business`, not the sentence beside it, so the payload is identical in
+ * both locales and does not change when a translator rewords a label.
  */
 function RadioGroup({
   id,
@@ -71,6 +71,7 @@ function RadioGroup({
   optional = false,
   required = false,
 }: RadioGroupProps) {
+  const t = useTranslations("ContactForm");
   const errorId = `${id}-error`;
   const legendId = `${id}-legend`;
 
@@ -90,25 +91,27 @@ function RadioGroup({
     >
       <legend id={legendId} className={LEGEND}>
         {question}
-        {optional ? OPTIONAL_TAG : null}
+        {optional ? (
+          <span className="ml-3 text-small font-normal text-black/70">{t("optional")}</span>
+        ) : null}
       </legend>
 
       <div className="mt-4 flex flex-col gap-3">
         {options.map((option, index) => (
           <label
-            key={option}
+            key={option.id}
             className="flex cursor-pointer items-start gap-3 text-body text-black/75 transition-colors duration-150 hover:text-black"
           >
             <input
               id={index === 0 ? id : undefined}
               type="radio"
               name={name}
-              value={option}
-              defaultChecked={value === option}
+              value={option.id}
+              defaultChecked={value === option.id}
               required={required && index === 0}
               className="mt-1 size-4 shrink-0 accent-black"
             />
-            <span>{option}</span>
+            <span>{option.label}</span>
           </label>
         ))}
       </div>
@@ -147,13 +150,16 @@ function TextField({
   optional = false,
   error,
 }: TextFieldProps) {
+  const t = useTranslations("ContactForm");
   const errorId = `${id}-error`;
 
   return (
     <div>
       <label htmlFor={id} className={LEGEND}>
         {label}
-        {optional ? OPTIONAL_TAG : null}
+        {optional ? (
+          <span className="ml-3 text-small font-normal text-black/70">{t("optional")}</span>
+        ) : null}
       </label>
 
       <input
@@ -195,9 +201,19 @@ function TextField({
  * Validation is server-side; the `required`/`aria-required` attributes are
  * semantics for assistive tech, and the form is `noValidate` so the browser's
  * own bubbles never compete with the messages rendered below each field.
+ *
+ * ## Bilingual
+ *
+ * Every visible string comes from `ContactForm.*`. The option sets are built
+ * here by pairing the ids in `data/contact.ts` with the labels in the catalogue,
+ * so the *ids* are what the radio inputs submit while the reader sees translated
+ * text. The hidden `locale` field is what lets the Server Action answer in the
+ * right language — see `CONTACT_LOCALE_FIELD` in `lib/contact.ts`.
  */
 export function ContactForm() {
   const [state, formAction, pending] = useActionState(submitContact, INITIAL_STATE);
+  const t = useTranslations("ContactForm");
+  const locale = useLocale();
   const uid = useId();
   const noticeRef = useRef<HTMLDivElement>(null);
 
@@ -225,11 +241,15 @@ export function ContactForm() {
 
   const fieldId = (field: string) => `${uid}-${field}`;
 
+  /** Pairs one option set with its labels, in the source's order. */
+  const options = (ids: readonly string[], group: string): RadioOption[] =>
+    ids.map((id) => ({ id, label: t(`${group}.${id}`) }));
+
   if (state.status === "success") {
     return (
       <div className="mt-16 max-w-[52rem] border-t border-line pt-12">
-        <h2 className="text-h3">{contactSuccessHeading}</h2>
-        <p className="mt-4 text-body-lg text-black/75">{contactSuccessBody}</p>
+        <h2 className="text-h3">{t("successHeading")}</h2>
+        <p className="mt-4 text-body-lg text-black/75">{t("successBody")}</p>
       </div>
     );
   }
@@ -242,13 +262,20 @@ export function ContactForm() {
       className="mt-16 flex max-w-[52rem] flex-col gap-12 border-t border-line pt-12"
     >
       {/*
+        The locale the form was rendered in. A Server Action cannot read the
+        `[locale]` segment, so the action is told instead of guessing — and it
+        validates this value against `routing.locales` before using it.
+      */}
+      <input type="hidden" name={CONTACT_LOCALE_FIELD} value={locale} />
+
+      {/*
         The honeypot. Hidden from sight and from assistive tech, and taken out of
         the tab order, so a real person can never fill it — see the Server
         Action, which answers anything that does exactly as it answers a real
         submission.
       */}
       <div className="sr-only" aria-hidden="true">
-        <label htmlFor={fieldId(HONEYPOT_FIELD)}>Fax number</label>
+        <label htmlFor={fieldId(HONEYPOT_FIELD)}>{t("honeypotLabel")}</label>
         <input
           id={fieldId(HONEYPOT_FIELD)}
           name={HONEYPOT_FIELD}
@@ -260,8 +287,8 @@ export function ContactForm() {
 
       {state.status === "undelivered" ? (
         <div ref={noticeRef} tabIndex={-1} className="border border-orange p-6">
-          <h2 className="text-h4">{contactUndeliveredHeading}</h2>
-          <p className="mt-3 text-body text-black/75">{contactUndeliveredBody}</p>
+          <h2 className="text-h4">{t("undeliveredHeading")}</h2>
+          <p className="mt-3 text-body text-black/75">{t("undeliveredBody")}</p>
           <p className="mt-5">
             <a
               href={`mailto:${contactEmail}`}
@@ -276,8 +303,8 @@ export function ContactForm() {
       <RadioGroup
         id={fieldId("intent")}
         name="intent"
-        question={contactIntentQuestion}
-        options={contactIntentOptions}
+        question={t("intentQuestion")}
+        options={options(CONTACT_INTENT_IDS, "intentOptions")}
         value={values.intent}
         error={errors.intent}
         required
@@ -286,8 +313,8 @@ export function ContactForm() {
       <TextField
         id={fieldId("goal")}
         name="goal"
-        label={contactGoalQuestion}
-        placeholder={contactGoalPlaceholder}
+        label={t("goalQuestion")}
+        placeholder={t("goalPlaceholder")}
         value={values.goal}
         error={errors.goal}
         required
@@ -296,8 +323,8 @@ export function ContactForm() {
       <RadioGroup
         id={fieldId("stage")}
         name="stage"
-        question={contactStageQuestion}
-        options={contactStageOptions}
+        question={t("stageQuestion")}
+        options={options(CONTACT_STAGE_IDS, "stageOptions")}
         value={values.stage}
         error={errors.stage}
         required
@@ -306,8 +333,8 @@ export function ContactForm() {
       <RadioGroup
         id={fieldId("budget")}
         name="budget"
-        question={contactBudgetQuestion}
-        options={contactBudgetOptions}
+        question={t("budgetQuestion")}
+        options={options(CONTACT_BUDGET_IDS, "budgetOptions")}
         value={values.budget}
         error={errors.budget}
         optional
@@ -316,8 +343,8 @@ export function ContactForm() {
       <RadioGroup
         id={fieldId("timing")}
         name="timing"
-        question={contactTimingQuestion}
-        options={contactTimingOptions}
+        question={t("timingQuestion")}
+        options={options(CONTACT_TIMING_IDS, "timingOptions")}
         value={values.timing}
         error={errors.timing}
         optional
@@ -328,7 +355,7 @@ export function ContactForm() {
           <TextField
             id={fieldId("name")}
             name="name"
-            label="Name"
+            label={t("nameLabel")}
             autoComplete="name"
             value={values.name}
             error={errors.name}
@@ -341,7 +368,7 @@ export function ContactForm() {
             id={fieldId("email")}
             name="email"
             type="email"
-            label="Email"
+            label={t("emailLabel")}
             autoComplete="email"
             value={values.email}
             error={errors.email}
@@ -353,7 +380,7 @@ export function ContactForm() {
           <TextField
             id={fieldId("company")}
             name="company"
-            label="Company"
+            label={t("companyLabel")}
             autoComplete="organization"
             value={values.company}
             error={errors.company}
@@ -364,9 +391,9 @@ export function ContactForm() {
 
       <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
         <Button type="submit" arrow disabled={pending}>
-          {contactSubmitLabel}
+          {t("submitLabel")}
         </Button>
-        <p className="text-small text-black/70">{contactMicrocopy}</p>
+        <p className="text-small text-black/70">{t("microcopy")}</p>
       </div>
     </form>
   );

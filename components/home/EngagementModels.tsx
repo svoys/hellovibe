@@ -1,11 +1,9 @@
+import { getTranslations } from "next-intl/server";
+
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import {
-  engagementEyebrow,
-  engagementHeadline,
-  engagementModels,
-} from "@/data/engagement-models";
+import { engagementModels } from "@/data/engagement-models";
 
 /** Anchor for the Engagement Models block. */
 export const ENGAGEMENT_SECTION_ID = "engagement-models";
@@ -42,7 +40,9 @@ export const ENGAGEMENT_SECTION_ID = "engagement-models";
  * considered and rejected: that variant is unused elsewhere in the codebase and
  * its `border-line` measures about 1.3:1 against a white card. See the pack §4.
  */
-export function EngagementModels() {
+export async function EngagementModels() {
+  const t = await getTranslations("Engagement");
+
   return (
     <section
       id={ENGAGEMENT_SECTION_ID}
@@ -58,10 +58,10 @@ export function EngagementModels() {
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <SectionHeader
               number="10"
-              eyebrow={engagementEyebrow}
+              eyebrow={t("eyebrow")}
               tone="strong"
               titleId="engagement-title"
-              title={engagementHeadline}
+              title={t("headline")}
             />
           </div>
         </div>
@@ -77,9 +77,9 @@ export function EngagementModels() {
             <div key={model.id} className="col-span-4 md:col-span-4 lg:col-span-6">
               <article className="flex h-full flex-col border border-line bg-white">
                 <div className="px-6 pt-8 lg:px-10 lg:pt-10">
-                  <h3 className="text-h3">{model.title}</h3>
+                  <h3 className="text-h3">{t(`models.${model.id}.title`)}</h3>
                   <p className="mt-3 max-w-[34ch] text-body-lg text-pretty text-black/75">
-                    {model.audience}
+                    {t(`models.${model.id}.audience`)}
                   </p>
                 </div>
 
@@ -90,7 +90,7 @@ export function EngagementModels() {
                   a stray mark. A row rule cannot wrap.
                 */}
                 <ul className="mt-8 border-t border-line">
-                  {model.items.map((item) => (
+                  {(t.raw(`models.${model.id}.items`) as readonly string[]).map((item) => (
                     <li
                       key={item}
                       className="border-b border-line px-6 py-3 text-body text-black/75 lg:px-10"
@@ -101,10 +101,10 @@ export function EngagementModels() {
                 </ul>
 
                 <div className="mt-auto flex flex-col items-start gap-6 px-6 py-8 lg:px-10 lg:py-10">
-                  <p className="text-body-lg font-medium">{model.outcome}</p>
+                  <p className="text-body-lg font-medium">{t(`models.${model.id}.outcome`)}</p>
 
-                  <ButtonLink href={model.cta.href} arrow>
-                    {model.cta.label}
+                  <ButtonLink href={model.href} arrow>
+                    {t(`models.${model.id}.ctaLabel`)}
                   </ButtonLink>
                 </div>
               </article>

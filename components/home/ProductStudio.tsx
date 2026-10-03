@@ -1,8 +1,10 @@
+import { getTranslations } from "next-intl/server";
+
 import { ProductStudioVisual } from "@/components/home/ProductStudioVisual";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { studioBody, studioCta, studioEyebrow, studioHeadline } from "@/data/product-studio";
+import { studioCta } from "@/data/product-studio";
 
 /** Anchor for the Product Studio block. */
 export const STUDIO_SECTION_ID = "product-studio";
@@ -34,7 +36,9 @@ export const STUDIO_SECTION_ID = "product-studio";
  *
  * Server Component. Only the diagram crosses into the client bundle.
  */
-export function ProductStudio() {
+export async function ProductStudio() {
+  const t = await getTranslations("Studio");
+
   return (
     <section
       id={STUDIO_SECTION_ID}
@@ -47,16 +51,16 @@ export function ProductStudio() {
           <div className="col-span-4 md:col-span-8 lg:col-span-5">
             <SectionHeader
               number="07"
-              eyebrow={studioEyebrow}
+              eyebrow={t("eyebrow")}
               tone="inverse"
               titleId="studio-title"
-              title={studioHeadline}
-              description={studioBody}
+              title={t("headline")}
+              description={t("body")}
             />
 
             <div className="mt-10">
               <ButtonLink href={studioCta.href} variant="inverse" arrow>
-                {studioCta.label}
+                {t("ctaLabel")}
               </ButtonLink>
             </div>
           </div>

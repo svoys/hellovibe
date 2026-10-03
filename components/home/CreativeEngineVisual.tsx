@@ -1,9 +1,10 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useRef, type CSSProperties } from "react";
 import { useInView } from "motion/react";
 
-import { creativeCaption, creativeOutputs, creativeSeed } from "@/data/creative-engine";
+import { creativeOutputs } from "@/data/creative-engine";
 import { REDUCED_MOTION_QUERY, useMediaQuery } from "@/lib/media-query";
 
 /** Delay between two consecutive branches, in ms. */
@@ -19,9 +20,10 @@ const beat = (n: number) => ({ "--d": `${n * STEP}ms` }) as CSSProperties;
  * gets — the caption below it is not announced as part of the figure. It has to
  * carry both the content (one seed, six formats) and the disclaimer, because
  * neither is available anywhere else.
+ *
+ * Localised, so it lives at `Creative.visual.label` and is read through
+ * `useTranslations` in the component below.
  */
-const LABEL =
-  "Diagram of one seed idea branching into six output formats — film, reel, ad, social, story and landing. Illustrative diagram of a content system, not a client campaign or a published asset.";
 
 /**
  * Section 10 — the creative-engine diagram.
@@ -43,6 +45,7 @@ const LABEL =
  * their resting state instead of dropping to zero.
  */
 export function CreativeEngineVisual() {
+  const t = useTranslations("Creative");
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.25 });
   /*
@@ -57,13 +60,13 @@ export function CreativeEngineVisual() {
 
   return (
     <figure className="flex flex-col gap-5">
-      <div ref={ref} role="img" aria-label={LABEL} data-shown={shown} className="ce-visual">
+      <div ref={ref} role="img" aria-label={t("visual.label")} data-shown={shown} className="ce-visual">
         {/*
           The seed. `origin-bottom-left` means it grows out of the exact corner
           the trunk attaches to, so the two never drift apart mid-animation.
         */}
         <div className="ce-seed inline-flex items-center bg-black px-5 py-3 text-white">
-          <span className="font-mono text-label uppercase">{creativeSeed}</span>
+          <span className="font-mono text-label uppercase">{t("seed")}</span>
         </div>
 
         {/*
@@ -76,21 +79,21 @@ export function CreativeEngineVisual() {
         */}
         <ol>
           {creativeOutputs.map((output, index) => (
-            <li key={output.id} style={beat(index)} className="ce-row flex items-center">
+            <li key={output} style={beat(index)} className="ce-row flex items-center">
               <span aria-hidden="true" className="relative block w-8 self-stretch">
                 <span className="ce-trunk absolute left-0 top-0 w-px bg-black" />
                 <span className="ce-stub absolute left-0 top-1/2 h-px w-8 bg-black" />
               </span>
 
               <span className="ce-chip my-2 border border-black px-3.5 py-2 font-mono text-label uppercase">
-                {output.label}
+                {t(`outputs.${output}`)}
               </span>
             </li>
           ))}
         </ol>
       </div>
 
-      <figcaption className="text-small text-black/70">{creativeCaption}</figcaption>
+      <figcaption className="text-small text-black/70">{t("caption")}</figcaption>
     </figure>
   );
 }

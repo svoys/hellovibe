@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import { ServiceCard } from "@/components/home/ServiceCard";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -15,7 +17,9 @@ export const SERVICES_SECTION_ID = "what-we-do";
  * Server Component. The header is deliberately split — title left, description
  * right — so it does not read as a second Hero.
  */
-export function Services() {
+export async function Services() {
+  const t = await getTranslations("Services");
+
   return (
     <section
       id={SERVICES_SECTION_ID}
@@ -27,18 +31,15 @@ export function Services() {
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <SectionHeader
               number="02"
-              eyebrow="What we do"
+              eyebrow={t("eyebrow")}
               tone="strong"
               titleId="services-title"
-              title="From opportunity to outcome."
+              title={t("title")}
             />
           </div>
 
           <div className="col-span-4 md:col-span-8 lg:col-span-5">
-            <p className="max-w-[44ch] text-body-lg text-pretty text-black/75">
-              We combine strategy, product, technology and creative to take AI ideas all the way
-              from first hypothesis to working reality.
-            </p>
+            <p className="max-w-[44ch] text-body-lg text-pretty text-black/75">{t("description")}</p>
           </div>
         </div>
 

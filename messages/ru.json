@@ -1,0 +1,509 @@
+{
+  "Metadata": {
+    "siteTitle": "HelloVibe — AI Product & Transformation Studio",
+    "siteDescription": "We turn AI opportunities into working products, business systems and creative engines."
+  },
+  "Common": {
+    "brand": "hellovibe",
+    "studio": "AI Product & Transformation Studio",
+    "skipToContent": "Skip to content",
+    "languageSwitcher": {
+      "label": "Language",
+      "ru": "RU",
+      "en": "EN",
+      "switchTo": "Switch to {language}"
+    }
+  },
+  "Nav": {
+    "primaryLabel": "Primary",
+    "mobileLabel": "Mobile",
+    "footerLabel": "Footer",
+    "servicesLabel": "Services",
+    "items": {
+      "whatWeDo": "What we do",
+      "howWeWork": "How we work",
+      "cases": "Cases",
+      "about": "About"
+    },
+    "startProject": "Start a project",
+    "menuWord": "menu",
+    "closeWord": "close",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Footer": {
+    "copyright": "© HelloVibe"
+  },
+  "Hero": {
+    "eyebrow": "AI Product & Transformation Studio",
+    "title": "AI, but make it <accent>real.</accent>",
+    "lead": "We turn AI opportunities into working products, business systems and creative engines.",
+    "primaryCta": "Start a project",
+    "secondaryCta": "Explore what we do",
+    "micro": "Strategy · Product · AI · Creative",
+    "machineLabel": "The Vibe Machine: ten scattered words — idea, data, users, process, AI, automation, content, code, creative and product — organise into a system of inputs, system and output, and resolve into a product and an outcome.",
+    "machineTitle": "The Vibe Machine",
+    "machineStagesLabel": "Vibe Machine stages",
+    "machineSettledLabel": "The Vibe Machine, assembled: its ten words have settled into inputs, system and output, and the product has resolved into a green outcome."
+  },
+  "Trust": {
+    "statement": "Built for ambitious teams building what’s next.",
+    "categories": {
+      "startups": "Startups",
+      "scaleUps": "Scale-ups",
+      "productTeams": "Product Teams",
+      "brands": "Brands"
+    }
+  },
+  "AIGap": {
+    "eyebrow": "The AI gap",
+    "title": "Everyone is talking about AI. Few know what to do with it.",
+    "description": "AI can write, code, analyze, automate and create. But the hard part isn’t finding another AI tool. It’s knowing where AI actually creates leverage — and turning that opportunity into something people can use.",
+    "visual": {
+      "label": "Diagram: nine disconnected AI possibilities — AI, chat, tools, models, prompts, automation, data, content and agents — settle into five elements of business reality — people, process, system, product and outcome — and resolve into one working system.",
+      "tierOne": ["AI", "Chat", "Tools", "Models", "Prompts", "Automation", "Data", "Content", "Agents"],
+      "tierTwo": ["People", "Process", "System", "Product", "Outcome"],
+      "from": "AI everywhere",
+      "to": "Business reality",
+      "result": "One working system"
+    }
+  },
+  "Services": {
+    "eyebrow": "What we do",
+    "title": "From opportunity to outcome.",
+    "description": "We combine strategy, product, technology and creative to take AI ideas all the way from first hypothesis to working reality.",
+    "exploreCta": "Explore {title}",
+    "pillars": {
+      "ai-strategy": {
+        "action": "Find",
+        "title": "AI Strategy",
+        "description": "Find where AI can actually move the needle."
+      },
+      "ai-systems": {
+        "action": "Automate",
+        "title": "AI Systems",
+        "description": "Automate the work that shouldn’t be manual anymore."
+      },
+      "ai-products": {
+        "action": "Build",
+        "title": "AI Products",
+        "description": "Turn ambitious ideas into products people can use."
+      },
+      "ai-creative": {
+        "action": "Amplify",
+        "title": "AI Creative",
+        "description": "Build a creative engine that never runs out of ideas."
+      }
+    },
+    "capabilities": {
+      "ai-strategy": [
+        "AI audit",
+        "opportunity mapping",
+        "automation opportunities",
+        "priority use cases",
+        "ROI hypotheses",
+        "implementation roadmap"
+      ],
+      "ai-systems": [
+        "AI agents",
+        "workflows",
+        "integrations",
+        "RAG",
+        "CRM automation",
+        "sales systems",
+        "support systems",
+        "document intelligence",
+        "internal tools"
+      ],
+      "ai-products": [
+        "discovery",
+        "UX/UI",
+        "prototype",
+        "MWP",
+        "MVP",
+        "engineering",
+        "launch",
+        "product development"
+      ],
+      "ai-creative": [
+        "creative strategy",
+        "AI content systems",
+        "image generation",
+        "video generation",
+        "campaigns",
+        "always-on content operations"
+      ]
+    },
+    "visuals": {
+      "strategy": ["Signals", "Opportunities", "Priority"],
+      "systems": ["Manual", "Automation", "Flow"],
+      "products": ["Idea", "Prototype", "Product"],
+      "creative": ["One idea", "Many outputs"]
+    }
+  },
+  "Journey": {
+    "eyebrow": "One partner. Every stage.",
+    "headline": "Start anywhere. We’ll figure out what’s next.",
+    "supporting": "You don’t need to know exactly what to build. That’s our job.",
+    "ctaPrompt": "Not sure where to start?",
+    "ctaLabel": "Start a project",
+    "stagesLabel": "Our process, four stages",
+    "includesLabel": "Includes",
+    "stages": {
+      "discover": {
+        "phase": "Discover",
+        "title": "Find the opportunity.",
+        "description": "We start with the problem, the business and the people behind it.",
+        "items": ["AI Audit", "Product Discovery", "Creative Audit"],
+        "metaphor": "Question → Signals → Opportunity"
+      },
+      "design": {
+        "phase": "Design",
+        "title": "Shape what could work.",
+        "description": "We turn the opportunity into a clear product, system or creative direction.",
+        "items": ["Strategy", "UX / UI", "Architecture", "Prototype"],
+        "metaphor": "Idea → Flow → Prototype"
+      },
+      "build": {
+        "phase": "Build",
+        "title": "Make it real.",
+        "description": "We combine product, design, engineering and AI to build something people can actually use.",
+        "items": ["AI Systems", "MWP", "MVP", "Creative Engine"],
+        "metaphor": "Prototype → System → Product"
+      },
+      "scale": {
+        "phase": "Scale",
+        "title": "Make it better. Then make it bigger.",
+        "description": "We optimize what works, automate what doesn’t and keep building from there.",
+        "items": ["Optimization", "Product Team", "Automation", "Growth"],
+        "metaphor": "Learn → Optimize → Scale"
+      }
+    }
+  },
+  "AIAudit": {
+    "eyebrow": "Not sure where to start?",
+    "headline": "Find your best AI opportunities.",
+    "description": "We’ll look at your business, processes and existing technology to identify where AI can create the most meaningful impact.",
+    "deliverablesLabel": "What you get",
+    "microcopy": "Typically 1–2 weeks",
+    "ctaLabel": "Explore AI Audit",
+    "caption": "Illustrative interface — conceptual, not a live analysis.",
+    "visual": {
+      "label": "Conceptual diagnostic interface, labelled Demo. A panel titled Business scan, listing the seven areas an AI audit examines — business model, processes, customer journey, operations, sales, marketing and existing technology — above the next steps: prioritize, build, measure. Illustrative interface, not a live analysis.",
+      "panelTitle": "Business scan",
+      "demoTag": "Demo",
+      "scanLabel": "What we look at",
+      "nextLabel": "Next",
+      "nextSteps": ["Prioritize", "Build", "Measure"]
+    },
+    "deliverables": {
+      "opportunityMap": "AI opportunity map",
+      "automation": "Automation opportunities",
+      "useCases": "Priority use cases",
+      "roi": "ROI hypotheses",
+      "roadmap": "Implementation roadmap"
+    },
+    "scanAreas": [
+      "Business model",
+      "Processes",
+      "Customer journey",
+      "Operations",
+      "Sales",
+      "Marketing",
+      "Existing technology"
+    ]
+  },
+  "Cases": {
+    "eyebrow": "Selected work",
+    "headline": "Things we’re building.",
+    "supporting": "No published case studies yet. We’d rather show nothing than show work we can’t back up — so until the first ones are real, here’s what’s in the workshop.",
+    "ctaPrompt": "Working on something similar?",
+    "ctaLabel": "Start a project",
+    "categories": {
+      "aiSystem": "AI System",
+      "aiProduct": "AI Product",
+      "creativeEngine": "Creative Engine",
+      "internalExperiment": "Internal Experiment"
+    },
+    "work": {
+      "aiSystem": "Workflows, agents, integrations",
+      "aiProduct": "Discovery, prototype, MWP, MVP",
+      "creativeEngine": "Content systems, image and video, campaigns",
+      "internalExperiment": "Prototypes and internal builds"
+    }
+  },
+  "Method": {
+    "eyebrow": "How we work",
+    "headline": "Think first. Build fast. Learn constantly.",
+    "closing": "No six-month black boxes. No innovation theatre. Just things that work.",
+    "stages": {
+      "understand": {
+        "title": "Understand",
+        "description": "We start with the business, not the technology."
+      },
+      "focus": {
+        "title": "Focus",
+        "description": "We identify the smallest opportunity that can create meaningful value."
+      },
+      "build": {
+        "title": "Build",
+        "description": "We combine product, design, engineering and AI into one team."
+      },
+      "launch": {
+        "title": "Launch",
+        "description": "Real users beat internal assumptions."
+      },
+      "learn": {
+        "title": "Learn",
+        "description": "We measure what works, improve what doesn’t and keep moving."
+      }
+    }
+  },
+  "Studio": {
+    "eyebrow": "Have an idea?",
+    "headline": "Let’s turn it into something people can use.",
+    "body": "From the first product hypothesis to a working MWP, MVP and beyond — we bring product, design, AI and engineering under one roof.",
+    "ctaLabel": "Build my product",
+    "caption": "A diagram, not a screenshot. The frame shows how a product firms up from wireframe to working interface — no real product, no client work, and no metrics are depicted.",
+    "visual": {
+      "label": "Diagram of the six-stage product journey — idea, discovery, prototype, MWP, minimum working product, MVP, minimum viable product, and scale — beneath an abstract interface frame that firms up from wireframe to working interface. Illustrative diagram, not a screenshot of a real product."
+    },
+    "stages": {
+      "idea": "Idea",
+      "discovery": "Discovery",
+      "prototype": "Prototype",
+      "mwp": "MWP",
+      "mvp": "MVP",
+      "scale": "Scale"
+    },
+    "glosses": {
+      "mwp": "Minimum Working Product",
+      "mvp": "Minimum Viable Product"
+    }
+  },
+  "Creative": {
+    "eyebrow": "AI × CREATIVE",
+    "headline": "Your next creative team doesn’t sleep.",
+    "body": "We build AI-powered content systems that turn strategy into a constant flow of ideas, campaigns, images, video and social content.",
+    "ctaLabel": "Build a creative engine",
+    "caption": "A diagram, not a showreel. It shows the shape of the system — one idea branching into the formats it can feed — not a client campaign, a published asset or a measured result.",
+    "seed": "One idea",
+    "visual": {
+      "label": "Diagram of one seed idea branching into six output formats — film, reel, ad, social, story and landing. Illustrative diagram of a content system, not a client campaign or a published asset."
+    },
+    "outputs": {
+      "film": "Film",
+      "reel": "Reel",
+      "ad": "Ad",
+      "social": "Social",
+      "story": "Story",
+      "landing": "Landing"
+    }
+  },
+  "Why": {
+    "eyebrow": "Why HelloVibe",
+    "headline": "Different disciplines. One team.",
+    "closing": "The best AI work happens where these disciplines meet.",
+    "disciplines": {
+      "strategy": {
+        "label": "Strategy",
+        "description": "We know how to find the problem before building the solution."
+      },
+      "product": {
+        "label": "Product",
+        "description": "We think in users, outcomes and adoption — not just features."
+      },
+      "technology": {
+        "label": "Technology",
+        "description": "AI-native engineering from prototype to production."
+      },
+      "creative": {
+        "label": "Creative",
+        "description": "Products should work beautifully and communicate clearly."
+      }
+    }
+  },
+  "Engagement": {
+    "eyebrow": "How we can work together",
+    "headline": "One project. Or your AI team.",
+    "models": {
+      "project": {
+        "title": "Project",
+        "audience": "For a defined challenge.",
+        "items": ["Discovery", "AI Audit", "MWP", "MVP", "AI System", "Creative Engine"],
+        "outcome": "Fixed scope → clear outcome",
+        "ctaLabel": "Start a project"
+      },
+      "partnership": {
+        "title": "Partnership",
+        "audience": "For teams building continuously.",
+        "items": ["Fractional Product", "AI Engineering", "AI Strategy", "Creative", "Optimization"],
+        "outcome": "One team → ongoing momentum",
+        "ctaLabel": "Build with us"
+      }
+    }
+  },
+  "Faq": {
+    "eyebrow": "FAQ",
+    "headline": "Questions people usually ask.",
+    "items": {
+      "who-we-work-with": {
+        "question": "Do you work with existing companies or startups?",
+        "answer": [
+          "Both.",
+          "We work with founders building new products and established teams looking for practical ways to use AI."
+        ]
+      },
+      "defined-brief": {
+        "question": "Do we need to know exactly what we want to build?",
+        "answer": [
+          "No.",
+          "You can come with a business problem, an idea, a process that feels too manual, or simply a feeling there’s a better way.",
+          "We’ll help define the opportunity."
+        ]
+      },
+      "ai-only": {
+        "question": "Do you only work with AI?",
+        "answer": [
+          "AI is central to what we do, but the goal is always the business or product outcome.",
+          "We don’t add AI just because we can."
+        ]
+      },
+      "idea-to-launch": {
+        "question": "Can you take a product from idea to launch?",
+        "answer": [
+          "Yes.",
+          "Discovery, strategy, UX/UI, AI architecture, engineering, launch and ongoing development."
+        ]
+      },
+      "existing-team": {
+        "question": "Can you work with our existing team?",
+        "answer": [
+          "Yes.",
+          "We can act as an external product/AI team or add a specialist layer to your existing organization."
+        ]
+      },
+      "how-projects-start": {
+        "question": "How do projects start?",
+        "answer": [
+          "Usually with a conversation.",
+          "If the opportunity is unclear, an AI Audit or Product Discovery can be a good starting point."
+        ]
+      }
+    }
+  },
+  "FinalCta": {
+    "eyebrow": "Ready when you are",
+    "headline": "Got an idea? A problem? Or just a feeling there’s a better way?",
+    "body": "Tell us what’s on your mind. We’ll figure out where AI fits.",
+    "micro": "No pitch deck required."
+  },
+  "Pages": {
+    "About": {
+      "metadataTitle": "About",
+      "metadataDescription": "AI is changing how products are built, businesses operate and brands communicate. We want to be where those three things meet.",
+      "eyebrow": "About",
+      "title": "We like building things.",
+      "lead": [
+        "AI is changing how products are built, businesses operate and brands communicate.",
+        "We want to be where those three things meet."
+      ],
+      "studioLabel": "AI Product & Transformation Studio",
+      "studioTitle": "AI, but make it real.",
+      "missingVisualsNote": "The team, the workspace, the sketches, the prototypes — that page arrives when those photographs do. Until then this one stays thin on purpose: no stock imagery, no invented history, and nothing we can’t point at.",
+      "ctaLabel": "Start a project"
+    },
+    "Services": {
+      "metadataTitle": "What we do",
+      "metadataDescription": "We combine strategy, product, technology and creative to take AI ideas all the way from first hypothesis to working reality.",
+      "eyebrow": "What we do",
+      "title": "From opportunity to outcome.",
+      "lead": "We combine strategy, product, technology and creative to take AI ideas all the way from first hypothesis to working reality.",
+      "ctaLabel": "Start a project"
+    },
+    "Pillar": {
+      "includesLabel": "Includes",
+      "fourPillarsLabel": "Four pillars",
+      "crossNavLabel": "Service pillars",
+      "ctaLabel": "Start a project"
+    },
+    "Work": {
+      "metadataTitle": "Cases",
+      "metadataDescription": "Selected work from HelloVibe.",
+      "eyebrow": "Selected work",
+      "title": "Things we’re building.",
+      "publishingPolicy": "Results appear here only with verified numbers. Where there is no measurable result yet, an entry says so — “Early-stage prototype”, or “Currently in development”.",
+      "ctaPrompt": "Working on something similar?",
+      "ctaLabel": "Start a project"
+    },
+    "Contact": {
+      "metadataTitle": "Start a project",
+      "metadataDescription": "Start a project with HelloVibe.",
+      "eyebrow": "Contact",
+      "title": "Start a project.",
+      "lead": "Tell us what’s on your mind. We’ll figure out where AI fits."
+    },
+    "NotFound": {
+      "metadataTitle": "Page not found",
+      "metadataDescription": "That page does not exist.",
+      "eyebrow": "404",
+      "title": "This page doesn’t exist.",
+      "lead": "The link may be out of date, or the page may not have been built yet. Every page below does exist:",
+      "routesLabel": "Available pages",
+      "home": "Home"
+    }
+  },
+  "ContactForm": {
+    "intentQuestion": "What brings you here?",
+    "intentOptions": {
+      "use_ai_business": "I want to use AI in my business",
+      "build_ai_product": "I want to build an AI product",
+      "automate_process": "I want to automate a process",
+      "scale_creative": "I want to scale content / creative",
+      "not_sure": "I’m not sure yet"
+    },
+    "goalQuestion": "What are you trying to achieve?",
+    "goalPlaceholder": "Tell us what’s happening, what you’re trying to change, or what’s currently not working.",
+    "stageQuestion": "Where are you today?",
+    "stageOptions": {
+      "idea": "Idea",
+      "prototype": "Prototype",
+      "existing_product": "Existing product",
+      "existing_business": "Existing business",
+      "scaling": "Scaling"
+    },
+    "budgetQuestion": "What’s your approximate budget?",
+    "budgetOptions": {
+      "under_10k": "<$10k",
+      "from_10k_to_30k": "$10–30k",
+      "from_30k_to_75k": "$30–75k",
+      "from_75k_to_150k": "$75–150k",
+      "over_150k": "$150k+"
+    },
+    "timingQuestion": "When are you looking to start?",
+    "timingOptions": {
+      "asap": "ASAP",
+      "months_1_2": "1–2 months",
+      "months_3_6": "3–6 months",
+      "exploring": "Exploring"
+    },
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "companyLabel": "Company",
+    "honeypotLabel": "Fax number",
+    "optional": "Optional",
+    "submitLabel": "Let’s talk",
+    "microcopy": "No pitch deck required.",
+    "successHeading": "Got it.",
+    "successBody": "Thanks — we’ll be in touch soon.",
+    "undeliveredHeading": "Nothing was sent.",
+    "undeliveredBody": "Automatic delivery is not connected yet, so this form cannot send your message. Write to us directly and we’ll pick it up from there.",
+    "errors": {
+      "chooseOne": "Choose one option.",
+      "chooseListed": "Choose one of the listed options.",
+      "required": "This is required.",
+      "emailInvalid": "Enter a valid email address.",
+      "tooLong": "Please keep this under {max} characters."
+    }
+  }
+}

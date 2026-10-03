@@ -1,7 +1,8 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 import { ServiceVisual } from "@/components/home/ServiceVisual";
 import type { Service } from "@/data/services";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 /**
@@ -20,7 +21,9 @@ import { cn } from "@/lib/utils";
  * valid HTML and the larger hit area. `href` is passed in rather than looked up
  * here, so the card stays presentational and knows nothing about routes.
  */
-export function ServiceCard({ service, href }: { service: Service; href: string }) {
+export async function ServiceCard({ service, href }: { service: Service; href: string }) {
+  const t = await getTranslations("Services.pillars");
+
   const dark = service.surface === "dark";
   const muted = dark ? "text-white/70" : "text-black/70";
   const body = dark ? "text-white/75" : "text-black/75";
@@ -39,13 +42,15 @@ export function ServiceCard({ service, href }: { service: Service; href: string 
       >
         <div className={cn("flex items-center justify-between gap-4 border-b px-6 py-4", rule)}>
           <span className={cn("font-mono text-label", muted)}>{service.number}</span>
-          <span className={cn("font-mono text-label uppercase", muted)}>{service.action}</span>
+          <span className={cn("font-mono text-label uppercase", muted)}>
+            {t(`${service.id}.action`)}
+          </span>
         </div>
 
         <div className="flex flex-1 flex-col px-6 pt-7">
-          <h3 className="text-h3">{service.title}</h3>
+          <h3 className="text-h3">{t(`${service.id}.title`)}</h3>
           <p className={cn("mt-3 max-w-[32ch] text-body text-pretty", body)}>
-            {service.description}
+            {t(`${service.id}.description`)}
           </p>
         </div>
 

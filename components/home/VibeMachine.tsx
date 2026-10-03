@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import {
   motion,
   useMotionValue,
@@ -40,8 +41,19 @@ const HEADER_RANGE: [number, number] = [0.38, 0.5];
 const OUTCOME_RANGE: [number, number] = [0.82, 0.92];
 const RULE_RANGE: [number, number] = [0.78, 0.92];
 
-const MACHINE_LABEL =
-  "The Vibe Machine: ten scattered words — idea, data, users, process, AI, automation, content, code, creative and product — organise into a system of inputs, system and output, and resolve into a product and an outcome.";
+/**
+ * The accessible name for the whole machine.
+ *
+ * `role="img"` means a screen reader gets this string and nothing else from the
+ * panel — the stage rail below is a separate list and is announced on its own.
+ * So the label has to carry the content (ten words, three columns, one outcome)
+ * as well as the name of the object.
+ *
+ * Localised, so it lives at `Hero.machineLabel` and is read through
+ * `useTranslations` in the component below. The ten word labels and the stage
+ * names it quotes stay English — see the note at the top of
+ * `lib/vibe-machine.ts`.
+ */
 
 /** Opacity-only reveal driven by Hero progress. */
 function Reveal({
@@ -73,6 +85,7 @@ function Reveal({
  * nudge that fades away as the system forms; touch never drives it.
  */
 export function VibeMachine() {
+  const t = useTranslations("Hero");
   const scrollProgress = useHeroProgress();
   /*
    * Deliberately `useMediaQuery`, not Motion's `useReducedMotion()`. The stage
@@ -145,7 +158,7 @@ export function VibeMachine() {
       <div
         ref={boxRef}
         role="img"
-        aria-label={MACHINE_LABEL}
+        aria-label={t("machineLabel")}
         data-calm={stage >= 2}
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
@@ -183,7 +196,7 @@ export function VibeMachine() {
 
         {/* Status bar — real text, so the current stage is never animation-only */}
         <div className="absolute inset-x-0 top-0 z-10 flex h-9 items-center justify-between border-b border-black bg-bg px-3 font-mono text-label uppercase">
-          <span>The Vibe Machine</span>
+          <span>{t("machineTitle")}</span>
           <span className="flex items-center gap-2">
             <span aria-hidden="true" className="inline-block size-2 bg-orange" />
             <span>
@@ -247,7 +260,7 @@ export function VibeMachine() {
 
       {/* Stage rail — the sequence as real text, readable with motion disabled */}
       <ol
-        aria-label="Vibe Machine stages"
+        aria-label={t("machineStagesLabel")}
         className="mt-4 flex flex-wrap gap-x-4 gap-y-3 font-mono text-label uppercase sm:grid sm:grid-cols-5 sm:gap-x-2"
       >
         {STAGES.map((item, index) => {

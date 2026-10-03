@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { ServiceVisual } from "@/components/home/ServiceVisual";
@@ -8,6 +9,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { primaryCta } from "@/data/navigation";
 import { pillarBySlug, SERVICE_PILLAR_SLUGS } from "@/data/service-pillars";
+import { alternatesFor } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 /**
@@ -26,20 +28,26 @@ type PillarPageProps = {
  * `/services/[slug]` — the four pillar pages the source's route map lists as
  * main routes (`/services/strategy`, `/systems`, `/products`, `/creative`).
  *
- * Every string on this page is already approved elsewhere: the label, the
- * action word, the description and the abstract diagram come from
- * `data/services.ts` (via `data/service-pillars.ts`), and the contents list
- * comes from `data/service-capabilities.ts`. Nothing here is written for this
- * page, and nothing is added to make it look fuller — the source gives each
- * pillar one sentence and a list, so that is what a pillar page holds. The page
- * earns its place by being addressable and by carrying the cross-navigation,
+ * Every string on this page is already approved elsewhere: the label, the action
+ * word, the description and the abstract diagram come from `data/services.ts`
+ * (via `data/service-pillars.ts`) joined to `Services.pillars.<id>`, and the
+ * contents list comes from `Services.capabilities.<id>`. Nothing here is written
+ * for this page, and nothing is added to make it look fuller — the source gives
+ * each pillar one sentence and a list, so that is what a pillar page holds. The
+ * page earns its place by being addressable and by carrying the cross-navigation,
  * not by inventing claims, metrics, clients or case studies.
  *
  * No `border-t`: the navbar already draws the rule above the first block, and
  * every other page on the site follows the same rule.
  */
 
-/** Only the four approved slugs are generated; anything else falls to `notFound()`. */
+/**
+ * Only the four approved slugs are generated; anything else falls to `notFound()`.
+ *
+ * No `locale` key: the `[locale]` layout owns that half of the route and returns
+ * both locales from its own `generateStaticParams`, so Next cross-multiplies the
+ * two. Returning `locale` here as well would just be the same list written twice.
+ */
 export function generateStaticParams() {
   return SERVICE_PILLAR_SLUGS.map((slug) => ({ slug }));
 }
@@ -50,9 +58,12 @@ export async function generateMetadata({ params }: PillarPageProps): Promise<Met
 
   if (!pillar) return {};
 
+  const pillars = await getTranslations("Services.pillars");
+
   return {
-    title: pillar.service.title,
-    description: pillar.service.description,
+    title: pillars(`${pillar.service.id}.title`),
+    description: pillars(`${pillar.service.id}.description`),
+    alternates: await alternatesFor(`/services/${pillar.slug}`),
   };
 }
 
@@ -62,22 +73,31 @@ export default async function ServicePillarPage({ params }: PillarPageProps) {
 
   if (!pillar) notFound();
 
-  const { service, includes } = pillar;
+  const t = await getTranslations("Pages.Pillar");
+  const services = await getTranslations("Services");
+  const pillars = await getTranslations("Services.pillars");
+
+  const { service } = pillar;
   const dark = service.surface === "dark";
+
+  const action = pillars(`${service.id}.action`);
+  const title = pillars(`${service.id}.title`);
+  const description = pillars(`${service.id}.description`);
+  const includes = services.raw(`capabilities.${service.id}`) as readonly string[];
 
   return (
     <section aria-labelledby="pillar-title">
       <Container className="py-section-lg">
         <PageIntro
-          eyebrow={`${service.number} — ${service.action}`}
+          eyebrow={`${service.number} — ${action}`}
           titleId="pillar-title"
-          title={service.title}
-          lead={<p>{service.description}</p>}
+          title={title}
+          lead={<p>{description}</p>}
         />
 
         <div className="hv-grid mt-20 items-start gap-y-12">
           <div className="col-span-4 md:col-span-8 lg:col-span-5">
-            <h2 className="text-label uppercase text-black/70">Includes</h2>
+            <h2 className="text-label uppercase text-black/70">{t("includesLabel")}</h2>
 
             <ul className="mt-6 flex flex-col gap-2 border-l border-line pl-5 text-body text-black/75">
               {includes.map((item) => (
@@ -100,7 +120,7 @@ export default async function ServicePillarPage({ params }: PillarPageProps) {
         </div>
 
         <div className="mt-20">
-          <h2 className="text-label uppercase text-black/70">Four pillars</h2>
+          <h2 className="text-label uppercase text-black/70">{t("fourPillarsLabel")}</h2>
           <PillarCrossNav currentSlug={pillar.slug} className="mt-6" />
         </div>
 
@@ -110,7 +130,7 @@ export default async function ServicePillarPage({ params }: PillarPageProps) {
             inventing a per-pillar flow. */}
         <div className="mt-20 border-t border-line pt-12">
           <ButtonLink href={primaryCta.href} arrow>
-            {primaryCta.label}
+            {t("ctaLabel")}
           </ButtonLink>
         </div>
       </Container>

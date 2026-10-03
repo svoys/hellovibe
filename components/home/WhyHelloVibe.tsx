@@ -1,6 +1,8 @@
+import { getTranslations } from "next-intl/server";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { disciplines, whyClosing, whyEyebrow, whyHeadline } from "@/data/why-hellovibe";
+import { disciplines } from "@/data/why-hellovibe";
 
 /** Anchor for the Why HelloVibe block. */
 export const WHY_SECTION_ID = "why-hellovibe";
@@ -36,7 +38,9 @@ export const WHY_SECTION_ID = "why-hellovibe";
  * **No CTA.** The source gives this block a closing statement and no link, and
  * the Final CTA is a section of its own further down.
  */
-export function WhyHelloVibe() {
+export async function WhyHelloVibe() {
+  const t = await getTranslations("Why");
+
   return (
     <section
       id={WHY_SECTION_ID}
@@ -48,10 +52,10 @@ export function WhyHelloVibe() {
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <SectionHeader
               number="09"
-              eyebrow={whyEyebrow}
+              eyebrow={t("eyebrow")}
               tone="strong"
               titleId="why-title"
-              title={whyHeadline}
+              title={t("headline")}
             />
           </div>
         </div>
@@ -63,11 +67,11 @@ export function WhyHelloVibe() {
         */}
         <ul className="hv-grid mt-16">
           {disciplines.map((discipline) => (
-            <li key={discipline.id} className="col-span-4 md:col-span-4 lg:col-span-3">
+            <li key={discipline} className="col-span-4 md:col-span-4 lg:col-span-3">
               <div className="border-t border-line pt-6">
-                <h3 className="text-h4">{discipline.label}</h3>
+                <h3 className="text-h4">{t(`disciplines.${discipline}.label`)}</h3>
                 <p className="mt-3 max-w-[32ch] text-body text-pretty text-black/75">
-                  {discipline.description}
+                  {t(`disciplines.${discipline}.description`)}
                 </p>
               </div>
             </li>
@@ -81,7 +85,7 @@ export function WhyHelloVibe() {
           separates this one.
         */}
         <div className="mt-20">
-          <p className="max-w-[34ch] text-balance text-h3">{whyClosing}</p>
+          <p className="max-w-[34ch] text-balance text-h3">{t("closing")}</p>
         </div>
       </Container>
     </section>

@@ -1,23 +1,11 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useRef, type CSSProperties } from "react";
 import { useInView } from "motion/react";
 
 import { Tag } from "@/components/ui/Tag";
-import { auditCaption, auditScanAreas } from "@/data/ai-audit";
 import { REDUCED_MOTION_QUERY, useMediaQuery } from "@/lib/media-query";
-
-const NEXT_STEPS = ["Prioritize", "Build", "Measure"] as const;
-
-/**
- * The accessible name for the whole panel.
- *
- * It has to carry the disclaimer too, not just the visual caption: the panel is
- * `role="img"`, so this string is the *only* thing a screen reader gets, and it
- * must not be possible to mistake the diagram for a real analysis through it.
- */
-const LABEL =
-  "Conceptual diagnostic interface, labelled Demo. A panel titled Business scan, listing the seven areas an AI audit examines — business model, processes, customer journey, operations, sales, marketing and existing technology — above the next steps: prioritize, build, measure. Illustrative interface, not a live analysis.";
 
 /**
  * Section 06 — the AI Audit diagnostic panel.
@@ -26,6 +14,13 @@ const LABEL =
  * transition on `transform` and `opacity`, so the animation stays off the main
  * thread and the whole panel collapses to its final state in one step under
  * reduced motion.
+ *
+ * Every string is localised: the panel title, the instrument labels, the seven
+ * method rows, the next steps and the accessible name under `AIAudit.visual`
+ * and `AIAudit.scanAreas`. The accessible name has to be translated with
+ * particular care — the panel is `role="img"`, so it is the *only* thing a
+ * screen reader gets, and it must not be possible to mistake the diagram for a
+ * real analysis in any language.
  *
  * What this panel deliberately does **not** contain: any number, percentage,
  * score or value bar. The source conversation forbids fabricated metrics in
@@ -44,46 +39,53 @@ export function AIAuditVisual() {
    * `false`, which is a hydration mismatch on the attribute.
    */
   const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
+  const t = useTranslations("AIAudit");
 
   const shown = Boolean(reducedMotion) || inView;
+  const scanAreas = t.raw("scanAreas") as readonly string[];
+  const nextSteps = t.raw("visual.nextSteps") as readonly string[];
 
   return (
     <figure className="flex flex-col gap-4">
       <div
         ref={ref}
         role="img"
-        aria-label={LABEL}
+        aria-label={t("visual.label")}
         data-shown={shown}
         className="audit-panel border border-black bg-white"
       >
         <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-4">
           <span className="flex min-w-0 items-center gap-3">
             <span aria-hidden="true" className="inline-block size-2 shrink-0 bg-black" />
-            <span className="font-mono text-label uppercase text-black">Business scan</span>
+            <span className="font-mono text-label uppercase text-black">
+              {t("visual.panelTitle")}
+            </span>
           </span>
 
           {/*
             The one place `--color-vibe` appears in this section. It marks the
             panel as a system artefact rather than a result.
           */}
-          <Tag variant="vibe">Demo</Tag>
+          <Tag variant="vibe">{t("visual.demoTag")}</Tag>
         </div>
 
         <div className="px-5 py-5">
-          <p className="font-mono text-label uppercase text-black/70">What we look at</p>
+          <p className="font-mono text-label uppercase text-black/70">{t("visual.scanLabel")}</p>
 
           <ul className="mt-4 flex flex-col">
-            {auditScanAreas.map((area, index) => (
+            {scanAreas.map((area, index) => (
               <li
                 key={area}
                 style={{ "--d": `${index * 60}ms` } as CSSProperties}
                 /*
-                  The label column has to fit "Existing technology" on one line
-                  at every width — about 153px at the smallest step of
-                  `text-label`. `8.5rem` was tried and wrapped that label to two
-                  lines at 320px, which makes the row taller than its siblings
-                  and breaks the rhythm of the panel. A short rule at 320px is
-                  the better trade.
+                  The label column has to fit the longest area on one line at
+                  every width — about 153px at the smallest step of `text-label`.
+                  `8.5rem` was tried and wrapped that label to two lines at
+                  320px, which makes the row taller than its siblings and breaks
+                  the rhythm of the panel. A short rule at 320px is the better
+                  trade. The column is fixed rather than content-sized for the
+                  same reason: a translation that is a little longer must not
+                  resize the panel.
                 */
                 className="audit-row grid grid-cols-[minmax(0,10rem)_1fr] items-center gap-4 py-2.5"
               >
@@ -96,9 +98,9 @@ export function AIAuditVisual() {
         </div>
 
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-line px-5 py-4">
-          <span className="font-mono text-label uppercase text-black/70">Next</span>
+          <span className="font-mono text-label uppercase text-black/70">{t("visual.nextLabel")}</span>
           <span className="font-mono text-label uppercase text-black">
-            {NEXT_STEPS.map((step, index) => (
+            {nextSteps.map((step, index) => (
               <span key={step}>
                 {index > 0 ? <span aria-hidden="true">{" → "}</span> : null}
                 {step}
@@ -114,7 +116,7 @@ export function AIAuditVisual() {
         it has to be read rather than skimmed — so it stays in sentence case in
         the body face, visually outside the instrument.
       */}
-      <figcaption className="text-small text-black/70">{auditCaption}</figcaption>
+      <figcaption className="text-small text-black/70">{t("caption")}</figcaption>
     </figure>
   );
 }

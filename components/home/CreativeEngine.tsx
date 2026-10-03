@@ -1,13 +1,10 @@
+import { getTranslations } from "next-intl/server";
+
 import { CreativeEngineVisual } from "@/components/home/CreativeEngineVisual";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import {
-  creativeBody,
-  creativeCta,
-  creativeEyebrow,
-  creativeHeadline,
-} from "@/data/creative-engine";
+import { creativeCta } from "@/data/creative-engine";
 
 /** Anchor for the Creative Engine block. */
 export const CREATIVE_SECTION_ID = "creative-engine";
@@ -47,7 +44,9 @@ export const CREATIVE_SECTION_ID = "creative-engine";
  *
  * Server Component. Only the diagram crosses into the client bundle.
  */
-export function CreativeEngine() {
+export async function CreativeEngine() {
+  const t = await getTranslations("Creative");
+
   return (
     <section
       id={CREATIVE_SECTION_ID}
@@ -60,16 +59,16 @@ export function CreativeEngine() {
           <div className="col-span-4 md:col-span-8 lg:col-span-5">
             <SectionHeader
               number="08"
-              eyebrow={creativeEyebrow}
+              eyebrow={t("eyebrow")}
               tone="vibe"
               titleId="creative-title"
-              title={creativeHeadline}
-              description={creativeBody}
+              title={t("headline")}
+              description={t("body")}
             />
 
             <div className="mt-10">
               <ButtonLink href={creativeCta.href} variant="accent" arrow>
-                {creativeCta.label}
+                {t("ctaLabel")}
               </ButtonLink>
             </div>
           </div>

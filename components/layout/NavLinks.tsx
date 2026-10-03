@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { mainNavigation } from "@/data/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 /**
@@ -12,6 +12,13 @@ import { cn } from "@/lib/utils";
  * This is the only reason the desktop navbar needs a Client Component at all —
  * `usePathname` is a client hook. Everything else in `Navbar` stays a Server
  * Component.
+ *
+ * Both the link and the path hook come from `i18n/navigation.ts`. That matters
+ * for the active state specifically: the `usePathname` in `next/navigation`
+ * returns the path *with* the locale prefix, so on `/en/about` a comparison
+ * against `/about` would be false and English readers would see no current-page
+ * marker at all. The locale-aware hook strips the prefix, so the same comparison
+ * works in both languages.
  *
  * The active state is a hairline underline plus stronger text. No pills, no
  * filled tabs.
@@ -23,15 +30,16 @@ import { cn } from "@/lib/utils";
  */
 export function NavLinks() {
   const pathname = usePathname();
+  const t = useTranslations("Nav");
 
   return (
-    <nav aria-label="Primary">
+    <nav aria-label={t("primaryLabel")}>
       <ul className="flex items-center gap-6 lg:gap-8">
         {mainNavigation.map((item) => {
           const active = pathname === item.href;
 
           return (
-            <li key={item.label}>
+            <li key={item.key}>
               <Link
                 href={item.href}
                 aria-current={active ? "page" : undefined}
@@ -40,7 +48,7 @@ export function NavLinks() {
                   active ? "text-black" : "text-black/60",
                 )}
               >
-                {item.label}
+                {t(`items.${item.key}`)}
                 <span
                   aria-hidden="true"
                   className={cn(

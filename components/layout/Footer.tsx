@@ -1,8 +1,10 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Container } from "@/components/ui/Container";
-import { contactEmail, footerServices, mainNavigation, primaryCta } from "@/data/navigation";
+import { contactEmail, mainNavigation, primaryCta } from "@/data/navigation";
+import { servicePillarLinks } from "@/data/service-pillars";
+import { Link } from "@/i18n/navigation";
 
 /**
  * Global footer — the final editorial frame rather than a generic sitemap.
@@ -24,30 +26,35 @@ import { contactEmail, footerServices, mainNavigation, primaryCta } from "@/data
  *
  * TODO (later phase): legal links (privacy / terms) once the documents exist.
  */
-export function Footer() {
+export async function Footer() {
+  const t = await getTranslations("Footer");
+  const nav = await getTranslations("Nav");
+  const common = await getTranslations("Common");
+  const pillars = await getTranslations("Services.pillars");
+
   return (
     <footer className="border-t border-white/15 bg-black text-white">
       <Container className="py-section">
         <div className="hv-grid gap-y-12">
           <div className="col-span-4 md:col-span-8 lg:col-span-4">
-            <p className="text-h3">hellovibe</p>
-            <p className="mt-3 text-body text-muted">AI Product & Transformation Studio</p>
+            <p className="text-h3">{common("brand")}</p>
+            <p className="mt-3 text-body text-muted">{common("studio")}</p>
             <div className="mt-8">
               <ArrowLink href={primaryCta.href} tone="on-dark">
-                {primaryCta.label}
+                {nav("startProject")}
               </ArrowLink>
             </div>
           </div>
 
-          <nav aria-label="Footer" className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-6">
+          <nav aria-label={nav("footerLabel")} className="col-span-4 md:col-span-4 lg:col-span-3 lg:col-start-6">
             <ul className="flex flex-col gap-3">
               {mainNavigation.map((item) => (
-                <li key={item.label}>
+                <li key={item.key}>
                   <Link
                     href={item.href}
                     className="text-body text-muted transition-colors duration-150 hover:text-white"
                   >
-                    {item.label}
+                    {nav(`items.${item.key}`)}
                   </Link>
                 </li>
               ))}
@@ -56,13 +63,13 @@ export function Footer() {
 
           <div className="col-span-4 md:col-span-4 lg:col-span-2">
             <ul className="flex flex-col gap-3">
-              {footerServices.map((item) => (
-                <li key={item.label}>
+              {servicePillarLinks.map((item) => (
+                <li key={item.id}>
                   <Link
                     href={item.href}
                     className="text-body text-muted transition-colors duration-150 hover:text-white"
                   >
-                    {item.label}
+                    {pillars(`${item.id}.title`)}
                   </Link>
                 </li>
               ))}
@@ -80,7 +87,7 @@ export function Footer() {
         </div>
 
         <div className="mt-20 border-t border-white/15 pt-6 text-small text-muted">
-          <p>© HelloVibe</p>
+          <p>{t("copyright")}</p>
         </div>
       </Container>
     </footer>

@@ -1,5 +1,5 @@
 /**
- * Case studies and the copy for Section 07 — CASES.
+ * Case studies and the structure for Section 07 — CASES.
  *
  * The source conversation states its rule five times — never invent clients,
  * logos, metrics, testimonials, awards, partnerships or results — and then
@@ -7,6 +7,9 @@
  * `Consumer Brand`, `working MWP in 6 weeks`). There are no such clients on
  * record, so this file takes the rule over the examples and the section renders
  * its empty state. See `docs/cases/Cases_Implementation_Pack_v0.1.md`.
+ *
+ * The section's copy — kicker, headline, empty-state body, category names and
+ * their artefacts, closing CTA — is in `messages/<locale>.json` under `Cases`.
  */
 
 /**
@@ -17,12 +20,17 @@
  * verified result must be publishable without one, which is why
  * `Currently in development` and `Early-stage prototype` are acceptable
  * values for `result` rather than reasons to withhold the case.
+ *
+ * `title`, `description` and `category` stay inline rather than becoming message
+ * keys: a case study is authored content, not interface copy, so it will arrive
+ * already written in whatever language it is published in. `category` holds a
+ * {@link WorkCategoryId}.
  */
 export type CaseStudy = {
   /** Route segment under `/work`. */
   slug: string;
-  /** Which kind of work this was. One of {@link workCategories}' labels. */
-  category: string;
+  /** Which kind of work this was. One of {@link workCategories}. */
+  category: WorkCategoryId;
   /** Case title. */
   title: string;
   /** One-line summary. */
@@ -55,15 +63,8 @@ export type CaseStudy = {
  */
 export const caseStudies: readonly CaseStudy[] = [];
 
-/** A kind of work HelloVibe does. */
-export type WorkCategory = {
-  /** Stable key. */
-  id: string;
-  /** Category name — the row's heading. */
-  label: string;
-  /** The artefacts that sit under it. */
-  work: string;
-};
+/** Stable key for a kind of work HelloVibe does. Doubles as its message key. */
+export type WorkCategoryId = "aiSystem" | "aiProduct" | "creativeEngine" | "internalExperiment";
 
 /**
  * The four categories, taken from the source's own list of "possible
@@ -74,33 +75,14 @@ export type WorkCategory = {
  * exactly why these are safe to render while the three example case cards in
  * the source are not. See the pack §"What I decided".
  */
-export const workCategories: readonly WorkCategory[] = [
-  { id: "ai-system", label: "AI System", work: "Workflows, agents, integrations" },
-  { id: "ai-product", label: "AI Product", work: "Discovery, prototype, MWP, MVP" },
-  {
-    id: "creative-engine",
-    label: "Creative Engine",
-    work: "Content systems, image and video, campaigns",
-  },
-  { id: "internal-experiment", label: "Internal Experiment", work: "Prototypes and internal builds" },
+export const workCategories: readonly WorkCategoryId[] = [
+  "aiSystem",
+  "aiProduct",
+  "creativeEngine",
+  "internalExperiment",
 ];
 
-export const casesEyebrow = "Selected work";
-
-/** The source's empty-state replacement for the whole block. */
-export const casesHeadline = "Things we’re building.";
-
-/**
- * Written here, not recovered — the source specifies the empty state but never
- * writes its body copy. It restates the source's own policy, which is the
- * honest reason this block looks the way it does.
- */
-export const casesSupporting =
-  "No published case studies yet. We’d rather show nothing than show work we can’t back up — so until the first ones are real, here’s what’s in the workshop.";
-
-/** Also written here, not recovered. */
+/** The block's closing call to action. Labels are `Cases.ctaPrompt` / `Cases.ctaLabel`. */
 export const casesCta = {
-  prompt: "Working on something similar?",
-  label: "Start a project",
   href: "/contact",
 } as const;

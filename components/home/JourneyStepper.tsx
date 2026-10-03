@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 
 import { JourneyVisual } from "@/components/home/JourneyVisual";
@@ -37,6 +38,7 @@ const LAST = journeyStages.length - 1;
  */
 export function JourneyStepper() {
   const [active, setActive] = useState(0);
+  const t = useTranslations("Journey");
   /*
    * `useMediaQuery`, not Motion's `useReducedMotion()` — one rule for the whole
    * codebase. Motion resolves the preference at module load, so it is already
@@ -102,7 +104,7 @@ export function JourneyStepper() {
 
         <div
           role="tablist"
-          aria-label="Our process, four stages"
+          aria-label={t("stagesLabel")}
           aria-orientation={horizontal ? "horizontal" : "vertical"}
           onKeyDown={onKeyDown}
           className="pj-tablist grid grid-cols-1 lg:grid-cols-4"
@@ -131,7 +133,7 @@ export function JourneyStepper() {
                   <span className="flex items-center gap-2 font-mono text-label uppercase text-black/70">
                     <span>{stage.number}</span>
                     <span aria-hidden="true" className="h-px w-3 bg-line" />
-                    <span>{stage.phase}</span>
+                    <span>{t(`stages.${stage.id}.phase`)}</span>
                   </span>
 
                   <span
@@ -140,7 +142,7 @@ export function JourneyStepper() {
                       selected ? "text-black" : "text-black/70 group-hover:text-black",
                     )}
                   >
-                    {stage.title}
+                    {t(`stages.${stage.id}.title`)}
                   </span>
                 </span>
               </button>
@@ -187,13 +189,15 @@ export function JourneyStepper() {
                     it is a few pixels generous on a phone.
                   */}
                   <p className="max-w-[52ch] text-body-lg text-pretty text-black/75 min-h-[5.8em] min-[384px]:min-h-[4.35em] md:min-h-[2.9em]">
-                    {stage.description}
+                    {t(`stages.${stage.id}.description`)}
                   </p>
 
-                  <p className="mt-8 font-mono text-label uppercase text-black/70">Includes</p>
+                  <p className="mt-8 font-mono text-label uppercase text-black/70">
+                    {t("includesLabel")}
+                  </p>
 
                   <ul className="mt-4 flex min-h-[8.25rem] flex-col gap-2.5">
-                    {stage.items.map((item) => (
+                    {(t.raw(`stages.${stage.id}.items`) as readonly string[]).map((item) => (
                       <li key={item} className="flex items-center gap-3 text-body text-black/75">
                         <span aria-hidden="true" className="h-px w-4 shrink-0 bg-line" />
                         {item}
@@ -205,7 +209,7 @@ export function JourneyStepper() {
                 <div className="col-span-4 md:col-span-8 lg:col-span-6">
                   <JourneyVisual
                     kind={stage.visual}
-                    metaphor={stage.metaphor}
+                    metaphor={t(`stages.${stage.id}.metaphor`)}
                     active={selected}
                     reduced={reduced}
                   />

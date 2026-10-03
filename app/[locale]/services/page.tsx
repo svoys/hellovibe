@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 import { ServiceVisual } from "@/components/home/ServiceVisual";
 import { PageIntro } from "@/components/layout/PageIntro";
@@ -6,13 +7,18 @@ import { ArrowLink } from "@/components/ui/ArrowLink";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { servicePillars } from "@/data/service-pillars";
+import { alternatesFor } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "What we do",
-  description:
-    "We combine strategy, product, technology and creative to take AI ideas all the way from first hypothesis to working reality.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Pages.Services");
+
+  return {
+    title: t("metadataTitle"),
+    description: t("metadataDescription"),
+    alternates: await alternatesFor("/services"),
+  };
+}
 
 /**
  * `/services` — the destination the navbar's "What we do" has always pointed at.
@@ -25,31 +31,44 @@ export const metadata: Metadata = {
  * homepage follows the same rule — `Hero` has no top border, and only the
  * sections *between* blocks carry one.
  *
- * Each pillar now carries the source's own CTA — "Explore AI Strategy →" — into
- * its dedicated page. Those four routes were previously left unlinked on
- * purpose, because they did not exist and linking them would have replaced
- * three 404s with four new ones. They exist now, so this page is the way in.
+ * Each pillar carries the source's own CTA — "Explore AI Strategy →" — into its
+ * dedicated page. Those four routes were previously left unlinked on purpose,
+ * because they did not exist and linking them would have replaced three 404s
+ * with four new ones. They exist now, so this page is the way in.
+ *
+ * ## Two namespaces, on purpose
+ *
+ * `Pages.Services` holds the page's own metadata and intro; `Services` holds the
+ * pillars, their capability lists and the CTA pattern. They overlap on two
+ * strings today, which is a coincidence of the page repeating the block's
+ * headline — and keeping them separate is what would let the page intro diverge
+ * from the homepage block without a second edit.
  */
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const t = await getTranslations("Pages.Services");
+  const services = await getTranslations("Services");
+  const pillars = await getTranslations("Services.pillars");
+
   return (
     <section aria-labelledby="services-page-title">
       <Container className="py-section-lg">
         <PageIntro
-          eyebrow="What we do"
+          eyebrow={t("eyebrow")}
           titleId="services-page-title"
-          title="From opportunity to outcome."
-          lead={
-            <p>
-              We combine strategy, product, technology and creative to take AI ideas all the way
-              from first hypothesis to working reality.
-            </p>
-          }
+          title={t("title")}
+          lead={<p>{t("lead")}</p>}
         />
 
         <div className="mt-20 flex flex-col">
           {servicePillars.map((pillar) => {
-            const { service, includes, href } = pillar;
+            const { service, href } = pillar;
             const dark = service.surface === "dark";
+
+            const action = pillars(`${service.id}.action`);
+            const title = pillars(`${service.id}.title`);
+            const description = pillars(`${service.id}.description`);
+            /* An array in the catalogue, so it comes back unparsed. */
+            const includes = services.raw(`capabilities.${service.id}`) as readonly string[];
 
             return (
               <article
@@ -60,13 +79,13 @@ export default function ServicesPage() {
                   <p className="flex items-center gap-3 font-mono text-label uppercase text-black/70">
                     <span>{service.number}</span>
                     <span aria-hidden="true" className="h-px w-6 bg-line" />
-                    <span>{service.action}</span>
+                    <span>{action}</span>
                   </p>
 
-                  <h2 className="mt-5 text-h3">{service.title}</h2>
+                  <h2 className="mt-5 text-h3">{title}</h2>
 
                   <p className="mt-4 max-w-[40ch] text-body text-pretty text-black/75">
-                    {service.description}
+                    {description}
                   </p>
 
                   <ul className="mt-7 flex flex-col gap-2 border-l border-line pl-5 text-body text-black/75">
@@ -76,7 +95,7 @@ export default function ServicesPage() {
                   </ul>
 
                   <div className="mt-7">
-                    <ArrowLink href={href}>Explore {service.title}</ArrowLink>
+                    <ArrowLink href={href}>{services("exploreCta", { title })}</ArrowLink>
                   </div>
                 </div>
 
@@ -97,7 +116,7 @@ export default function ServicesPage() {
 
         <div className="mt-20 border-t border-line pt-12">
           <ButtonLink href="/contact" arrow>
-            Start a project
+            {t("ctaLabel")}
           </ButtonLink>
         </div>
       </Container>

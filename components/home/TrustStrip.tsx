@@ -1,5 +1,7 @@
+import { getTranslations } from "next-intl/server";
+
 import { Container } from "@/components/ui/Container";
-import { trustCategories, trustStatement } from "@/data/trust";
+import { trustCategories } from "@/data/trust";
 
 /** Anchor for the Trust Strip. */
 export const TRUST_SECTION_ID = "trust";
@@ -21,7 +23,9 @@ export const TRUST_SECTION_ID = "trust";
  *
  * Server Component: nothing here is interactive.
  */
-export function TrustStrip() {
+export async function TrustStrip() {
+  const t = await getTranslations("Trust");
+
   return (
     <section id={TRUST_SECTION_ID} aria-labelledby="trust-title" className="border-t border-line">
       <Container className="py-12 md:py-16">
@@ -33,14 +37,14 @@ export function TrustStrip() {
           */}
           <div className="col-span-4 md:col-span-8 lg:col-span-5">
             <h2 id="trust-title" className="max-w-[38ch] text-body-lg text-balance text-black/75">
-              {trustStatement}
+              {t("statement")}
             </h2>
           </div>
 
           <div className="col-span-4 md:col-span-8 lg:col-span-6 lg:col-start-7">
             <ul className="flex flex-wrap items-center gap-x-3 gap-y-2">
               {trustCategories.map((category, index) => (
-                <li key={category.id} className="flex items-center gap-3">
+                <li key={category} className="flex items-center gap-3">
                   {/*
                     Decorative rules between labels, and `hidden md:block` so
                     they disappear exactly where the row wraps.
@@ -60,7 +64,7 @@ export function TrustStrip() {
                     <span aria-hidden="true" className="hidden h-px w-6 shrink-0 bg-line md:block" />
                   ) : null}
                   <span className="font-mono text-label uppercase text-black/70">
-                    {category.label}
+                    {t(`categories.${category}`)}
                   </span>
                 </li>
               ))}

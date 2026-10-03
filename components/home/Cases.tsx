@@ -1,13 +1,9 @@
+import { getTranslations } from "next-intl/server";
+
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import {
-  casesCta,
-  casesEyebrow,
-  casesHeadline,
-  casesSupporting,
-  workCategories,
-} from "@/data/cases";
+import { casesCta, workCategories } from "@/data/cases";
 
 /** Anchor for the Cases block. */
 export const CASES_SECTION_ID = "cases";
@@ -33,7 +29,9 @@ export const CASES_SECTION_ID = "cases";
  * `data/cases.ts` and this block switches over; that array and the `CaseStudy`
  * type are already the right shape, so no layout change is needed.
  */
-export function Cases() {
+export async function Cases() {
+  const t = await getTranslations("Cases");
+
   return (
     <section id={CASES_SECTION_ID} aria-labelledby="cases-title" className="border-t border-line">
       <Container className="py-section-lg">
@@ -41,15 +39,15 @@ export function Cases() {
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <SectionHeader
               number="05"
-              eyebrow={casesEyebrow}
+              eyebrow={t("eyebrow")}
               tone="strong"
               titleId="cases-title"
-              title={casesHeadline}
+              title={t("headline")}
             />
           </div>
 
           <div className="col-span-4 md:col-span-8 lg:col-span-5">
-            <p className="max-w-[44ch] text-body-lg text-pretty text-black/75">{casesSupporting}</p>
+            <p className="max-w-[44ch] text-body-lg text-pretty text-black/75">{t("supporting")}</p>
           </div>
         </div>
 
@@ -60,10 +58,10 @@ export function Cases() {
         <ul className="mt-16">
           {workCategories.map((category) => (
             <li
-              key={category.id}
+              key={category}
               className="flex flex-col gap-2 border-t border-line py-6 last:border-b sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
             >
-              <h3 className="text-h3 text-black">{category.label}</h3>
+              <h3 className="text-h3 text-black">{t(`categories.${category}`)}</h3>
               {/*
                 No `max-w` here. Constraining it wrapped the two longest
                 artefact lists onto a second line, which made those rows taller
@@ -72,17 +70,17 @@ export function Cases() {
                 from `sm` up, where the row is horizontal.
               */}
               <p className="font-mono text-label uppercase text-black/70 sm:text-right">
-                {category.work}
+                {t(`work.${category}`)}
               </p>
             </li>
           ))}
         </ul>
 
         <div className="mt-12 flex flex-col gap-5 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-body-lg text-black/75">{casesCta.prompt}</p>
+          <p className="text-body-lg text-black/75">{t("ctaPrompt")}</p>
 
           <ArrowLink href={casesCta.href} className="text-body-lg">
-            {casesCta.label}
+            {t("ctaLabel")}
           </ArrowLink>
         </div>
       </Container>
