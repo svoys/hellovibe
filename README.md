@@ -4,13 +4,15 @@
 
 The marketing site: a single-page homepage assembled from fourteen sections, four
 service pillar pages, and the static pages around them. Built from
-`HelloVibe_Foundation_Pack_v0.1.md`; all copy comes from that pack.
+`HelloVibe_Foundation_Pack_v0.1.md`; the English copy comes from that pack, and
+the Russian catalogue is a translation of it.
 
 ## Stack
 
 | Concern | Choice |
 |---|---|
 | Framework | Next.js 16 (App Router, Turbopack) |
+| Languages | Russian (default, unprefixed) and English (`/en`), via `next-intl` |
 | Language | TypeScript, `strict: true` |
 | Styling | Tailwind CSS v4 via `@tailwindcss/postcss` |
 | Motion | `motion` — import from `motion/react`, never `framer-motion` |
@@ -31,6 +33,10 @@ npm run typecheck  # tsc --noEmit
 
 ## Routes
 
+Every route exists in both languages. The table below uses the Russian URL,
+which is the bare one; the English equivalent is the same path under `/en`
+(`/services` → `/en/services`).
+
 | Route | Contents |
 |---|---|
 | `/` | Homepage — see below |
@@ -41,7 +47,44 @@ npm run typecheck  # tsc --noEmit
 | `/contact` | Contact form |
 | `/sitemap.xml` `/robots.txt` | Generated from `app/sitemap.ts` / `app/robots.ts` |
 
-Unknown paths render `app/not-found.tsx`; an unknown pillar slug calls `notFound()`.
+Unknown paths render `app/[locale]/not-found.tsx`; an unknown pillar slug calls
+`notFound()`.
+
+## Languages
+
+Russian is the default and carries **no prefix** — the canonical Russian
+homepage is `/`, not `/ru`. English is secondary and is prefixed, so it lives at
+`/en`. Hand-typed `/ru/...` URLs redirect to the bare form, so the Russian page
+cannot exist at two addresses.
+
+| Piece | Where |
+|---|---|
+| Locales and prefix rule | `i18n/routing.ts` — `localePrefix: "as-needed"` |
+| Message catalogues | `messages/ru.json`, `messages/en.json` |
+| Middleware | `proxy.ts` (Next 16 replaced `middleware.ts` with this) |
+| `<html lang>` and site metadata | `app/[locale]/layout.tsx` |
+| `RU \| EN` switcher | `components/layout/LocaleSwitcher.tsx` |
+| Canonical, `hreflang`, sitemap URLs | `lib/seo.ts` — `localePath()` |
+
+Three decisions worth knowing before changing anything here:
+
+- **`localeDetection: false`.** The URL is the only source of truth for
+  language. A Russian speaker with an English browser still gets Russian at `/`,
+  and a crawler sees exactly what a visitor sees.
+- **No `app/layout.tsx`.** The root layout lives at `app/[locale]/layout.tsx`.
+  Next 16.3 treats a layout with no layout above it as the root, so adding a
+  pass-through `app/layout.tsx` would silently take that role and the locale
+  would be lost. For the same reason there is no root `not-found.tsx` or
+  `global-not-found.tsx`.
+- **The switcher's Russian link carries a `/ru` prefix.** `next-intl` forces a
+  prefix on any `Link` given an explicit `locale`, so switching costs one
+  redirect to the correct bare URL. This is deliberate and explained in the
+  component; canonical URLs, `hreflang` and the sitemap never contain `/ru`.
+
+The locale also has a layout consequence: `--text-h1` is
+`clamp(3.25rem, 1.75rem + 4.4vw, 5.5rem)`, so its 52px floor holds at every width
+up to ~545px. A long unbreakable Russian word can therefore overflow a 320px
+viewport where the English headline did not, and the fix is usually the copy.
 
 ## Homepage
 
