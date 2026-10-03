@@ -55,7 +55,7 @@ export function FinalCta() {
         <div className="hv-grid items-center gap-y-12">
           <div className="col-span-4 md:col-span-8 lg:col-span-7">
             <SectionHeader
-              number="12"
+              number="14"
               eyebrow={finalCtaEyebrow}
               tone="inverse"
               titleId="final-cta-title"

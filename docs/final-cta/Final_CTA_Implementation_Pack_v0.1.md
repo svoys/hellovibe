@@ -28,7 +28,7 @@ there and are not re-derived here.
 | 4 | The composition **mirrors the Hero's split** — copy 1–7, machine 8–12 | The bookend only reads if the object is in the same place at both ends |
 | 5 | The machine reuses `lib/vibe-machine.ts` — **no second vocabulary** | `MACHINE_WORDS`, `LAYOUT_*` and `systemFrame` already define it; a copy would drift |
 | 6 | Both layout layers are rendered and swapped with **CSS**, not `useMediaQuery` | Same breakpoint, same result, and the block stays a Server Component with **zero client JS** |
-| 7 | Section number is **12** | Continues the visible run 01–11; the source's own indices for this block conflict and are not copy |
+| 7 | Section number is **14** — **changed from `12` on 2026-10-03 by the owner** | The original decision was `12`, continuing the visible run 01–11, on the grounds that the source's own indices for this block conflict and are not copy. The owner overrode it in the production-gap pass, reading the block as its narrative position (Hero `01` … Final CTA `14`). See §1a — the override is **not** consistent with the rest of the page and was chosen knowingly |
 | 8 | **The footer gained `border-t border-white/15`** | CTA → footer is the only DARK → DARK adjacency on the page; without a rule the two merge and the footer's nav reads as part of the CTA |
 | 9 | Micro-copy is a **quiet sentence**, not an uppercase mono label | It is a full sentence with a full stop; the uppercase-mono treatment is for fragments |
 | 10 | Email is a **secondary action**, borrowing the Hero's bottom-rule treatment | Source calls it "Secondary"; it is a link, not a label |
@@ -41,8 +41,25 @@ there and are not re-derived here.
 Last block before the footer, immediately after FAQ.
 
 ```text
-… → Engagement Models (10) → FAQ (11) → Final CTA (12) → Footer
+… → Engagement Models (10) → FAQ (11) → Final CTA (14) → Footer
 ```
+
+### 1a. The section number, and why it now reads `14`
+
+The displayed numbers are the **visitor-visible run of indexed blocks**: Hero and
+Trust Strip carry no index, so AI Gap is `01` and the twelfth indexed block is
+`12`. The source's `# 10. Homepage narrative` uses a different scheme — the
+position in the full page order, where Hero is `1` and Final CTA is `14` — and
+the source's own section headings use both (`# 14. FINAL CTA` in one pass,
+`# 15. FINAL CTA` in another). The packs for Why HelloVibe, Engagement Models and
+Creative Engine all record the same trap, and all shipped the indexed run.
+
+**On 2026-10-03 the owner overrode that for this block**, so it now reads `14`.
+The consequence is deliberate and on the record: FAQ still shows `11`, so the
+page's last two numbers read `11 → 14`. Making the page fully consistent means
+either reverting this block to `12`, or renumbering **all twelve** indexed blocks
+to the full-page-order scheme (AI Gap `03` … Final CTA `14`). Neither has been
+done — do not "fix" this number in isolation without asking.
 
 Anchor: `#final-cta`. Nothing links to it — it exists for parity with every other
 block, and so the anchor list stays complete. Confirmed on the page:
@@ -486,8 +503,9 @@ black.
 - **No invented content.** No clients, logos, testimonials, awards, metrics,
   prices or timeline promises. Asserted.
 - **No fabricated numbers.** The only digits in the block are the section index
-  (`12`) and the machine's stage counter (`05 / 05`) — both from the source. The
-  harness strips those two tokens before asserting there are none left.
+  (`14` since 2026-10-03, `12` before that) and the machine's stage counter
+  (`05 / 05`) — both from the source. The harness strips those two tokens before
+  asserting there are none left.
 - **No illustration.** The only graphics are the button's 24px arrow icon and the
   machine's grid. No `<img>`.
 - **No client JavaScript.**

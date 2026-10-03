@@ -118,10 +118,43 @@ not:
 spam. Because it posts natively it validates and submits with JavaScript
 disabled; the client component only exists to render the action's result.
 
-**Delivery is not connected.** `lib/contact-delivery.ts` is the single seam and
-currently returns `not-configured`, so a valid submission shows an honest "nothing
-was sent" notice with the email address instead of a success screen. Connecting a
-provider means replacing that one function body; see `.env.example`.
+Fields, in order: `intent`, `goal`, `stage`, `budget`, `timing`, `name`, `email`,
+`company`. `intent`, `goal`, `stage`, `name` and `email` are required; the rest
+are optional. The choice fields are validated against the approved option lists
+rather than merely for emptiness, so a crafted POST cannot put arbitrary text
+into a field the UI renders as a fixed set.
+
+### Delivery is not connected
+
+`lib/contact-delivery.ts` is the single seam between the form and the outside
+world. It currently returns `not-configured`, so a **valid** submission shows an
+honest "nothing was sent" notice with `hello@hellovibe.ru` instead of a success
+screen. The `success` state is fully wired and renders the moment a transport is
+added; it is deliberately unreachable before then, because a success screen for a
+message nobody received would both lie to the reader and lose the lead.
+
+**So the form is complete but not yet a lead-capture channel.** Connecting it
+means replacing the body of `deliverContactMessage` and nothing else — the action
+already treats a non-`ok` outcome as "not delivered".
+
+## Environment
+
+Copy `.env.example` to `.env.local`. Nothing here is required for `next dev` or
+`next build`; the variables below are what a deployment must set.
+
+| Variable | Required | Purpose |
+|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | **yes, in production** | Canonical origin. Used for `metadataBase`, every `sitemap.xml` URL and the `Sitemap:` line in `robots.txt`. Falls back to `http://localhost:3000`, which is not a production value. |
+| `CONTACT_EMAIL` | only once delivery is connected | Recipient address for contact submissions. Read by `lib/contact-delivery.ts`. |
+| `EMAIL_API_KEY` | only once delivery is connected | Provider credential for the same function. |
+
+Both contact variables are **server-side only**. Never prefix a secret with
+`NEXT_PUBLIC_` — that prefix inlines the value into the client bundle. The source
+requires this explicitly.
+
+Deploying without `NEXT_PUBLIC_SITE_URL` is the one configuration mistake that
+fails silently: the site renders correctly but advertises `localhost:3000` to
+crawlers.
 
 ## Conventions
 
