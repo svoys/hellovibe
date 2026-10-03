@@ -41,6 +41,28 @@ import { cn } from "@/lib/utils";
  * It renders as real anchors, so it works with JavaScript disabled and is
  * crawlable: the English pages are reachable from the Russian ones without
  * going through a redirect.
+ *
+ * ## The one `/ru` prefix this component does emit
+ *
+ * Measured, not assumed: on `/en/services` the Russian link's `href` is
+ * `/ru/services`, **not** the bare `/services`. That is `next-intl`'s intended
+ * behaviour, not a misconfiguration — `createSharedNavigationFns` computes
+ * `forcePrefix: locale != null`, so *any* `Link` given an explicit `locale`
+ * always carries a prefix, default locale included. The library does this on
+ * purpose (its own comment: "Always include a prefix when changing locales"),
+ * to guarantee a fresh server render for the new locale instead of a
+ * client-router cache hit, and it accepts "an additional redirect" as the cost.
+ *
+ * So the switch costs one `307` (`proxy.ts` sends `/ru/*` → `/*`), and the URL a
+ * reader ends on is the correct bare `/services`. Nothing canonical is affected:
+ * `lib/seo.ts` builds the canonical, the `hreflang` alternates and the sitemap,
+ * and none of them ever contains `/ru`.
+ *
+ * This is left as-is rather than worked around with a raw `next/link` and a
+ * hand-built `localePath`: that would drop `next-intl`'s locale-cookie sync and
+ * the `hreflang` attribute on the anchor, and would add a second, unmanaged way
+ * to build internal links — the exact drift `i18n/navigation.ts` exists to
+ * prevent. A rare, single redirect is the cheaper of the two.
  */
 export function LocaleSwitcher({ className }: { className?: string }) {
   const active = useLocale();

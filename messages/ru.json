@@ -1,509 +1,509 @@
 {
   "Metadata": {
-    "siteTitle": "HelloVibe — AI Product & Transformation Studio",
-    "siteDescription": "We turn AI opportunities into working products, business systems and creative engines."
+    "siteTitle": "HelloVibe — студия AI-продуктов и трансформации",
+    "siteDescription": "Превращаем возможности AI в работающие продукты, бизнес-системы и креативные движки."
   },
   "Common": {
     "brand": "hellovibe",
-    "studio": "AI Product & Transformation Studio",
-    "skipToContent": "Skip to content",
+    "studio": "Студия AI-продуктов и трансформации",
+    "skipToContent": "Перейти к содержимому",
     "languageSwitcher": {
-      "label": "Language",
+      "label": "Язык",
       "ru": "RU",
       "en": "EN",
-      "switchTo": "Switch to {language}"
+      "switchTo": "Переключить на {language}"
     }
   },
   "Nav": {
-    "primaryLabel": "Primary",
-    "mobileLabel": "Mobile",
-    "footerLabel": "Footer",
-    "servicesLabel": "Services",
+    "primaryLabel": "Основная навигация",
+    "mobileLabel": "Мобильная навигация",
+    "footerLabel": "Навигация в подвале",
+    "servicesLabel": "Услуги",
     "items": {
-      "whatWeDo": "What we do",
-      "howWeWork": "How we work",
-      "cases": "Cases",
-      "about": "About"
+      "whatWeDo": "Что мы делаем",
+      "howWeWork": "Как мы работаем",
+      "cases": "Кейсы",
+      "about": "О нас"
     },
-    "startProject": "Start a project",
-    "menuWord": "menu",
-    "closeWord": "close",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "startProject": "Начать проект",
+    "menuWord": "меню",
+    "closeWord": "закрыть",
+    "openMenu": "Открыть меню",
+    "closeMenu": "Закрыть меню"
   },
   "Footer": {
     "copyright": "© HelloVibe"
   },
   "Hero": {
-    "eyebrow": "AI Product & Transformation Studio",
-    "title": "AI, but make it <accent>real.</accent>",
-    "lead": "We turn AI opportunities into working products, business systems and creative engines.",
-    "primaryCta": "Start a project",
-    "secondaryCta": "Explore what we do",
-    "micro": "Strategy · Product · AI · Creative",
-    "machineLabel": "The Vibe Machine: ten scattered words — idea, data, users, process, AI, automation, content, code, creative and product — organise into a system of inputs, system and output, and resolve into a product and an outcome.",
+    "eyebrow": "Студия AI-продуктов и трансформации",
+    "title": "AI, но <accent>всерьёз.</accent>",
+    "lead": "Превращаем возможности AI в работающие продукты, бизнес-системы и креативные движки.",
+    "primaryCta": "Начать проект",
+    "secondaryCta": "Смотреть, что мы делаем",
+    "micro": "Стратегия · Продукт · AI · Креатив",
+    "machineLabel": "The Vibe Machine: десять разрозненных слов — идея, данные, пользователи, процесс, AI, автоматизация, контент, код, креатив и продукт — собираются в систему из входов, системы и выхода и превращаются в продукт и результат.",
     "machineTitle": "The Vibe Machine",
-    "machineStagesLabel": "Vibe Machine stages",
-    "machineSettledLabel": "The Vibe Machine, assembled: its ten words have settled into inputs, system and output, and the product has resolved into a green outcome."
+    "machineStagesLabel": "Этапы Vibe Machine",
+    "machineSettledLabel": "The Vibe Machine в сборе: десять слов улеглись во входы, систему и выход, а продукт превратился в зелёный результат."
   },
   "Trust": {
-    "statement": "Built for ambitious teams building what’s next.",
+    "statement": "Создано для амбициозных команд, которые строят будущее.",
     "categories": {
-      "startups": "Startups",
-      "scaleUps": "Scale-ups",
-      "productTeams": "Product Teams",
-      "brands": "Brands"
+      "startups": "Стартапы",
+      "scaleUps": "Растущие компании",
+      "productTeams": "Продуктовые команды",
+      "brands": "Бренды"
     }
   },
   "AIGap": {
-    "eyebrow": "The AI gap",
-    "title": "Everyone is talking about AI. Few know what to do with it.",
-    "description": "AI can write, code, analyze, automate and create. But the hard part isn’t finding another AI tool. It’s knowing where AI actually creates leverage — and turning that opportunity into something people can use.",
+    "eyebrow": "Разрыв с AI",
+    "title": "Все говорят об AI. Немногие знают, что с ним делать.",
+    "description": "AI умеет писать, программировать, анализировать, автоматизировать и создавать. Но сложность не в том, чтобы найти ещё один AI-инструмент. Сложность в том, чтобы понять, где AI действительно даёт рычаг, — и превратить эту возможность в то, чем люди смогут пользоваться.",
     "visual": {
-      "label": "Diagram: nine disconnected AI possibilities — AI, chat, tools, models, prompts, automation, data, content and agents — settle into five elements of business reality — people, process, system, product and outcome — and resolve into one working system.",
-      "tierOne": ["AI", "Chat", "Tools", "Models", "Prompts", "Automation", "Data", "Content", "Agents"],
-      "tierTwo": ["People", "Process", "System", "Product", "Outcome"],
-      "from": "AI everywhere",
-      "to": "Business reality",
-      "result": "One working system"
+      "label": "Схема: девять разрозненных возможностей AI — AI, чат, инструменты, модели, промпты, автоматизация, данные, контент и агенты — складываются в пять элементов бизнес-реальности — люди, процесс, система, продукт и результат — и превращаются в одну работающую систему.",
+      "tierOne": ["AI", "Чат", "Инструменты", "Модели", "Промпты", "Автоматизация", "Данные", "Контент", "Агенты"],
+      "tierTwo": ["Люди", "Процесс", "Система", "Продукт", "Результат"],
+      "from": "AI повсюду",
+      "to": "Бизнес-реальность",
+      "result": "Одна работающая система"
     }
   },
   "Services": {
-    "eyebrow": "What we do",
-    "title": "From opportunity to outcome.",
-    "description": "We combine strategy, product, technology and creative to take AI ideas all the way from first hypothesis to working reality.",
-    "exploreCta": "Explore {title}",
+    "eyebrow": "Что мы делаем",
+    "title": "От возможности к результату.",
+    "description": "Соединяем стратегию, продукт, технологии и креатив, чтобы провести AI-идеи весь путь от первой гипотезы до работающей реальности.",
+    "exploreCta": "Подробнее: {title}",
     "pillars": {
       "ai-strategy": {
-        "action": "Find",
-        "title": "AI Strategy",
-        "description": "Find where AI can actually move the needle."
+        "action": "Найти",
+        "title": "AI-стратегия",
+        "description": "Найти, где AI действительно меняет картину."
       },
       "ai-systems": {
-        "action": "Automate",
-        "title": "AI Systems",
-        "description": "Automate the work that shouldn’t be manual anymore."
+        "action": "Автоматизировать",
+        "title": "AI-системы",
+        "description": "Автоматизировать работу, которая больше не должна быть ручной."
       },
       "ai-products": {
-        "action": "Build",
-        "title": "AI Products",
-        "description": "Turn ambitious ideas into products people can use."
+        "action": "Создать",
+        "title": "AI-продукты",
+        "description": "Превратить амбициозные идеи в продукты, которыми пользуются люди."
       },
       "ai-creative": {
-        "action": "Amplify",
-        "title": "AI Creative",
-        "description": "Build a creative engine that never runs out of ideas."
+        "action": "Усилить",
+        "title": "AI-креатив",
+        "description": "Собрать креативный движок, у которого не заканчиваются идеи."
       }
     },
     "capabilities": {
       "ai-strategy": [
-        "AI audit",
-        "opportunity mapping",
-        "automation opportunities",
-        "priority use cases",
-        "ROI hypotheses",
-        "implementation roadmap"
+        "AI-аудит",
+        "карта возможностей",
+        "возможности автоматизации",
+        "приоритетные сценарии",
+        "гипотезы ROI",
+        "дорожная карта внедрения"
       ],
       "ai-systems": [
-        "AI agents",
-        "workflows",
-        "integrations",
+        "AI-агенты",
+        "процессы",
+        "интеграции",
         "RAG",
-        "CRM automation",
-        "sales systems",
-        "support systems",
-        "document intelligence",
-        "internal tools"
+        "автоматизация CRM",
+        "системы продаж",
+        "системы поддержки",
+        "анализ документов",
+        "внутренние инструменты"
       ],
       "ai-products": [
-        "discovery",
+        "исследование",
         "UX/UI",
-        "prototype",
+        "прототип",
         "MWP",
         "MVP",
-        "engineering",
-        "launch",
-        "product development"
+        "разработка",
+        "запуск",
+        "развитие продукта"
       ],
       "ai-creative": [
-        "creative strategy",
-        "AI content systems",
-        "image generation",
-        "video generation",
-        "campaigns",
-        "always-on content operations"
+        "креативная стратегия",
+        "AI-системы контента",
+        "генерация изображений",
+        "генерация видео",
+        "кампании",
+        "непрерывный контент-процесс"
       ]
     },
     "visuals": {
-      "strategy": ["Signals", "Opportunities", "Priority"],
-      "systems": ["Manual", "Automation", "Flow"],
-      "products": ["Idea", "Prototype", "Product"],
-      "creative": ["One idea", "Many outputs"]
+      "strategy": ["Сигналы", "Возможности", "Приоритет"],
+      "systems": ["Вручную", "Автоматизация", "Поток"],
+      "products": ["Идея", "Прототип", "Продукт"],
+      "creative": ["Одна идея", "Много форматов"]
     }
   },
   "Journey": {
-    "eyebrow": "One partner. Every stage.",
-    "headline": "Start anywhere. We’ll figure out what’s next.",
-    "supporting": "You don’t need to know exactly what to build. That’s our job.",
-    "ctaPrompt": "Not sure where to start?",
-    "ctaLabel": "Start a project",
-    "stagesLabel": "Our process, four stages",
-    "includesLabel": "Includes",
+    "eyebrow": "Один партнёр. Все этапы.",
+    "headline": "Начните с чего угодно. Дальше разберёмся вместе.",
+    "supporting": "Не обязательно точно знать, что именно строить. Это наша работа.",
+    "ctaPrompt": "Не знаете, с чего начать?",
+    "ctaLabel": "Начать проект",
+    "stagesLabel": "Наш процесс, четыре этапа",
+    "includesLabel": "Включает",
     "stages": {
       "discover": {
-        "phase": "Discover",
-        "title": "Find the opportunity.",
-        "description": "We start with the problem, the business and the people behind it.",
-        "items": ["AI Audit", "Product Discovery", "Creative Audit"],
-        "metaphor": "Question → Signals → Opportunity"
+        "phase": "Исследование",
+        "title": "Найти возможность.",
+        "description": "Начинаем с проблемы, бизнеса и людей за ним.",
+        "items": ["AI-аудит", "Исследование продукта", "Креативный аудит"],
+        "metaphor": "Вопрос → Сигналы → Возможность"
       },
       "design": {
-        "phase": "Design",
-        "title": "Shape what could work.",
-        "description": "We turn the opportunity into a clear product, system or creative direction.",
-        "items": ["Strategy", "UX / UI", "Architecture", "Prototype"],
-        "metaphor": "Idea → Flow → Prototype"
+        "phase": "Дизайн",
+        "title": "Собрать то, что может работать.",
+        "description": "Превращаем возможность в понятный продукт, систему или креативное направление.",
+        "items": ["Стратегия", "UX / UI", "Архитектура", "Прототип"],
+        "metaphor": "Идея → Поток → Прототип"
       },
       "build": {
-        "phase": "Build",
-        "title": "Make it real.",
-        "description": "We combine product, design, engineering and AI to build something people can actually use.",
-        "items": ["AI Systems", "MWP", "MVP", "Creative Engine"],
-        "metaphor": "Prototype → System → Product"
+        "phase": "Разработка",
+        "title": "Сделать это реальным.",
+        "description": "Соединяем продукт, дизайн, разработку и AI, чтобы создать то, чем люди действительно смогут пользоваться.",
+        "items": ["AI-системы", "MWP", "MVP", "Креативный движок"],
+        "metaphor": "Прототип → Система → Продукт"
       },
       "scale": {
-        "phase": "Scale",
-        "title": "Make it better. Then make it bigger.",
-        "description": "We optimize what works, automate what doesn’t and keep building from there.",
-        "items": ["Optimization", "Product Team", "Automation", "Growth"],
-        "metaphor": "Learn → Optimize → Scale"
+        "phase": "Масштабирование",
+        "title": "Сначала лучше. Потом больше.",
+        "description": "Оптимизируем то, что работает, автоматизируем то, что нет, и продолжаем строить дальше.",
+        "items": ["Оптимизация", "Продуктовая команда", "Автоматизация", "Рост"],
+        "metaphor": "Учиться → Оптимизировать → Масштабировать"
       }
     }
   },
   "AIAudit": {
-    "eyebrow": "Not sure where to start?",
-    "headline": "Find your best AI opportunities.",
-    "description": "We’ll look at your business, processes and existing technology to identify where AI can create the most meaningful impact.",
-    "deliverablesLabel": "What you get",
-    "microcopy": "Typically 1–2 weeks",
-    "ctaLabel": "Explore AI Audit",
-    "caption": "Illustrative interface — conceptual, not a live analysis.",
+    "eyebrow": "Не знаете, с чего начать?",
+    "headline": "Найдите свои лучшие возможности с AI.",
+    "description": "Изучим ваш бизнес, процессы и текущие технологии, чтобы понять, где AI даст максимальный эффект.",
+    "deliverablesLabel": "Что вы получите",
+    "microcopy": "Обычно 1–2 недели",
+    "ctaLabel": "Подробнее об AI-аудите",
+    "caption": "Иллюстративный интерфейс — концепция, а не реальный анализ.",
     "visual": {
-      "label": "Conceptual diagnostic interface, labelled Demo. A panel titled Business scan, listing the seven areas an AI audit examines — business model, processes, customer journey, operations, sales, marketing and existing technology — above the next steps: prioritize, build, measure. Illustrative interface, not a live analysis.",
-      "panelTitle": "Business scan",
-      "demoTag": "Demo",
-      "scanLabel": "What we look at",
-      "nextLabel": "Next",
-      "nextSteps": ["Prioritize", "Build", "Measure"]
+      "label": "Концептуальный диагностический интерфейс с пометкой «Демо». Панель «Сканирование бизнеса» перечисляет семь областей, которые изучает AI-аудит — бизнес-модель, процессы, путь клиента, операционную деятельность, продажи, маркетинг и текущие технологии, — над следующими шагами: приоритизировать, создать, измерить. Иллюстративный интерфейс, а не реальный анализ.",
+      "panelTitle": "Сканирование бизнеса",
+      "demoTag": "Демо",
+      "scanLabel": "На что мы смотрим",
+      "nextLabel": "Далее",
+      "nextSteps": ["Приоритизировать", "Создать", "Измерить"]
     },
     "deliverables": {
-      "opportunityMap": "AI opportunity map",
-      "automation": "Automation opportunities",
-      "useCases": "Priority use cases",
-      "roi": "ROI hypotheses",
-      "roadmap": "Implementation roadmap"
+      "opportunityMap": "Карта возможностей AI",
+      "automation": "Возможности автоматизации",
+      "useCases": "Приоритетные сценарии",
+      "roi": "Гипотезы ROI",
+      "roadmap": "Дорожная карта внедрения"
     },
     "scanAreas": [
-      "Business model",
-      "Processes",
-      "Customer journey",
-      "Operations",
-      "Sales",
-      "Marketing",
-      "Existing technology"
+      "Бизнес-модель",
+      "Процессы",
+      "Путь клиента",
+      "Операционная деятельность",
+      "Продажи",
+      "Маркетинг",
+      "Текущие технологии"
     ]
   },
   "Cases": {
-    "eyebrow": "Selected work",
-    "headline": "Things we’re building.",
-    "supporting": "No published case studies yet. We’d rather show nothing than show work we can’t back up — so until the first ones are real, here’s what’s in the workshop.",
-    "ctaPrompt": "Working on something similar?",
-    "ctaLabel": "Start a project",
+    "eyebrow": "Избранные работы",
+    "headline": "То, что мы строим.",
+    "supporting": "Опубликованных кейсов пока нет. Лучше не показывать ничего, чем показывать то, что мы не можем подтвердить, — поэтому, пока не появятся первые реальные кейсы, вот что происходит в мастерской.",
+    "ctaPrompt": "Работаете над чем-то похожим?",
+    "ctaLabel": "Начать проект",
     "categories": {
-      "aiSystem": "AI System",
-      "aiProduct": "AI Product",
-      "creativeEngine": "Creative Engine",
-      "internalExperiment": "Internal Experiment"
+      "aiSystem": "AI-система",
+      "aiProduct": "AI-продукт",
+      "creativeEngine": "Креативный движок",
+      "internalExperiment": "Внутренний эксперимент"
     },
     "work": {
-      "aiSystem": "Workflows, agents, integrations",
-      "aiProduct": "Discovery, prototype, MWP, MVP",
-      "creativeEngine": "Content systems, image and video, campaigns",
-      "internalExperiment": "Prototypes and internal builds"
+      "aiSystem": "Процессы, агенты, интеграции",
+      "aiProduct": "Исследование, прототип, MWP, MVP",
+      "creativeEngine": "Системы контента, изображения и видео, кампании",
+      "internalExperiment": "Прототипы и внутренние разработки"
     }
   },
   "Method": {
-    "eyebrow": "How we work",
-    "headline": "Think first. Build fast. Learn constantly.",
-    "closing": "No six-month black boxes. No innovation theatre. Just things that work.",
+    "eyebrow": "Как мы работаем",
+    "headline": "Сначала думаем. Быстро строим. Постоянно учимся.",
+    "closing": "Никаких полугодовых «чёрных ящиков». Никакого театра инноваций. Только то, что работает.",
     "stages": {
       "understand": {
-        "title": "Understand",
-        "description": "We start with the business, not the technology."
+        "title": "Понять",
+        "description": "Начинаем с бизнеса, а не с технологий."
       },
       "focus": {
-        "title": "Focus",
-        "description": "We identify the smallest opportunity that can create meaningful value."
+        "title": "Сфокусироваться",
+        "description": "Находим минимальную возможность, которая создаёт значимую ценность."
       },
       "build": {
-        "title": "Build",
-        "description": "We combine product, design, engineering and AI into one team."
+        "title": "Создать",
+        "description": "Собираем продукт, дизайн, разработку и AI в одну команду."
       },
       "launch": {
-        "title": "Launch",
-        "description": "Real users beat internal assumptions."
+        "title": "Запустить",
+        "description": "Реальные пользователи важнее внутренних предположений."
       },
       "learn": {
-        "title": "Learn",
-        "description": "We measure what works, improve what doesn’t and keep moving."
+        "title": "Учиться",
+        "description": "Измеряем то, что работает, улучшаем то, что нет, и продолжаем двигаться."
       }
     }
   },
   "Studio": {
-    "eyebrow": "Have an idea?",
-    "headline": "Let’s turn it into something people can use.",
-    "body": "From the first product hypothesis to a working MWP, MVP and beyond — we bring product, design, AI and engineering under one roof.",
-    "ctaLabel": "Build my product",
-    "caption": "A diagram, not a screenshot. The frame shows how a product firms up from wireframe to working interface — no real product, no client work, and no metrics are depicted.",
+    "eyebrow": "Есть идея?",
+    "headline": "Превратим её в то, чем смогут пользоваться люди.",
+    "body": "От первой продуктовой гипотезы до работающего MWP, MVP и дальше — продукт, дизайн, AI и разработка под одной крышей.",
+    "ctaLabel": "Собрать мой продукт",
+    "caption": "Это схема, а не скриншот. Рамка показывает, как продукт обретает форму — от вайрфрейма до рабочего интерфейса. Здесь нет ни реального продукта, ни клиентской работы, ни метрик.",
     "visual": {
-      "label": "Diagram of the six-stage product journey — idea, discovery, prototype, MWP, minimum working product, MVP, minimum viable product, and scale — beneath an abstract interface frame that firms up from wireframe to working interface. Illustrative diagram, not a screenshot of a real product."
+      "label": "Схема пути продукта из шести этапов — идея, исследование, прототип, MWP (минимально работающий продукт), MVP (минимально жизнеспособный продукт) и масштабирование — под абстрактной рамкой интерфейса, которая обретает форму от вайрфрейма до рабочего интерфейса. Иллюстративная схема, а не скриншот реального продукта."
     },
     "stages": {
-      "idea": "Idea",
-      "discovery": "Discovery",
-      "prototype": "Prototype",
+      "idea": "Идея",
+      "discovery": "Исследование",
+      "prototype": "Прототип",
       "mwp": "MWP",
       "mvp": "MVP",
-      "scale": "Scale"
+      "scale": "Масштабирование"
     },
     "glosses": {
-      "mwp": "Minimum Working Product",
-      "mvp": "Minimum Viable Product"
+      "mwp": "Минимально работающий продукт",
+      "mvp": "Минимально жизнеспособный продукт"
     }
   },
   "Creative": {
-    "eyebrow": "AI × CREATIVE",
-    "headline": "Your next creative team doesn’t sleep.",
-    "body": "We build AI-powered content systems that turn strategy into a constant flow of ideas, campaigns, images, video and social content.",
-    "ctaLabel": "Build a creative engine",
-    "caption": "A diagram, not a showreel. It shows the shape of the system — one idea branching into the formats it can feed — not a client campaign, a published asset or a measured result.",
-    "seed": "One idea",
+    "eyebrow": "AI × КРЕАТИВ",
+    "headline": "Ваша следующая креативная команда не спит.",
+    "body": "Создаём контент-системы на базе AI, которые превращают стратегию в постоянный поток идей, кампаний, изображений, видео и контента для соцсетей.",
+    "ctaLabel": "Собрать креативный движок",
+    "caption": "Это схема, а не шоурил. Она показывает устройство системы: одна идея расходится на форматы, которые она питает, — а не клиентскую кампанию, опубликованный материал или измеренный результат.",
+    "seed": "Одна идея",
     "visual": {
-      "label": "Diagram of one seed idea branching into six output formats — film, reel, ad, social, story and landing. Illustrative diagram of a content system, not a client campaign or a published asset."
+      "label": "Схема: одна идея-зерно расходится на шесть форматов — фильм, рил, реклама, соцсети, сторис и лендинг. Иллюстративная схема контент-системы, а не клиентская кампания или опубликованный материал."
     },
     "outputs": {
-      "film": "Film",
-      "reel": "Reel",
-      "ad": "Ad",
-      "social": "Social",
-      "story": "Story",
-      "landing": "Landing"
+      "film": "Фильм",
+      "reel": "Рил",
+      "ad": "Реклама",
+      "social": "Соцсети",
+      "story": "Сторис",
+      "landing": "Лендинг"
     }
   },
   "Why": {
-    "eyebrow": "Why HelloVibe",
-    "headline": "Different disciplines. One team.",
-    "closing": "The best AI work happens where these disciplines meet.",
+    "eyebrow": "Почему HelloVibe",
+    "headline": "Разные дисциплины. Одна команда.",
+    "closing": "Лучшая работа с AI рождается там, где эти дисциплины встречаются.",
     "disciplines": {
       "strategy": {
-        "label": "Strategy",
-        "description": "We know how to find the problem before building the solution."
+        "label": "Стратегия",
+        "description": "Мы умеем находить проблему до того, как строить решение."
       },
       "product": {
-        "label": "Product",
-        "description": "We think in users, outcomes and adoption — not just features."
+        "label": "Продукт",
+        "description": "Мы думаем о пользователях, результатах и внедрении, а не только о функциях."
       },
       "technology": {
-        "label": "Technology",
-        "description": "AI-native engineering from prototype to production."
+        "label": "Технологии",
+        "description": "AI-разработка от прототипа до продакшена."
       },
       "creative": {
-        "label": "Creative",
-        "description": "Products should work beautifully and communicate clearly."
+        "label": "Креатив",
+        "description": "Продукты должны работать красиво и говорить ясно."
       }
     }
   },
   "Engagement": {
-    "eyebrow": "How we can work together",
-    "headline": "One project. Or your AI team.",
+    "eyebrow": "Как мы можем работать вместе",
+    "headline": "Один проект. Или ваша AI-команда.",
     "models": {
       "project": {
-        "title": "Project",
-        "audience": "For a defined challenge.",
-        "items": ["Discovery", "AI Audit", "MWP", "MVP", "AI System", "Creative Engine"],
-        "outcome": "Fixed scope → clear outcome",
-        "ctaLabel": "Start a project"
+        "title": "Проект",
+        "audience": "Для конкретной задачи.",
+        "items": ["Исследование", "AI-аудит", "MWP", "MVP", "AI-система", "Креативный движок"],
+        "outcome": "Фиксированный объём → понятный результат",
+        "ctaLabel": "Начать проект"
       },
       "partnership": {
-        "title": "Partnership",
-        "audience": "For teams building continuously.",
-        "items": ["Fractional Product", "AI Engineering", "AI Strategy", "Creative", "Optimization"],
-        "outcome": "One team → ongoing momentum",
-        "ctaLabel": "Build with us"
+        "title": "Партнёрство",
+        "audience": "Для команд, которые строят постоянно.",
+        "items": ["Fractional-продукт", "AI-разработка", "AI-стратегия", "Креатив", "Оптимизация"],
+        "outcome": "Одна команда → постоянное движение",
+        "ctaLabel": "Строить вместе с нами"
       }
     }
   },
   "Faq": {
     "eyebrow": "FAQ",
-    "headline": "Questions people usually ask.",
+    "headline": "Вопросы, которые задают чаще всего.",
     "items": {
       "who-we-work-with": {
-        "question": "Do you work with existing companies or startups?",
+        "question": "Вы работаете с существующими компаниями или со стартапами?",
         "answer": [
-          "Both.",
-          "We work with founders building new products and established teams looking for practical ways to use AI."
+          "И с теми, и с другими.",
+          "Мы работаем с основателями, которые создают новые продукты, и с командами в уже сложившихся компаниях, которые ищут практичные способы применять AI."
         ]
       },
       "defined-brief": {
-        "question": "Do we need to know exactly what we want to build?",
+        "question": "Нужно ли точно знать, что мы хотим построить?",
         "answer": [
-          "No.",
-          "You can come with a business problem, an idea, a process that feels too manual, or simply a feeling there’s a better way.",
-          "We’ll help define the opportunity."
+          "Нет.",
+          "Можно прийти с бизнес-проблемой, идеей, процессом, который кажется слишком ручным, или просто с ощущением, что есть способ лучше.",
+          "Мы поможем определить возможность."
         ]
       },
       "ai-only": {
-        "question": "Do you only work with AI?",
+        "question": "Вы работаете только с AI?",
         "answer": [
-          "AI is central to what we do, but the goal is always the business or product outcome.",
-          "We don’t add AI just because we can."
+          "AI — в центре того, что мы делаем, но цель всегда в бизнес-результате или продукте.",
+          "Мы не добавляем AI только потому, что можем."
         ]
       },
       "idea-to-launch": {
-        "question": "Can you take a product from idea to launch?",
+        "question": "Можете провести продукт от идеи до запуска?",
         "answer": [
-          "Yes.",
-          "Discovery, strategy, UX/UI, AI architecture, engineering, launch and ongoing development."
+          "Да.",
+          "Исследование, стратегия, UX/UI, AI-архитектура, разработка, запуск и дальнейшее развитие."
         ]
       },
       "existing-team": {
-        "question": "Can you work with our existing team?",
+        "question": "Можете работать с нашей существующей командой?",
         "answer": [
-          "Yes.",
-          "We can act as an external product/AI team or add a specialist layer to your existing organization."
+          "Да.",
+          "Мы можем быть внешней продуктовой/AI-командой или добавить слой специалистов к вашей текущей структуре."
         ]
       },
       "how-projects-start": {
-        "question": "How do projects start?",
+        "question": "Как начинаются проекты?",
         "answer": [
-          "Usually with a conversation.",
-          "If the opportunity is unclear, an AI Audit or Product Discovery can be a good starting point."
+          "Обычно с разговора.",
+          "Если возможность неочевидна, хорошей отправной точкой может стать AI-аудит или исследование продукта."
         ]
       }
     }
   },
   "FinalCta": {
-    "eyebrow": "Ready when you are",
-    "headline": "Got an idea? A problem? Or just a feeling there’s a better way?",
-    "body": "Tell us what’s on your mind. We’ll figure out where AI fits.",
-    "micro": "No pitch deck required."
+    "eyebrow": "Готовы, когда вы готовы",
+    "headline": "Есть идея? Проблема? Или просто ощущение, что можно лучше?",
+    "body": "Расскажите, что вас беспокоит. Мы разберёмся, где здесь место AI.",
+    "micro": "Питч-дек не нужен."
   },
   "Pages": {
     "About": {
-      "metadataTitle": "About",
-      "metadataDescription": "AI is changing how products are built, businesses operate and brands communicate. We want to be where those three things meet.",
-      "eyebrow": "About",
-      "title": "We like building things.",
+      "metadataTitle": "О нас",
+      "metadataDescription": "AI меняет то, как создаются продукты, работают компании и общаются бренды. Мы хотим быть там, где эти три вещи встречаются.",
+      "eyebrow": "О нас",
+      "title": "Мы любим создавать.",
       "lead": [
-        "AI is changing how products are built, businesses operate and brands communicate.",
-        "We want to be where those three things meet."
+        "AI меняет то, как создаются продукты, работают компании и общаются бренды.",
+        "Мы хотим быть там, где эти три вещи встречаются."
       ],
-      "studioLabel": "AI Product & Transformation Studio",
-      "studioTitle": "AI, but make it real.",
-      "missingVisualsNote": "The team, the workspace, the sketches, the prototypes — that page arrives when those photographs do. Until then this one stays thin on purpose: no stock imagery, no invented history, and nothing we can’t point at.",
-      "ctaLabel": "Start a project"
+      "studioLabel": "Студия AI-продуктов и трансформации",
+      "studioTitle": "AI, но всерьёз.",
+      "missingVisualsNote": "Команда, мастерская, наброски, прототипы — эта страница появится, когда появятся такие фотографии. До тех пор она намеренно остаётся скупой: никаких стоковых изображений, никакой придуманной истории и ничего, на что мы не можем указать.",
+      "ctaLabel": "Начать проект"
     },
     "Services": {
-      "metadataTitle": "What we do",
-      "metadataDescription": "We combine strategy, product, technology and creative to take AI ideas all the way from first hypothesis to working reality.",
-      "eyebrow": "What we do",
-      "title": "From opportunity to outcome.",
-      "lead": "We combine strategy, product, technology and creative to take AI ideas all the way from first hypothesis to working reality.",
-      "ctaLabel": "Start a project"
+      "metadataTitle": "Что мы делаем",
+      "metadataDescription": "Соединяем стратегию, продукт, технологии и креатив, чтобы провести AI-идеи весь путь от первой гипотезы до работающей реальности.",
+      "eyebrow": "Что мы делаем",
+      "title": "От возможности к результату.",
+      "lead": "Соединяем стратегию, продукт, технологии и креатив, чтобы провести AI-идеи весь путь от первой гипотезы до работающей реальности.",
+      "ctaLabel": "Начать проект"
     },
     "Pillar": {
-      "includesLabel": "Includes",
-      "fourPillarsLabel": "Four pillars",
-      "crossNavLabel": "Service pillars",
-      "ctaLabel": "Start a project"
+      "includesLabel": "Включает",
+      "fourPillarsLabel": "Четыре направления",
+      "crossNavLabel": "Направления услуг",
+      "ctaLabel": "Начать проект"
     },
     "Work": {
-      "metadataTitle": "Cases",
-      "metadataDescription": "Selected work from HelloVibe.",
-      "eyebrow": "Selected work",
-      "title": "Things we’re building.",
-      "publishingPolicy": "Results appear here only with verified numbers. Where there is no measurable result yet, an entry says so — “Early-stage prototype”, or “Currently in development”.",
-      "ctaPrompt": "Working on something similar?",
-      "ctaLabel": "Start a project"
+      "metadataTitle": "Кейсы",
+      "metadataDescription": "Избранные работы HelloVibe.",
+      "eyebrow": "Избранные работы",
+      "title": "То, что мы строим.",
+      "publishingPolicy": "Результаты появляются здесь только с подтверждёнными цифрами. Там, где измеримого результата пока нет, так и написано — «Ранний прототип» или «В разработке».",
+      "ctaPrompt": "Работаете над чем-то похожим?",
+      "ctaLabel": "Начать проект"
     },
     "Contact": {
-      "metadataTitle": "Start a project",
-      "metadataDescription": "Start a project with HelloVibe.",
-      "eyebrow": "Contact",
-      "title": "Start a project.",
-      "lead": "Tell us what’s on your mind. We’ll figure out where AI fits."
+      "metadataTitle": "Начать проект",
+      "metadataDescription": "Начните проект с HelloVibe.",
+      "eyebrow": "Контакты",
+      "title": "Начните проект.",
+      "lead": "Расскажите, что вас беспокоит. Мы разберёмся, где здесь место AI."
     },
     "NotFound": {
-      "metadataTitle": "Page not found",
-      "metadataDescription": "That page does not exist.",
+      "metadataTitle": "Страница не найдена",
+      "metadataDescription": "Такой страницы не существует.",
       "eyebrow": "404",
-      "title": "This page doesn’t exist.",
-      "lead": "The link may be out of date, or the page may not have been built yet. Every page below does exist:",
-      "routesLabel": "Available pages",
-      "home": "Home"
+      "title": "Такой страницы не существует.",
+      "lead": "Возможно, ссылка устарела или страница ещё не создана. Все страницы ниже существуют:",
+      "routesLabel": "Доступные страницы",
+      "home": "Главная"
     }
   },
   "ContactForm": {
-    "intentQuestion": "What brings you here?",
+    "intentQuestion": "Что вас привело?",
     "intentOptions": {
-      "use_ai_business": "I want to use AI in my business",
-      "build_ai_product": "I want to build an AI product",
-      "automate_process": "I want to automate a process",
-      "scale_creative": "I want to scale content / creative",
-      "not_sure": "I’m not sure yet"
+      "use_ai_business": "Хочу применять AI в бизнесе",
+      "build_ai_product": "Хочу создать AI-продукт",
+      "automate_process": "Хочу автоматизировать процесс",
+      "scale_creative": "Хочу масштабировать контент / креатив",
+      "not_sure": "Пока не уверен"
     },
-    "goalQuestion": "What are you trying to achieve?",
-    "goalPlaceholder": "Tell us what’s happening, what you’re trying to change, or what’s currently not working.",
-    "stageQuestion": "Where are you today?",
+    "goalQuestion": "Чего вы хотите добиться?",
+    "goalPlaceholder": "Расскажите, что происходит, что вы хотите изменить или что сейчас не работает.",
+    "stageQuestion": "На каком вы этапе?",
     "stageOptions": {
-      "idea": "Idea",
-      "prototype": "Prototype",
-      "existing_product": "Existing product",
-      "existing_business": "Existing business",
-      "scaling": "Scaling"
+      "idea": "Идея",
+      "prototype": "Прототип",
+      "existing_product": "Есть продукт",
+      "existing_business": "Есть бизнес",
+      "scaling": "Масштабирование"
     },
-    "budgetQuestion": "What’s your approximate budget?",
+    "budgetQuestion": "Какой у вас примерный бюджет?",
     "budgetOptions": {
-      "under_10k": "<$10k",
+      "under_10k": "до $10k",
       "from_10k_to_30k": "$10–30k",
       "from_30k_to_75k": "$30–75k",
       "from_75k_to_150k": "$75–150k",
       "over_150k": "$150k+"
     },
-    "timingQuestion": "When are you looking to start?",
+    "timingQuestion": "Когда вы планируете начать?",
     "timingOptions": {
-      "asap": "ASAP",
-      "months_1_2": "1–2 months",
-      "months_3_6": "3–6 months",
-      "exploring": "Exploring"
+      "asap": "Как можно скорее",
+      "months_1_2": "1–2 месяца",
+      "months_3_6": "3–6 месяцев",
+      "exploring": "Пока изучаю"
     },
-    "nameLabel": "Name",
+    "nameLabel": "Имя",
     "emailLabel": "Email",
-    "companyLabel": "Company",
-    "honeypotLabel": "Fax number",
-    "optional": "Optional",
-    "submitLabel": "Let’s talk",
-    "microcopy": "No pitch deck required.",
-    "successHeading": "Got it.",
-    "successBody": "Thanks — we’ll be in touch soon.",
-    "undeliveredHeading": "Nothing was sent.",
-    "undeliveredBody": "Automatic delivery is not connected yet, so this form cannot send your message. Write to us directly and we’ll pick it up from there.",
+    "companyLabel": "Компания",
+    "honeypotLabel": "Номер факса",
+    "optional": "Необязательно",
+    "submitLabel": "Давайте обсудим",
+    "microcopy": "Питч-дек не нужен.",
+    "successHeading": "Принято.",
+    "successBody": "Спасибо — скоро свяжемся.",
+    "undeliveredHeading": "Ничего не отправлено.",
+    "undeliveredBody": "Автоматическая отправка пока не подключена, поэтому форма не может отправить ваше сообщение. Напишите нам напрямую — и мы продолжим оттуда.",
     "errors": {
-      "chooseOne": "Choose one option.",
-      "chooseListed": "Choose one of the listed options.",
-      "required": "This is required.",
-      "emailInvalid": "Enter a valid email address.",
-      "tooLong": "Please keep this under {max} characters."
+      "chooseOne": "Выберите один вариант.",
+      "chooseListed": "Выберите один из предложенных вариантов.",
+      "required": "Это обязательное поле.",
+      "emailInvalid": "Введите корректный адрес email.",
+      "tooLong": "Не более {max} символов."
     }
   }
 }
