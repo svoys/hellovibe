@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { siteOrigin } from "@/lib/site";
 
 import "./globals.css";
 
@@ -23,7 +24,7 @@ const SITE_DESCRIPTION =
   "We turn AI opportunities into working products, business systems and creative engines.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(siteOrigin),
   title: {
     default: SITE_TITLE,
     template: "%s — HelloVibe",

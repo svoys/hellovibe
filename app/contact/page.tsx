@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
+import { ContactForm } from "@/components/contact/ContactForm";
 import { PageIntro } from "@/components/layout/PageIntro";
-import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Container } from "@/components/ui/Container";
-import { contactEmail } from "@/data/navigation";
+import { finalCtaBody } from "@/data/final-cta";
 
 export const metadata: Metadata = {
   title: "Start a project",
@@ -11,14 +11,14 @@ export const metadata: Metadata = {
 };
 
 /**
- * Route placeholder so the Hero's primary CTA resolves instead of 404ing.
+ * `/contact` — the destination of every "Start a project" CTA on the site.
  *
- * Deliberately not a form: the pack rules out a fake or half-built contact
- * experience in this phase. The only channel that genuinely exists is email.
+ * The page was a placeholder while the form was out of scope; it now carries the
+ * real form. Its lead reuses the Final CTA's body copy rather than inventing a
+ * new sentence — it is the same promise the reader just clicked, and it is
+ * already approved.
  *
- * No `border-t` — the navbar already draws the rule above the first block, so a
- * top border here produced a doubled hairline. `/services`, `/work` and `/about`
- * follow the same rule.
+ * No `border-t`: the navbar already draws the rule above the first block.
  */
 export default function ContactPage() {
   return (
@@ -28,20 +28,10 @@ export default function ContactPage() {
           eyebrow="Contact"
           titleId="contact-page-title"
           title="Start a project."
-          lead={
-            <p>
-              The full contact experience arrives in the next phase. Until then, write to{" "}
-              <a
-                href={`mailto:${contactEmail}`}
-                className="border-b border-line text-black transition-colors duration-150 hover:border-black"
-              >
-                {contactEmail}
-              </a>
-              .
-            </p>
-          }
-          actions={<ArrowLink href="/">Back home</ArrowLink>}
+          lead={<p>{finalCtaBody}</p>}
         />
+
+        <ContactForm />
       </Container>
     </section>
   );
